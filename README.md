@@ -11,7 +11,7 @@ Proyecto en Python de una aplicacion de escritorio. Se ha utilizado la libreria 
 
 ## Tech Stack
 
- PyQT, SQlite
+Python, PyQT, SQlite
 
 
 
