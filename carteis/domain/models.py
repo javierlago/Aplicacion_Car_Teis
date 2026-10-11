@@ -7,7 +7,7 @@ from enum import StrEnum
 from typing import ClassVar
 
 from carteis.domain.errors import InvalidStateError, ValidationError
-from carteis.domain.pricing import InvoiceTotals, compute_totals, line_amount
+from carteis.domain.pricing import InvoiceTotals, Location, compute_totals, line_amount
 from carteis.domain.validators import require_text, validate_dni, validate_phone
 
 
@@ -110,18 +110,20 @@ class Client(_Deactivatable):
 
 @dataclass(kw_only=True)
 class Trip:
-    """One invoice line. ``origin`` and ``destination`` are municipality names."""
+    """One invoice line.
 
-    origin: str
-    destination: str
+    Origin and destination keep their province: municipality names repeat across provinces
+    (e.g. "Castejón"), and the fare depends on the province.
+    """
+
+    origin: Location
+    destination: Location
     km: int
     rate: Decimal
     id: int | None = None
     invoice_id: int | None = None
 
     def __post_init__(self) -> None:
-        self.origin = require_text(self.origin, "Origen", "origin")
-        self.destination = require_text(self.destination, "Destino", "destination")
         if self.km <= 0:
             raise ValidationError("Los kilómetros deben ser mayores que cero.", field="km")
         if self.rate <= 0:

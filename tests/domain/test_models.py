@@ -5,6 +5,12 @@ import pytest
 
 from carteis.domain.errors import InvalidStateError, ValidationError
 from carteis.domain.models import Client, Driver, Invoice, License, Trip
+from carteis.domain.pricing import Location
+
+VIGO = Location("Pontevedra", "Vigo")
+FERROL = Location("A Coruña", "Ferrol")
+ALEGRIA = Location("Álava", "Alegría-Dulantzi")
+ALATOZ = Location("Albacete", "Alatoz")
 
 
 def make_driver(**overrides):
@@ -130,17 +136,18 @@ class TestClient:
 
 class TestTrip:
     def test_amount(self):
-        trip = Trip(origin="Vigo", destination="Ferrol", km=12, rate=Decimal("0.80"))
+        trip = Trip(origin=VIGO, destination=FERROL, km=12, rate=Decimal("0.80"))
         assert trip.amount == Decimal("9.60")
+        assert trip.destination.province == "A Coruña"
 
     @pytest.mark.parametrize(
-        "field, value",
-        [("origin", ""), ("destination", " "), ("km", 0), ("km", -5), ("rate", Decimal("0"))],
+        "field, value", [("km", 0), ("km", -5), ("rate", Decimal("0")), ("rate", Decimal("-1"))]
     )
     def test_rejects_invalid_field(self, field, value):
-        fields = {"origin": "Vigo", "destination": "Vigo", "km": 10, "rate": Decimal("0.20")}
-        with pytest.raises(ValidationError):
+        fields = {"origin": VIGO, "destination": VIGO, "km": 10, "rate": Decimal("0.20")}
+        with pytest.raises(ValidationError) as error:
             Trip(**(fields | {field: value}))
+        assert error.value.field == field
 
 
 class TestInvoice:
@@ -150,13 +157,8 @@ class TestInvoice:
             issued_on=date(2023, 12, 26),
             driver_id=13,
             trips=[
-                Trip(origin="Alegría-Dulantzi", destination="Alatoz", km=12, rate=Decimal("0.8")),
-                Trip(
-                    origin="Alegría-Dulantzi",
-                    destination="Alegría-Dulantzi",
-                    km=10,
-                    rate=Decimal("0.2"),
-                ),
+                Trip(origin=ALEGRIA, destination=ALATOZ, km=12, rate=Decimal("0.8")),
+                Trip(origin=ALEGRIA, destination=ALEGRIA, km=10, rate=Decimal("0.2")),
             ],
         )
         assert invoice.client_dni == "71784575B"
