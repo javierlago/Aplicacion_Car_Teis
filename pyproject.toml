@@ -23,6 +23,7 @@ dev = [
     "pytest-qt==4.5.0",
     "ruff==0.14.0",
 ]
+build = ["pyinstaller==6.11.1"]
 
 [tool.setuptools.packages.find]
 include = ["carteis*"]
