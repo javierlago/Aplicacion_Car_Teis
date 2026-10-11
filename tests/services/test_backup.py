@@ -12,7 +12,7 @@ from carteis.services.backup import ARCHIVE_MEMBER
 from tests.factories import make_client, make_driver
 from tests.legacy_samples import build_legacy_db
 
-REAL_LEGACY_DB = Path(__file__).resolve().parents[2] / "bbdd.sqlite"
+REAL_LEGACY_DB = Path(__file__).resolve().parents[1] / "fixtures" / "legacy_bbdd.sqlite"
 
 
 @pytest.fixture
@@ -58,7 +58,6 @@ def test_restore_converts_legacy_backup(conn, backups, tmp_path):
     assert current_version(conn) >= 1
 
 
-@pytest.mark.skipif(not REAL_LEGACY_DB.exists(), reason="legacy bbdd.sqlite not present")
 def test_restore_real_legacy_backup(conn, backups, tmp_path):
     archive = tmp_path / "old.zip"
     with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as zf:

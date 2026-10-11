@@ -9,8 +9,7 @@ from carteis.data.legacy_import import import_legacy, main
 from carteis.data.repositories import ClientRepository, DriverRepository, InvoiceRepository
 from tests.legacy_samples import build_legacy_db
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
-REAL_LEGACY_DB = REPO_ROOT / "bbdd.sqlite"
+REAL_LEGACY_DB = Path(__file__).resolve().parents[1] / "fixtures" / "legacy_bbdd.sqlite"
 
 
 @pytest.fixture
@@ -85,7 +84,6 @@ def test_cli(legacy_db, tmp_path, capsys):
     assert main([str(legacy_db), str(target), "--overwrite"]) == 0
 
 
-@pytest.mark.skipif(not REAL_LEGACY_DB.exists(), reason="legacy bbdd.sqlite not present")
 def test_real_legacy_database(tmp_path):
     """The app's actual data: every record survives except the orphan trip (bug D4)."""
     report = import_legacy(REAL_LEGACY_DB, tmp_path / "new.sqlite")

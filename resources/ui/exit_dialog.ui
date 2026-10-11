@@ -21,7 +21,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../img/taxiIcon.png</normaloff>../../img/taxiIcon.png</iconset>
+    <normaloff>../img/taxiIcon.png</normaloff>../img/taxiIcon.png</iconset>
   </property>
   <property name="layoutDirection">
    <enum>Qt::LeftToRight</enum>
@@ -90,7 +90,7 @@
          <enum>Qt::PlainText</enum>
         </property>
         <property name="pixmap">
-         <pixmap>../../img/taxiIcon.png</pixmap>
+         <pixmap>../img/taxiIcon.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -153,7 +153,7 @@
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>../../img/OkIco.svg</normaloff>../../img/OkIco.svg</iconset>
+             <normaloff>../img/OkIco.svg</normaloff>../img/OkIco.svg</iconset>
            </property>
           </widget>
          </item>
@@ -176,7 +176,7 @@
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>../../img/CancelIco.ico</normaloff>../../img/CancelIco.ico</iconset>
+             <normaloff>../img/CancelIco.ico</normaloff>../img/CancelIco.ico</iconset>
            </property>
           </widget>
          </item>

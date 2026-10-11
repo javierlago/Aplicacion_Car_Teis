@@ -30,7 +30,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../img/taxiIcon.png</normaloff>../../img/taxiIcon.png</iconset>
+    <normaloff>../img/taxiIcon.png</normaloff>../img/taxiIcon.png</iconset>
   </property>
   <property name="modal">
    <bool>true</bool>
@@ -102,7 +102,7 @@
             <enum>Qt::PlainText</enum>
            </property>
            <property name="pixmap">
-            <pixmap>../../img/taxiIcon.png</pixmap>
+            <pixmap>../img/taxiIcon.png</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>

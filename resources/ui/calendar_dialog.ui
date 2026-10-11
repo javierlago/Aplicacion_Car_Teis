@@ -18,7 +18,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../img/calendar-icon_34471.png</normaloff>../../img/calendar-icon_34471.png</iconset>
+    <normaloff>../img/calendar-icon_34471.png</normaloff>../img/calendar-icon_34471.png</iconset>
   </property>
   <property name="modal">
    <bool>true</bool>

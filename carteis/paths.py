@@ -18,7 +18,7 @@ def _bundle_root() -> Path:
 
 
 RESOURCES_DIR = _bundle_root() / "resources"
-IMAGES_DIR = _bundle_root() / "img"  # moves to resources/img when the legacy code is removed
+IMAGES_DIR = RESOURCES_DIR / "img"
 REPORT_LOGO = IMAGES_DIR / "IconoInfome.png"
 STYLE_SHEET = RESOURCES_DIR / "styles.qss"
 SEED_DATABASE = RESOURCES_DIR / "seed.sqlite"

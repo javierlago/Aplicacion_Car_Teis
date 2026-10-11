@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 from pypdf import PdfReader
 
-from carteis import config
+from carteis import config, paths
 from carteis.domain.models import Invoice, Trip
 from carteis.domain.pricing import Location
 from carteis.reports import clients_report, drivers_report, invoice_report
@@ -15,7 +15,7 @@ from carteis.reports.pdf import fit
 from tests.factories import CANGAS, FERROL, VIGO, make_client, make_driver
 
 NOW = datetime(2026, 10, 11, 18, 30, 5)
-LOGO = Path(__file__).resolve().parents[2] / "img" / "IconoInfome.png"
+LOGO = paths.REPORT_LOGO
 
 
 def pages(path: Path) -> list[str]:
