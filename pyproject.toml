@@ -11,9 +11,10 @@ requires-python = ">=3.12"
 authors = [{ name = "Javier Lago Amoedo" }]
 dependencies = [
     "PyQt6==6.11.0",
+    "openpyxl==3.1.5",
     "reportlab==5.0.1",
     "svglib==2.3.0",
-    # Legacy .xls import/export; replaced by openpyxl in phase 3.
+    # Used only by the legacy .xls import/export; removed with the legacy code in phase 4.
     "xlrd==2.0.2",
     "xlwt==1.3.0",
 ]
