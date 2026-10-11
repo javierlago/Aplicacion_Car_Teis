@@ -21,6 +21,7 @@ RESOURCES_DIR = _bundle_root() / "resources"
 IMAGES_DIR = RESOURCES_DIR / "img"
 REPORT_LOGO = IMAGES_DIR / "IconoInfome.png"
 STYLE_SHEET = RESOURCES_DIR / "styles.qss"
+FONTS_DIR = RESOURCES_DIR / "fonts"
 SEED_DATABASE = RESOURCES_DIR / "seed.sqlite"
 
 DATABASE_ENV = "CARTEIS_DB"  # set it to use another database file (e.g. during development)

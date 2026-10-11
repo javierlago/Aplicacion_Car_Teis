@@ -90,15 +90,6 @@
            <height>0</height>
           </size>
          </property>
-         <property name="font">
-          <font>
-           <family>Alef</family>
-           <pointsize>10</pointsize>
-           <weight>75</weight>
-           <italic>false</italic>
-           <bold>true</bold>
-          </font>
-         </property>
          <property name="tabPosition">
           <enum>QTabWidget::North</enum>
          </property>
@@ -219,15 +210,6 @@
                               <height>24</height>
                              </size>
                             </property>
-                            <property name="font">
-                             <font>
-                              <family>Alef</family>
-                              <pointsize>10</pointsize>
-                              <weight>75</weight>
-                              <italic>false</italic>
-                              <bold>true</bold>
-                             </font>
-                            </property>
                             <property name="text">
                              <string>Código:</string>
                             </property>
@@ -249,14 +231,6 @@
                               <width>60</width>
                               <height>24</height>
                              </size>
-                            </property>
-                            <property name="font">
-                             <font>
-                              <family>Alef</family>
-                              <pointsize>10</pointsize>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
                             </property>
                             <property name="text">
                              <string>Apellidos:</string>
@@ -389,14 +363,6 @@
                                 <height>16</height>
                                </size>
                               </property>
-                              <property name="font">
-                               <font>
-                                <family>Alef</family>
-                                <pointsize>10</pointsize>
-                                <weight>75</weight>
-                                <bold>true</bold>
-                               </font>
-                              </property>
                               <property name="text">
                                <string>DNI:</string>
                               </property>
@@ -453,15 +419,6 @@
                                 <height>24</height>
                                </size>
                               </property>
-                              <property name="font">
-                               <font>
-                                <family>Alef</family>
-                                <pointsize>10</pointsize>
-                                <weight>75</weight>
-                                <italic>false</italic>
-                                <bold>true</bold>
-                               </font>
-                              </property>
                               <property name="text">
                                <string/>
                               </property>
@@ -476,7 +433,7 @@
                             <item>
                              <widget class="QPushButton" name="btnDriverSearch">
                               <property name="role" stdset="0">
-                               <string notr="true">secondary</string>
+                               <string notr="true">icon</string>
                               </property>
                               <property name="minimumSize">
                                <size>
@@ -602,14 +559,6 @@
                                 <verstretch>0</verstretch>
                                </sizepolicy>
                               </property>
-                              <property name="font">
-                               <font>
-                                <family>Alef</family>
-                                <pointsize>10</pointsize>
-                                <weight>75</weight>
-                                <bold>true</bold>
-                               </font>
-                              </property>
                               <property name="text">
                                <string>Salario:</string>
                               </property>
@@ -645,15 +594,6 @@
                             </item>
                             <item>
                              <widget class="QLabel" name="lblDriverSalaryHint">
-                              <property name="font">
-                               <font>
-                                <family>Alef</family>
-                                <pointsize>10</pointsize>
-                                <weight>75</weight>
-                                <italic>false</italic>
-                                <bold>true</bold>
-                               </font>
-                              </property>
                               <property name="text">
                                <string>(€)</string>
                               </property>
@@ -744,14 +684,6 @@
                             <height>24</height>
                            </size>
                           </property>
-                          <property name="font">
-                           <font>
-                            <family>Alef</family>
-                            <pointsize>10</pointsize>
-                            <weight>75</weight>
-                            <bold>true</bold>
-                           </font>
-                          </property>
                           <property name="text">
                            <string>Nombre:</string>
                           </property>
@@ -779,14 +711,6 @@
                             <width>0</width>
                             <height>24</height>
                            </size>
-                          </property>
-                          <property name="font">
-                           <font>
-                            <family>Alef</family>
-                            <pointsize>10</pointsize>
-                            <weight>75</weight>
-                            <bold>true</bold>
-                           </font>
                           </property>
                           <property name="text">
                            <string>Provincia:</string>
@@ -855,7 +779,7 @@
                           <item>
                            <widget class="QPushButton" name="btnDriverHiredOnCalendar">
                             <property name="role" stdset="0">
-                             <string notr="true">calendar</string>
+                             <string notr="true">icon</string>
                             </property>
                             <property name="sizePolicy">
                              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -985,7 +909,7 @@
                              <item>
                               <widget class="QPushButton" name="btnDriverLeftOnCalendar">
                                <property name="role" stdset="0">
-                                <string notr="true">calendar</string>
+                                <string notr="true">icon</string>
                                </property>
                                <property name="sizePolicy">
                                 <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -1098,14 +1022,6 @@
                               <verstretch>0</verstretch>
                              </sizepolicy>
                             </property>
-                            <property name="font">
-                             <font>
-                              <family>Alef</family>
-                              <pointsize>10</pointsize>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
-                            </property>
                             <property name="text">
                              <string>Localidad:</string>
                             </property>
@@ -1191,14 +1107,6 @@
                       </item>
                       <item>
                        <widget class="QLabel" name="lblDriverLicenses">
-                        <property name="font">
-                         <font>
-                          <family>Alef</family>
-                          <pointsize>10</pointsize>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
-                        </property>
                         <property name="text">
                          <string>Tipo de carné:</string>
                         </property>
@@ -1335,14 +1243,6 @@
                           <height>24</height>
                          </size>
                         </property>
-                        <property name="font">
-                         <font>
-                          <family>Alef</family>
-                          <pointsize>10</pointsize>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
-                        </property>
                         <property name="text">
                          <string>Estado:</string>
                         </property>
@@ -1355,14 +1255,6 @@
                           <horstretch>0</horstretch>
                           <verstretch>0</verstretch>
                          </sizepolicy>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <family>Alef</family>
-                          <pointsize>10</pointsize>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
                         </property>
                         <property name="text">
                          <string>Todos</string>
@@ -1399,14 +1291,6 @@
                           <verstretch>0</verstretch>
                          </sizepolicy>
                         </property>
-                        <property name="font">
-                         <font>
-                          <family>Alef</family>
-                          <pointsize>10</pointsize>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
-                        </property>
                         <property name="text">
                          <string>Alta</string>
                         </property>
@@ -1436,14 +1320,6 @@
                       </item>
                       <item>
                        <widget class="QRadioButton" name="rbtDriversInactive">
-                        <property name="font">
-                         <font>
-                          <family>Alef</family>
-                          <pointsize>10</pointsize>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
-                        </property>
                         <property name="text">
                          <string>Baja</string>
                         </property>
@@ -1524,14 +1400,6 @@
                           <height>24</height>
                          </size>
                         </property>
-                        <property name="font">
-                         <font>
-                          <family>Alef</family>
-                          <pointsize>10</pointsize>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
-                        </property>
                         <property name="text">
                          <string>Alta</string>
                         </property>
@@ -1540,7 +1408,7 @@
                       <item>
                        <widget class="QPushButton" name="btnDriverUpdate">
                         <property name="role" stdset="0">
-                         <string notr="true">primary</string>
+                         <string notr="true">outline</string>
                         </property>
                         <property name="enabled">
                          <bool>true</bool>
@@ -1563,14 +1431,6 @@
                           <height>24</height>
                          </size>
                         </property>
-                        <property name="font">
-                         <font>
-                          <family>Alef</family>
-                          <pointsize>10</pointsize>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
-                        </property>
                         <property name="autoFillBackground">
                          <bool>false</bool>
                         </property>
@@ -1582,7 +1442,7 @@
                       <item>
                        <widget class="QPushButton" name="btnDriverDeactivate">
                         <property name="role" stdset="0">
-                         <string notr="true">primary</string>
+                         <string notr="true">danger</string>
                         </property>
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -1601,14 +1461,6 @@
                           <width>75</width>
                           <height>24</height>
                          </size>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <family>Alef</family>
-                          <pointsize>10</pointsize>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
                         </property>
                         <property name="text">
                          <string>Baja</string>
@@ -1702,15 +1554,6 @@
                  <width>1157</width>
                  <height>16777215</height>
                 </size>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Alef</family>
-                 <pointsize>10</pointsize>
-                 <weight>75</weight>
-                 <italic>false</italic>
-                 <bold>true</bold>
-                </font>
                </property>
                <property name="focusPolicy">
                 <enum>Qt::NoFocus</enum>
@@ -2010,7 +1853,7 @@
                         <item>
                          <widget class="QPushButton" name="btnInvoiceClientSearch">
                           <property name="role" stdset="0">
-                           <string notr="true">secondary</string>
+                           <string notr="true">icon</string>
                           </property>
                           <property name="minimumSize">
                            <size>
@@ -2075,7 +1918,7 @@
                         <item>
                          <widget class="QPushButton" name="btnInvoiceDateCalendar">
                           <property name="role" stdset="0">
-                           <string notr="true">secondary</string>
+                           <string notr="true">icon</string>
                           </property>
                           <property name="minimumSize">
                            <size>
@@ -2198,7 +2041,7 @@
                         <item>
                          <widget class="QPushButton" name="btnInvoiceClear">
                           <property name="role" stdset="0">
-                           <string notr="true">secondary</string>
+                           <string notr="true">icon</string>
                           </property>
                           <property name="minimumSize">
                            <size>
@@ -2282,15 +2125,6 @@
                         <height>16777215</height>
                        </size>
                       </property>
-                      <property name="font">
-                       <font>
-                        <family>Montserrat ExtraBold</family>
-                        <pointsize>14</pointsize>
-                        <weight>10</weight>
-                        <italic>false</italic>
-                        <bold>false</bold>
-                       </font>
-                      </property>
                       <property name="text">
                        <string>Registro de viajes</string>
                       </property>
@@ -2351,14 +2185,6 @@
                         <width>0</width>
                         <height>24</height>
                        </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Alef</family>
-                        <pointsize>10</pointsize>
-                        <weight>75</weight>
-                        <bold>true</bold>
-                       </font>
                       </property>
                       <property name="text">
                        <string>Origen:</string>
@@ -2467,14 +2293,6 @@
                         <width>0</width>
                         <height>24</height>
                        </size>
-                      </property>
-                      <property name="font">
-                       <font>
-                        <family>Alef</family>
-                        <pointsize>10</pointsize>
-                        <weight>75</weight>
-                        <bold>true</bold>
-                       </font>
                       </property>
                       <property name="text">
                        <string>Destino:</string>
@@ -2758,7 +2576,7 @@
                     <item>
                      <widget class="QPushButton" name="btnTripUpdate">
                       <property name="role" stdset="0">
-                       <string notr="true">primary</string>
+                       <string notr="true">outline</string>
                       </property>
                       <property name="minimumSize">
                        <size>
@@ -2787,7 +2605,7 @@
                     <item>
                      <widget class="QPushButton" name="btnTripClear">
                       <property name="role" stdset="0">
-                       <string notr="true">secondary</string>
+                       <string notr="true">icon</string>
                       </property>
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
@@ -2903,15 +2721,6 @@
                     <height>16777215</height>
                    </size>
                   </property>
-                  <property name="font">
-                   <font>
-                    <family>Alef</family>
-                    <pointsize>10</pointsize>
-                    <weight>75</weight>
-                    <italic>false</italic>
-                    <bold>true</bold>
-                   </font>
-                  </property>
                   <property name="focusPolicy">
                    <enum>Qt::NoFocus</enum>
                   </property>
@@ -2993,15 +2802,6 @@
                       <width>702</width>
                       <height>16777215</height>
                      </size>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <family>Alef</family>
-                      <pointsize>10</pointsize>
-                      <weight>75</weight>
-                      <italic>false</italic>
-                      <bold>true</bold>
-                     </font>
                     </property>
                     <property name="focusPolicy">
                      <enum>Qt::NoFocus</enum>
@@ -3344,15 +3144,6 @@
                           <height>24</height>
                          </size>
                         </property>
-                        <property name="font">
-                         <font>
-                          <family>Alef</family>
-                          <pointsize>10</pointsize>
-                          <weight>75</weight>
-                          <italic>false</italic>
-                          <bold>true</bold>
-                         </font>
-                        </property>
                         <property name="text">
                          <string>Código:</string>
                         </property>
@@ -3380,14 +3171,6 @@
                           <width>90</width>
                           <height>16777215</height>
                          </size>
-                        </property>
-                        <property name="font">
-                         <font>
-                          <family>Alef</family>
-                          <pointsize>10</pointsize>
-                          <weight>75</weight>
-                          <bold>true</bold>
-                         </font>
                         </property>
                         <property name="text">
                          <string>Razón social:</string>
@@ -3517,14 +3300,6 @@
                             <height>16</height>
                            </size>
                           </property>
-                          <property name="font">
-                           <font>
-                            <family>Alef</family>
-                            <pointsize>10</pointsize>
-                            <weight>75</weight>
-                            <bold>true</bold>
-                           </font>
-                          </property>
                           <property name="text">
                            <string>DNI:</string>
                           </property>
@@ -3581,15 +3356,6 @@
                             <height>24</height>
                            </size>
                           </property>
-                          <property name="font">
-                           <font>
-                            <family>Alef</family>
-                            <pointsize>10</pointsize>
-                            <weight>75</weight>
-                            <italic>false</italic>
-                            <bold>true</bold>
-                           </font>
-                          </property>
                           <property name="text">
                            <string/>
                           </property>
@@ -3604,7 +3370,7 @@
                         <item>
                          <widget class="QPushButton" name="btnClientSearch">
                           <property name="role" stdset="0">
-                           <string notr="true">secondary</string>
+                           <string notr="true">icon</string>
                           </property>
                           <property name="minimumSize">
                            <size>
@@ -3861,7 +3627,7 @@
                        <item>
                         <widget class="QPushButton" name="btnClientLeftOnCalendar">
                          <property name="role" stdset="0">
-                          <string notr="true">calendar</string>
+                          <string notr="true">icon</string>
                          </property>
                          <property name="sizePolicy">
                           <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -3936,14 +3702,6 @@
                             <height>24</height>
                            </size>
                           </property>
-                          <property name="font">
-                           <font>
-                            <family>Alef</family>
-                            <pointsize>10</pointsize>
-                            <weight>75</weight>
-                            <bold>true</bold>
-                           </font>
-                          </property>
                           <property name="text">
                            <string>Provincia:</string>
                           </property>
@@ -4006,14 +3764,6 @@
                               <horstretch>0</horstretch>
                               <verstretch>0</verstretch>
                              </sizepolicy>
-                            </property>
-                            <property name="font">
-                             <font>
-                              <family>Alef</family>
-                              <pointsize>10</pointsize>
-                              <weight>75</weight>
-                              <bold>true</bold>
-                             </font>
                             </property>
                             <property name="text">
                              <string>Localidad:</string>
@@ -4135,14 +3885,6 @@
                       <height>24</height>
                      </size>
                     </property>
-                    <property name="font">
-                     <font>
-                      <family>Alef</family>
-                      <pointsize>10</pointsize>
-                      <weight>75</weight>
-                      <bold>true</bold>
-                     </font>
-                    </property>
                     <property name="text">
                      <string>Estado:</string>
                     </property>
@@ -4155,14 +3897,6 @@
                       <horstretch>0</horstretch>
                       <verstretch>0</verstretch>
                      </sizepolicy>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <family>Alef</family>
-                      <pointsize>10</pointsize>
-                      <weight>75</weight>
-                      <bold>true</bold>
-                     </font>
                     </property>
                     <property name="text">
                      <string>Todos</string>
@@ -4199,14 +3933,6 @@
                       <verstretch>0</verstretch>
                      </sizepolicy>
                     </property>
-                    <property name="font">
-                     <font>
-                      <family>Alef</family>
-                      <pointsize>10</pointsize>
-                      <weight>75</weight>
-                      <bold>true</bold>
-                     </font>
-                    </property>
                     <property name="text">
                      <string>Alta</string>
                     </property>
@@ -4236,14 +3962,6 @@
                   </item>
                   <item>
                    <widget class="QRadioButton" name="rbtClientsInactive">
-                    <property name="font">
-                     <font>
-                      <family>Alef</family>
-                      <pointsize>10</pointsize>
-                      <weight>75</weight>
-                      <bold>true</bold>
-                     </font>
-                    </property>
                     <property name="text">
                      <string>Baja</string>
                     </property>
@@ -4324,14 +4042,6 @@
                       <height>24</height>
                      </size>
                     </property>
-                    <property name="font">
-                     <font>
-                      <family>Alef</family>
-                      <pointsize>10</pointsize>
-                      <weight>75</weight>
-                      <bold>true</bold>
-                     </font>
-                    </property>
                     <property name="text">
                      <string>Alta</string>
                     </property>
@@ -4340,7 +4050,7 @@
                   <item>
                    <widget class="QPushButton" name="btnClientUpdate">
                     <property name="role" stdset="0">
-                     <string notr="true">primary</string>
+                     <string notr="true">outline</string>
                     </property>
                     <property name="enabled">
                      <bool>true</bool>
@@ -4363,14 +4073,6 @@
                       <height>24</height>
                      </size>
                     </property>
-                    <property name="font">
-                     <font>
-                      <family>Alef</family>
-                      <pointsize>10</pointsize>
-                      <weight>75</weight>
-                      <bold>true</bold>
-                     </font>
-                    </property>
                     <property name="autoFillBackground">
                      <bool>false</bool>
                     </property>
@@ -4382,7 +4084,7 @@
                   <item>
                    <widget class="QPushButton" name="btnClientDeactivate">
                     <property name="role" stdset="0">
-                     <string notr="true">primary</string>
+                     <string notr="true">danger</string>
                     </property>
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
@@ -4401,14 +4103,6 @@
                       <width>150</width>
                       <height>24</height>
                      </size>
-                    </property>
-                    <property name="font">
-                     <font>
-                      <family>Alef</family>
-                      <pointsize>10</pointsize>
-                      <weight>75</weight>
-                      <bold>true</bold>
-                     </font>
                     </property>
                     <property name="text">
                      <string>Baja</string>
@@ -4485,15 +4179,6 @@
                  <width>1157</width>
                  <height>16777215</height>
                 </size>
-               </property>
-               <property name="font">
-                <font>
-                 <family>Alef</family>
-                 <pointsize>10</pointsize>
-                 <weight>75</weight>
-                 <italic>false</italic>
-                 <bold>true</bold>
-                </font>
                </property>
                <property name="focusPolicy">
                 <enum>Qt::NoFocus</enum>

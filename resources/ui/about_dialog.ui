@@ -179,15 +179,6 @@ p, li { white-space: pre-wrap; }
           <height>50</height>
          </size>
         </property>
-        <property name="font">
-         <font>
-          <family>MS Shell Dlg 2</family>
-          <pointsize>16</pointsize>
-          <weight>75</weight>
-          <italic>false</italic>
-          <bold>true</bold>
-         </font>
-        </property>
         <property name="text">
          <string>Cerrar</string>
         </property>

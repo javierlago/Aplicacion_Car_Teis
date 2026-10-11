@@ -4,11 +4,12 @@ from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 from typing import Any
 
-from PyQt6.QtCore import QAbstractTableModel, QModelIndex, QObject, Qt
-from PyQt6.QtGui import QIcon
+from PyQt6.QtCore import QAbstractTableModel, QModelIndex, QObject, QSize, Qt
+from PyQt6.QtGui import QFont, QFontMetrics, QIcon
 from PyQt6.QtWidgets import QHeaderView, QPushButton, QTableView
 
 _CENTER = Qt.AlignmentFlag.AlignCenter
+_HEADER_MARGIN = 24  # horizontal space around each header title
 
 
 @dataclass(frozen=True)
@@ -23,6 +24,18 @@ class RecordTableModel[T](QAbstractTableModel):
         super().__init__(parent)
         self._columns = list(columns)
         self._records: list[T] = []
+        self._header_sizes: list[QSize] | None = None
+
+    def set_header_metrics(self, metrics: QFontMetrics) -> None:
+        """Size header sections from ``metrics`` plus a margin.
+
+        QHeaderView ignores style-sheet padding when it sizes sections to their contents, so
+        the margin is provided here through ``SizeHintRole`` instead.
+        """
+        self._header_sizes = [
+            QSize(metrics.horizontalAdvance(c.header) + _HEADER_MARGIN, metrics.height() + 14)
+            for c in self._columns
+        ]
 
     def rowCount(self, parent: QModelIndex = QModelIndex()) -> int:  # noqa: B008, N802
         return 0 if parent.isValid() else len(self._records)
@@ -43,8 +56,12 @@ class RecordTableModel[T](QAbstractTableModel):
     def headerData(  # noqa: N802
         self, section: int, orientation: Qt.Orientation, role: int = Qt.ItemDataRole.DisplayRole
     ) -> Any:
-        if role == Qt.ItemDataRole.DisplayRole and orientation == Qt.Orientation.Horizontal:
+        if orientation != Qt.Orientation.Horizontal:
+            return None
+        if role == Qt.ItemDataRole.DisplayRole:
             return self._columns[section].header
+        if role == Qt.ItemDataRole.SizeHintRole and self._header_sizes:
+            return self._header_sizes[section]
         return None
 
     def set_records(self, records: Sequence[T]) -> None:
@@ -62,7 +79,14 @@ class RecordTableModel[T](QAbstractTableModel):
 def attach_model[T](view: QTableView, columns: Sequence[Column[T]]) -> RecordTableModel[T]:
     model = RecordTableModel(columns, view)
     view.setModel(model)
+    view.setShowGrid(False)  # rows are separated by the style sheet
     header = view.horizontalHeader()
+    # Set the weight here, not in styles.qss: Qt sizes header sections with the widget font,
+    # so a bold style-sheet font would be clipped.
+    bold = QFont(header.font())
+    bold.setWeight(QFont.Weight.DemiBold)
+    header.setFont(bold)
+    model.set_header_metrics(QFontMetrics(bold))
     for index, column in enumerate(columns):
         stretch, fit = QHeaderView.ResizeMode.Stretch, QHeaderView.ResizeMode.ResizeToContents
         header.setSectionResizeMode(index, stretch if column.stretch else fit)

@@ -1,134 +1,455 @@
 /*
- * CarTeis application style sheet, loaded once at start-up.
+ * CarTeis application style sheet, loaded once at start-up by carteis.ui.theme.
  *
- * Widgets that share a look carry a dynamic "role" property in the .ui files (Qt Designer:
- * "Add dynamic property" > String > role). Rules ending in ", X *" reproduce styles that used
- * to be set on a container without a selector, which Qt applies to all its children too.
+ * Colours are written as @token and defined in carteis/ui/theme.py (COLORS). Widgets that
+ * share a look carry a dynamic "role" property in the .ui files (Qt Designer: "Add dynamic
+ * property" > String > role): field, primary, outline, danger, icon, highlight, total,
+ * title, table, panel, fare.
  */
 
-/* ---- Main window -------------------------------------------------------------------- */
+/* ---- Window chrome ------------------------------------------------------------------ */
 
-QWidget#centralwidget {
-    background-color: rgb(186, 186, 186);
+QMainWindow,
+QWidget#centralwidget,
+QDialog {
+    background-color: @background;
+    color: @text;
 }
 
-#mainTabs,
-#mainTabs * {
-    font: 75 10pt "Alef";
-    font-weight: bold;
+QMenuBar {
+    background-color: @surface;
+    border-bottom: 1px solid @border;
+    padding: 2px 4px;
 }
 
-/* Panels holding each tab's form */
+QMenuBar::item {
+    padding: 4px 10px;
+    border-radius: 4px;
+}
+
+QMenuBar::item:selected {
+    background-color: @background;
+}
+
+QMenu {
+    background-color: @surface;
+    border: 1px solid @border;
+    padding: 4px;
+}
+
+QMenu::item {
+    padding: 6px 24px 6px 12px;
+    border-radius: 4px;
+}
+
+QMenu::item:selected {
+    background-color: @accent-soft;
+    color: @text;
+}
+
+QMenu::separator {
+    height: 1px;
+    background: @border;
+    margin: 4px 8px;
+}
+
+QToolBar {
+    background-color: @surface;
+    border: none;
+    border-bottom: 1px solid @border;
+    spacing: 4px;
+    padding: 4px 8px;
+}
+
+QToolBar QToolButton {
+    border-radius: 6px;
+    padding: 4px;
+}
+
+QToolBar QToolButton:hover {
+    background-color: @background;
+}
+
+QStatusBar {
+    background-color: @surface;
+    border-top: 1px solid @border;
+    color: @muted;
+}
+
+QStatusBar QLabel {
+    color: @muted;
+    padding: 0 8px;
+}
+
+QToolTip {
+    background-color: @text;
+    color: @surface;
+    border: none;
+    padding: 4px 8px;
+}
+
+/* ---- Tabs ----------------------------------------------------------------------------- */
+
+QTabWidget::pane {
+    border: none;
+    background-color: @background;
+}
+
+QTabBar::tab {
+    background: transparent;
+    color: @muted;
+    padding: 8px 18px;
+    margin-right: 2px;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-weight: 600;
+}
+
+QTabBar::tab:hover {
+    color: @text;
+}
+
+QTabBar::tab:selected {
+    color: @text;
+    border-bottom: 3px solid @accent;
+}
+
+/* ---- Panels and text ------------------------------------------------------------------ */
+
+/* Card holding each tab's form */
 *[role="panel"] {
-    border-radius: 10px;
-    border: 2px solid black;
+    background-color: @surface;
+    border: 1px solid @border;
+    border-radius: 8px;
 }
 
-/* Section titles. Needs #mainTabs to win over the tab-wide font above. */
-#mainTabs *[role="title"] {
-    font: 81 14pt "Montserrat ExtraBold";
+*[role="panel"] QLabel,
+*[role="panel"] QRadioButton,
+*[role="panel"] QCheckBox {
+    background: transparent;
 }
 
-/* Text boxes and combo boxes */
-*[role="field"],
-*[role="field"] * {
-    border: 2px solid black;
-    border-radius: 3px;
+QLabel {
+    color: @text;
 }
 
-/* Read-only values that identify the current record (codes, invoice number) */
-*[role="highlight"],
-*[role="highlight"] * {
-    background-color: rgb(247, 181, 0);
-    border: 2px solid black;
-    border-radius: 3px;
-    color: rgb(0, 0, 0);
+/* Separator between the invoice and trip cards, and the frame around the invoice tables */
+#invoiceSeparator {
+    background-color: @border;
+    border: none;
+    max-width: 1px;
+}
+
+#invoiceTablesFrame,
+#mainFrame {
+    background: transparent;
+    border: none;
+}
+
+*[role="title"] {
+    font-size: 13pt;
+    font-weight: 600;
+    color: @text;
+}
+
+/* ---- Inputs --------------------------------------------------------------------------- */
+
+*[role="field"] {
+    background-color: @surface;
+    border: 1px solid @border;
+    border-radius: 6px;
+    padding: 2px 4px; /* narrow fixed-size boxes until the layout step */
+    min-height: 22px;
+    selection-background-color: @accent;
+    selection-color: @text;
+}
+
+*[role="field"]:hover {
+    border-color: @border-strong;
+}
+
+*[role="field"]:focus {
+    border: 1px solid @accent;
+}
+
+QLineEdit[role="field"]:read-only {
+    background-color: @surface-alt;
+    color: @muted;
+}
+
+QComboBox QAbstractItemView {
+    background-color: @surface;
+    border: 1px solid @border;
+    selection-background-color: @accent-soft;
+    selection-color: @text;
+    outline: none;
+}
+
+/* Codes and invoice number: read-only values that identify the current record */
+*[role="highlight"] {
+    background-color: @accent-soft;
+    border: 1px solid @accent;
+    border-radius: 6px;
+    padding: 2px 4px; /* narrow fixed-size boxes until the layout step */
+    color: @text;
+    font-weight: 600;
 }
 
 /* Invoice subtotal, VAT and total */
-*[role="total"],
-*[role="total"] * {
-    background-color: rgb(247, 181, 0);
-    border-radius: 3px;
-    color: rgb(0, 0, 0);
+*[role="total"] {
+    background-color: @surface;
+    border: 1px solid @border;
+    border-radius: 6px;
+    padding: 2px 4px; /* narrow fixed-size boxes until the layout step */
+    color: @text;
+    font-weight: 600;
 }
 
-/* Main actions: Alta, Modificar, Baja, Facturar, Grabar */
-*[role="primary"],
-*[role="primary"] * {
-    border: 2px solid black;
-    border-radius: 3px;
-    background-color: rgb(247, 181, 0);
+#txtTotal {
+    background-color: @accent-soft;
+    border-color: @accent;
 }
 
-/* Icon buttons: search, clear, invoice date */
-*[role="secondary"],
-*[role="secondary"] * {
-    border-radius: 2px;
-    background-color: rgb(225, 225, 225);
+QRadioButton,
+QCheckBox {
+    spacing: 6px;
+    color: @text;
 }
 
-*[role="calendar"],
-*[role="calendar"] * {
-    border-radius: 2px;
+QCheckBox::indicator,
+QRadioButton::indicator {
+    width: 14px;
+    height: 14px;
+    background-color: @surface;
+    border: 1px solid @border-strong;
 }
 
-*[role="fare"],
-*[role="fare"] * {
-    color: rgb(0, 0, 0);
+QCheckBox::indicator {
+    border-radius: 4px;
 }
 
-/* Tables */
-*[role="table"] QHeaderView::section {
-    background-color: rgb(247, 181, 0);
-    border-radius: 1px;
-    color: black;
-    font-weight: bold;
-    border: 1px solid black;
+QRadioButton::indicator {
+    border-radius: 8px;
 }
+
+QCheckBox::indicator:hover,
+QRadioButton::indicator:hover {
+    border-color: @accent-hover;
+}
+
+QCheckBox::indicator:checked,
+QRadioButton::indicator:checked {
+    background-color: @accent;
+    border: 1px solid @accent-hover;
+}
+
+
+/* The fare radios only show the computed fare */
+*[role="fare"] {
+    color: @muted;
+}
+
+*[role="fare"]:checked {
+    color: @text;
+    font-weight: 600;
+}
+
+/* ---- Buttons -------------------------------------------------------------------------- */
+
+QPushButton {
+    border-radius: 6px;
+    padding: 5px 8px;
+    min-height: 20px;
+    font-weight: 600;
+}
+
+/* Main action: Alta, Facturar, Grabar */
+*[role="primary"] {
+    background-color: @accent;
+    border: 1px solid @accent;
+    color: @text;
+}
+
+*[role="primary"]:hover {
+    background-color: @accent-hover;
+    border-color: @accent-hover;
+}
+
+/* Secondary action: Modificar */
+*[role="outline"] {
+    background-color: @surface;
+    border: 1px solid @border-strong;
+    color: @text;
+}
+
+*[role="outline"]:hover {
+    background-color: @background;
+}
+
+/* Destructive action: Baja / Reactivar */
+*[role="danger"] {
+    background-color: @surface;
+    border: 1px solid @danger;
+    color: @danger;
+}
+
+*[role="danger"]:hover {
+    background-color: @danger-soft;
+}
+
+/* Icon-only buttons: search, clear, calendars */
+*[role="icon"] {
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    padding: 2px;
+}
+
+*[role="icon"]:hover {
+    background-color: @background;
+    border-color: @border;
+}
+
+QPushButton:pressed {
+    padding-top: 6px;
+    padding-bottom: 4px;
+}
+
+/* ---- Tables --------------------------------------------------------------------------- */
 
 *[role="table"] {
-    selection-background-color: rgb(247, 181, 0);
+    background-color: @surface;
+    alternate-background-color: @surface-alt;
+    border: 1px solid @border;
+    border-radius: 8px;
+    selection-background-color: @accent-selected;
+    selection-color: @text;
+    outline: none;
 }
 
-/* Empty header area right of the last column. A per-table style sheet painted it with the
-   button colour; an application-wide one would use the base colour instead. */
+*[role="table"]::item {
+    padding: 0 6px;
+    border: none;
+    border-bottom: 1px solid @border;
+}
+
 *[role="table"] QHeaderView {
-    background-color: palette(button);
+    background-color: @surface;
+    border: none;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
-#tblInvoices,
-#tblTrips {
-    border: 1px solid black;
+*[role="table"] QHeaderView::section {
+    background-color: @surface;
+    color: @muted;
+    border: none;
+    border-bottom: 1px solid @border;
+    padding: 6px 0; /* no horizontal padding: Qt leaves it out when sizing sections */
 }
 
-/* ---- About dialog ------------------------------------------------------------------- */
-
-#aboutPanel,
-#aboutPanel * {
-    border-radius: 10px;
-    background-color: rgb(222, 222, 222);
+*[role="table"] QTableCornerButton::section {
+    background-color: @surface;
+    border: none;
 }
 
-#btnClose,
-#btnClose * {
-    border-radius: 5px;
-    background-color: rgb(203, 203, 203);
+/* Row trash-can buttons inside the tables */
+*[role="table"] QPushButton {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    min-height: 0;
 }
 
-/* ---- Exit dialog -------------------------------------------------------------------- */
+*[role="table"] QPushButton:hover {
+    background-color: @danger-soft;
+}
 
-#ExitDialog,
-#ExitDialog * {
-    background-color: rgb(200, 200, 200);
+QScrollBar:vertical,
+QScrollBar:horizontal {
+    background: transparent;
+    border: none;
+    margin: 0;
+}
+
+QScrollBar:vertical {
+    width: 10px;
+}
+
+QScrollBar:horizontal {
+    height: 10px;
+}
+
+QScrollBar::handle {
+    background: @border-strong;
+    border-radius: 4px;
+    margin: 2px;
+}
+
+QScrollBar::handle:hover {
+    background: @muted;
+}
+
+QScrollBar::add-line,
+QScrollBar::sub-line,
+QScrollBar::add-page,
+QScrollBar::sub-page {
+    background: none;
+    border: none;
+    width: 0;
+    height: 0;
+}
+
+/* ---- Dialogs -------------------------------------------------------------------------- */
+
+#aboutPanel {
+    background-color: @surface;
+    border: 1px solid @border;
+    border-radius: 8px;
+}
+
+#aboutPanel QTextEdit {
+    background: transparent;
+    border: none;
 }
 
 #ExitDialog #lblQuestion {
-    color: rgb(0, 0, 0);
-    font: 75 14pt "MS Shell Dlg 2";
+    font-size: 13pt;
+    font-weight: 600;
 }
 
-/* Needs #ExitDialog to win over the dialog-wide background above. */
-#ExitDialog #btnAccept {
-    background-color: rgb(197, 197, 197);
+#btnAccept,
+#btnClose {
+    background-color: @accent;
+    border: 1px solid @accent;
+    color: @text;
+}
+
+#btnAccept:hover,
+#btnClose:hover {
+    background-color: @accent-hover;
+}
+
+#btnCancel {
+    background-color: @surface;
+    border: 1px solid @border-strong;
+    color: @text;
+}
+
+QCalendarWidget QAbstractItemView {
+    background-color: @surface;
+    selection-background-color: @accent;
+    selection-color: @text;
+}
+
+QCalendarWidget QWidget#qt_calendar_navigationbar {
+    background-color: @surface;
+    border-bottom: 1px solid @border;
+}
+
+QCalendarWidget QToolButton {
+    color: @text;
+    background: transparent;
+    font-weight: 600;
+    padding: 4px 8px;
 }

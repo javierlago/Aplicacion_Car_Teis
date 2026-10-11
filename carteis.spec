@@ -12,6 +12,7 @@ a = Analysis(
     pathex=[str(ROOT)],
     datas=[
         (str(ROOT / "resources" / "img"), "resources/img"),
+        (str(ROOT / "resources" / "fonts"), "resources/fonts"),
         (str(ROOT / "resources" / "styles.qss"), "resources"),
         (str(ROOT / "resources" / "seed.sqlite"), "resources"),
         (str(ROOT / "carteis" / "data" / "migrations" / "*.sql"), "carteis/data/migrations"),

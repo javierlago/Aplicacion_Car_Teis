@@ -13,6 +13,7 @@ from PyQt6.QtWidgets import QApplication, QMessageBox
 from carteis import __version__, paths
 from carteis.data.database import connect
 from carteis.data.migrations import migrate
+from carteis.ui import theme
 
 log = logging.getLogger("carteis")
 
@@ -52,7 +53,7 @@ def create_application(argv: Sequence[str]) -> QApplication:
     app.setApplicationName("CarTeis")
     app.setApplicationVersion(__version__)
     QDir.addSearchPath("img", str(paths.IMAGES_DIR))
-    app.setStyleSheet(paths.STYLE_SHEET.read_text(encoding="utf-8"))
+    theme.apply(app, paths.STYLE_SHEET.read_text(encoding="utf-8"), paths.FONTS_DIR)
     return app
 
 
