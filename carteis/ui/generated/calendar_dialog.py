@@ -9,7 +9,7 @@ class Ui_CalendarDialog(object):
         CalendarDialog.setWindowModality(QtCore.Qt.WindowModality.ApplicationModal)
         CalendarDialog.resize(311, 188)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("img:calendar-icon_34471.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("img:calendario.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         CalendarDialog.setWindowIcon(icon)
         CalendarDialog.setModal(True)
         self.gridLayout = QtWidgets.QGridLayout(CalendarDialog)

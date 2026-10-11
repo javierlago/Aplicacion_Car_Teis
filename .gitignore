@@ -14,14 +14,7 @@ htmlcov/
 # Build output (PyInstaller, Sphinx)
 build/
 dist/
-*.exe
 docs/_build/
-
-# Files generated at runtime
-informes/*.pdf
-Facturacion/*.pdf
-*_backup.zip
-backups/
 
 # IDE
 .idea/

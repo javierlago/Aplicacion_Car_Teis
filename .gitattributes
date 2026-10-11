@@ -1,0 +1,7 @@
+# Normalise line endings to LF in the repository; Git converts text files on checkout as needed.
+* text=auto eol=lf
+
+*.png binary
+*.ico binary
+*.sqlite binary
+*.zip binary

@@ -1,4 +1,5 @@
 import logging
+import re
 import sys
 
 import pytest
@@ -85,3 +86,15 @@ def test_main_starts_and_closes(monkeypatch, qapp, tmp_path, isolated_logger):
     shown[0].prompts.confirm_exit = lambda: True
     shown[0].close()
     qapp.setStyleSheet("")
+
+
+def test_every_referenced_image_exists():
+    """Catch icons pointing at missing files (the legacy calendar icon never existed)."""
+    sources = paths.RESOURCES_DIR.parent / "carteis"
+    names = {
+        name
+        for source in sources.rglob("*.py")
+        for name in re.findall(r'"img:([^"]+)"', source.read_text(encoding="utf-8"))
+    }
+    assert names, "no img: references found"
+    assert sorted(n for n in names if not (paths.IMAGES_DIR / n).is_file()) == []
