@@ -1,4 +1,4 @@
-# Fase 7 — Rediseño visual (7.1, 7.2 y 7.4 ✅; 7.3 pendiente)
+# Fase 7 — Rediseño visual ✅
 
 Continuación de [02_plan.md](02_plan.md). El objetivo es una interfaz **clara y moderna**, con el amarillo taxi como acento, que se vea igual en cualquier equipo.
 
@@ -105,6 +105,6 @@ Continuación de [02_plan.md](02_plan.md). El objetivo es una interfaz **clara y
   - "Acerca de" mostraba otro proyecto ("TappxiControl 0.0.0.0");
   - el calendario sale en español y sin números de semana.
 
-**7.3 ⏳ Iconos (pendiente).** Siguen los PNG originales de la barra de herramientas y de los botones. `tools/fetch_icons.py` ya descarga y colorea iconos de Lucide; bastaría con añadirlos a `ICONS` y sustituirlos en los `.ui`.
+**7.3 ✅ Iconos.** Los iconos de la barra de herramientas, los menús, los botones del formulario, las papeleras de las tablas y la marca del DNI son ahora SVG de Lucide (`tools/fetch_icons.py`), coloreados con los tokens del tema: oscuros en la barra, grises en los formularios y verde/rojo para el DNI válido o no válido. Todos los botones de icono usan el mismo tamaño (18 px, desde `styles.qss`); antes el calendario medía 24 px y la lupa 16 px. Se borraron los 10 PNG/ICO antiguos y se conservaron solo las imágenes de marca (el taxi, el icono de la ventana y del `.exe` y el logo de los PDF). Capturas en `refactor_plan/capturas/7.3_*`.
 
 **7.4 ✅ Cierre.** 299 tests, cobertura del 100 %, documentación (`docs/`, CLAUDE.md) y README con capturas nuevas (`docs/img/`). Las capturas de cada paso están en `refactor_plan/capturas/`.

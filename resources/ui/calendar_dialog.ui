@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <ui version="4.0">
  <class>CalendarDialog</class>
  <widget class="QDialog" name="CalendarDialog">
@@ -18,7 +18,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../img/calendario.png</normaloff>../img/calendario.png</iconset>
+    <normaloff>../img/icons/calendar.svg</normaloff>../img/icons/calendar.svg</iconset>
   </property>
   <property name="modal">
    <bool>true</bool>
@@ -60,6 +60,6 @@
    </item>
   </layout>
  </widget>
- <resources/>
- <connections/>
+ <resources />
+ <connections />
 </ui>

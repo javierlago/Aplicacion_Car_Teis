@@ -74,7 +74,7 @@ class Prompts:
         """Tick any of ``options``. ``None`` if cancelled; may be an empty list."""
         dialog = QDialog(self._parent)
         dialog.setWindowTitle(title)
-        dialog.setWindowIcon(QIcon("img:impresora.png"))
+        dialog.setWindowIcon(QIcon("img:icons/printer.svg"))
         layout = QVBoxLayout(dialog)
         layout.addWidget(QLabel(text, dialog))
         boxes = [QCheckBox(option, dialog) for option in options]

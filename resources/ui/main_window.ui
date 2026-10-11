@@ -49,8 +49,8 @@
   </property>
   <property name="iconSize">
    <size>
-    <width>35</width>
-    <height>35</height>
+    <width>20</width>
+    <height>20</height>
    </size>
   </property>
   <property name="documentMode">
@@ -311,13 +311,7 @@
                     </property>
                     <property name="icon">
                      <iconset>
-                      <normaloff>../img/calendario.png</normaloff>../img/calendario.png</iconset>
-                    </property>
-                    <property name="iconSize">
-                     <size>
-                      <width>24</width>
-                      <height>24</height>
-                     </size>
+                      <normaloff>../img/icons/calendar.svg</normaloff>../img/icons/calendar.svg</iconset>
                     </property>
                     <property name="minimumSize">
                      <size>
@@ -398,14 +392,14 @@
                     </property>
                     <property name="minimumSize">
                      <size>
-                      <width>22</width>
-                      <height>22</height>
+                      <width>18</width>
+                      <height>18</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>22</width>
-                      <height>22</height>
+                      <width>18</width>
+                      <height>18</height>
                      </size>
                     </property>
                    </widget>
@@ -420,7 +414,7 @@
                     </property>
                     <property name="icon">
                      <iconset>
-                      <normaloff>../img/lupa2.png</normaloff>../img/lupa2.png</iconset>
+                      <normaloff>../img/icons/search.svg</normaloff>../img/icons/search.svg</iconset>
                     </property>
                     <property name="minimumSize">
                      <size>
@@ -529,13 +523,7 @@
                      </property>
                      <property name="icon">
                       <iconset>
-                       <normaloff>../img/calendario.png</normaloff>../img/calendario.png</iconset>
-                     </property>
-                     <property name="iconSize">
-                      <size>
-                       <width>24</width>
-                       <height>24</height>
-                      </size>
+                       <normaloff>../img/icons/calendar.svg</normaloff>../img/icons/calendar.svg</iconset>
                      </property>
                      <property name="minimumSize">
                       <size>
@@ -1359,7 +1347,7 @@
                       </property>
                       <property name="icon">
                        <iconset>
-                        <normaloff>../img/lupa2.png</normaloff>../img/lupa2.png</iconset>
+                        <normaloff>../img/icons/search.svg</normaloff>../img/icons/search.svg</iconset>
                       </property>
                       <property name="minimumSize">
                        <size>
@@ -1466,13 +1454,7 @@
                       </property>
                       <property name="icon">
                        <iconset>
-                        <normaloff>../img/calendario.png</normaloff>../img/calendario.png</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>24</width>
-                        <height>24</height>
-                       </size>
+                        <normaloff>../img/icons/calendar.svg</normaloff>../img/icons/calendar.svg</iconset>
                       </property>
                       <property name="minimumSize">
                        <size>
@@ -1530,13 +1512,7 @@
                       </property>
                       <property name="icon">
                        <iconset>
-                        <normaloff>../img/pincel.png</normaloff>../img/pincel.png</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>24</width>
-                        <height>24</height>
-                       </size>
+                        <normaloff>../img/icons/eraser-muted.svg</normaloff>../img/icons/eraser-muted.svg</iconset>
                       </property>
                       <property name="minimumSize">
                        <size>
@@ -1932,13 +1908,7 @@
                       </property>
                       <property name="icon">
                        <iconset>
-                        <normaloff>../img/pincel.png</normaloff>../img/pincel.png</iconset>
-                      </property>
-                      <property name="iconSize">
-                       <size>
-                        <width>24</width>
-                        <height>24</height>
-                       </size>
+                        <normaloff>../img/icons/eraser-muted.svg</normaloff>../img/icons/eraser-muted.svg</iconset>
                       </property>
                       <property name="minimumSize">
                        <size>
@@ -2653,14 +2623,14 @@
                     </property>
                     <property name="minimumSize">
                      <size>
-                      <width>22</width>
-                      <height>22</height>
+                      <width>18</width>
+                      <height>18</height>
                      </size>
                     </property>
                     <property name="maximumSize">
                      <size>
-                      <width>22</width>
-                      <height>22</height>
+                      <width>18</width>
+                      <height>18</height>
                      </size>
                     </property>
                    </widget>
@@ -2675,7 +2645,7 @@
                     </property>
                     <property name="icon">
                      <iconset>
-                      <normaloff>../img/lupa2.png</normaloff>../img/lupa2.png</iconset>
+                      <normaloff>../img/icons/search.svg</normaloff>../img/icons/search.svg</iconset>
                     </property>
                     <property name="minimumSize">
                      <size>
@@ -2824,13 +2794,7 @@
                      </property>
                      <property name="icon">
                       <iconset>
-                       <normaloff>../img/calendario.png</normaloff>../img/calendario.png</iconset>
-                     </property>
-                     <property name="iconSize">
-                      <size>
-                       <width>24</width>
-                       <height>24</height>
-                      </size>
+                       <normaloff>../img/icons/calendar.svg</normaloff>../img/icons/calendar.svg</iconset>
                      </property>
                      <property name="minimumSize">
                       <size>
@@ -3331,7 +3295,7 @@
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>../img/OkIco.svg</normaloff>../img/OkIco.svg</iconset>
+     <normaloff>../img/icons/info.svg</normaloff>../img/icons/info.svg</iconset>
    </property>
    <property name="text">
     <string>Acerca de...</string>
@@ -3340,7 +3304,7 @@
   <action name="actionToolbarExit">
    <property name="icon">
     <iconset>
-     <normaloff>../img/salir.png</normaloff>../img/salir.png</iconset>
+     <normaloff>../img/icons/log-out.svg</normaloff>../img/icons/log-out.svg</iconset>
    </property>
    <property name="text">
     <string>Salir</string>
@@ -3349,7 +3313,7 @@
   <action name="actionClearForms">
    <property name="icon">
     <iconset>
-     <normaloff>../img/pincel.png</normaloff>../img/pincel.png</iconset>
+     <normaloff>../img/icons/eraser.svg</normaloff>../img/icons/eraser.svg</iconset>
    </property>
    <property name="text">
     <string>Limpiar formularios</string>
@@ -3358,7 +3322,7 @@
   <action name="actionExit">
    <property name="icon">
     <iconset>
-     <normaloff>../img/salir.png</normaloff>../img/salir.png</iconset>
+     <normaloff>../img/icons/log-out.svg</normaloff>../img/icons/log-out.svg</iconset>
    </property>
    <property name="text">
     <string>Salir</string>
@@ -3372,7 +3336,7 @@
   <action name="actionBackupCreate">
    <property name="icon">
     <iconset>
-     <normaloff>../img/actualizar.png</normaloff>../img/actualizar.png</iconset>
+     <normaloff>../img/icons/database-backup.svg</normaloff>../img/icons/database-backup.svg</iconset>
    </property>
    <property name="text">
     <string>Crear copia de seguridad</string>
@@ -3384,7 +3348,7 @@
   <action name="actionBackupRestore">
    <property name="icon">
     <iconset>
-     <normaloff>../img/restaura_bbdd.png</normaloff>../img/restaura_bbdd.png</iconset>
+     <normaloff>../img/icons/archive-restore.svg</normaloff>../img/icons/archive-restore.svg</iconset>
    </property>
    <property name="text">
     <string>Restaurar copia de seguridad</string>
@@ -3421,8 +3385,7 @@
   <action name="actionPrintReports">
    <property name="icon">
     <iconset>
-     <normalon>../img/impresora.png</normalon>
-    </iconset>
+     <normaloff>../img/icons/printer.svg</normaloff>../img/icons/printer.svg</iconset>
    </property>
    <property name="text">
     <string>Imprimir informes</string>

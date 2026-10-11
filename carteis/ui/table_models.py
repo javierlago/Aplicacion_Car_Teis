@@ -106,7 +106,7 @@ def add_row_buttons[T](
         record = model.record(row)
         button = QPushButton(view)
         button.setFixedSize(30, 28)
-        button.setIcon(QIcon("img:papelera.png"))
+        button.setIcon(QIcon("img:icons/trash.svg"))
         button.setToolTip("Eliminar")
         button.clicked.connect(lambda _checked=False, item=record: on_click(item))
         view.setIndexWidget(model.index(row, column), button)

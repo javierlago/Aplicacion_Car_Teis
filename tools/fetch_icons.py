@@ -25,6 +25,21 @@ OUT_DIR = Path(__file__).resolve().parents[1] / "resources" / "img" / "icons"
 # file name in resources/img/icons -> (Lucide icon name, colour token)
 ICONS: dict[str, tuple[str, str]] = {
     "chevron-down.svg": ("chevron-down", "muted"),
+    # toolbar and menus
+    "printer.svg": ("printer", "text"),
+    "database-backup.svg": ("database-backup", "text"),
+    "archive-restore.svg": ("archive-restore", "text"),
+    "eraser.svg": ("eraser", "text"),
+    "log-out.svg": ("log-out", "text"),
+    "info.svg": ("info", "text"),
+    # buttons inside the forms and tables
+    "search.svg": ("search", "muted"),
+    "calendar.svg": ("calendar", "muted"),
+    "eraser-muted.svg": ("eraser", "muted"),
+    "trash.svg": ("trash-2", "muted"),
+    # DNI check next to the DNI boxes
+    "dni-valid.svg": ("circle-check", "success"),
+    "dni-invalid.svg": ("circle-x", "danger"),
 }
 
 _SVG_START = re.compile(rb"^\s*(<!--.*?-->\s*)?<svg\b", re.DOTALL)

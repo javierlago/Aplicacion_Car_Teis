@@ -17,6 +17,9 @@ from carteis.domain.pricing import Location
 from carteis.domain.validators import is_valid_dni, parse_money
 from carteis.ui.prompts import Prompts
 
+_DNI_VALID_ICON = "img:icons/dni-valid.svg"
+_DNI_INVALID_ICON = "img:icons/dni-invalid.svg"
+
 
 class _Controller(Protocol):
     prompts: Prompts
@@ -122,4 +125,4 @@ def show_dni_check(label: QLabel, dni: str) -> None:
         label.clear()
         return
     label.setScaledContents(True)
-    label.setPixmap(QPixmap("img:OkIco.svg" if is_valid_dni(dni) else "img:CancelIco.ico"))
+    label.setPixmap(QPixmap(_DNI_VALID_ICON if is_valid_dni(dni) else _DNI_INVALID_ICON))

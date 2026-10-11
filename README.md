@@ -43,7 +43,7 @@ Todo el proceso está documentado en [`refactor_plan/`](refactor_plan/): la audi
 | Base de datos | **SQLite** con `sqlite3`, esquema versionado con migraciones SQL |
 | Informes | **reportlab** (generación de PDF) |
 | Excel | **openpyxl** |
-| Tipografía e iconos | **Inter** (SIL OFL), incluida en la app; **Lucide** (ISC) para la flecha de los desplegables |
+| Tipografía e iconos | **Inter** (SIL OFL) e iconos **Lucide** (ISC), incluidos en la app |
 | Tests | **pytest**, **pytest-qt** (interfaz sin pantalla), **pytest-cov**, **pypdf** (lectura de los PDF generados) |
 | Calidad de código | **ruff** (lint y formato) |
 | Documentación | **Sphinx** (referencia generada desde los docstrings) |
