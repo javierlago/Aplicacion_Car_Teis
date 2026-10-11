@@ -56,7 +56,7 @@ Convenciones: PEP 8 en inglés (`snake_case`, `PascalCase` para clases) y type h
 
 ## Fases
 
-### Fase 0 — Preparación y red de seguridad
+### Fase 0 — Preparación y red de seguridad ✅ (2026-10-11)
 **Objetivo:** un repo limpio y reproducible, y una base para medir que no rompemos nada.
 
 - Crear la rama `refactor`.
