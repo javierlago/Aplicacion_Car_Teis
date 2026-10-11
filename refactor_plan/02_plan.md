@@ -89,7 +89,7 @@ Cambios de comportamiento deliberados respecto al código antiguo:
 - **Validación completa:** se comprueban todos los campos obligatorios, sin el bug F10 que ignoraba el último.
 - **Formato de dinero y fechas** hecho a mano, sin depender del locale `es_ES.UTF-8`.
 
-### Fase 2 — Capa de datos
+### Fase 2 — Capa de datos ✅ (2026-10-11)
 **Objetivo:** un único acceso a SQLite, con integridad y datos bien tipados.
 
 - `database.py` con `sqlite3`: una sola conexión, `PRAGMA foreign_keys = ON` (corrige **D4**) y transacciones explícitas.
@@ -104,6 +104,17 @@ Cambios de comportamiento deliberados respecto al código antiguo:
 - Tests de repositorios contra una BD temporal.
 
 **Criterio de salida:** los tests de repositorios pasan y la BD migrada conserva el mismo número de registros que la original.
+
+**Resultado (2026-10-11) ✅** — `carteis/data/` con `database.py` (conexión, transacciones y traducción de errores), `converters.py`, `migrations/` (`0001_initial_schema.sql`), `repositories/` (conductores, clientes, facturas y localidades) y `legacy_import.py`. 209 tests y cobertura del 100 %. `resources/seed.sqlite` contiene los datos actuales migrados: 19 conductores, 32 clientes, 6 facturas y 31 de 32 viajes. Los totales de las 6 facturas coinciden al céntimo con el cálculo antiguo.
+
+Decisiones tomadas durante la fase:
+- **Localidad como clave foránea** (`municipality_id`) en conductores, clientes y en el origen y destino de los viajes, en lugar de texto libre. La BD garantiza que la localidad existe y pertenece a su provincia. Hay 17 nombres de municipio repetidos en varias provincias, así que `Trip` guarda `Location` (provincia + municipio) para calcular siempre bien la tarifa.
+- **Correcciones de datos** en la migración (6 registros escritos a mano): `Malaga`→`Málaga`, `Gerona`→`Girona`, `Mallorca/Palma de Mallorca`→`Illes Balears/Palma`, `Bilbao/Baracaldo`→`Vizcaya/Barakaldo`, `Santander`→`Cantabria`, y se recorta el espacio de `Jaén `. También se quita el `.0` de 3 teléfonos importados desde Excel.
+- **Datos perdidos:** se descarta el viaje 41 (su factura no existe, bug D4) y los 6 conductores sin fecha de alta (bug D3) se migran con la fecha vacía.
+- **Dinero en céntimos enteros** (`salary_cents`, `rate_cents`): exacto y numérico.
+- Las facturas referencian al cliente por DNI (`client_dni`, con `ON UPDATE CASCADE`) y al conductor por id.
+
+> ⚠️ La app antigua sigue escribiendo en `bbdd.sqlite`. Antes de cambiar a la app nueva (fase 4) hay que **regenerar la semilla** con `python -m carteis.data.legacy_import bbdd.sqlite resources/seed.sqlite --overwrite` para no perder lo que se haya registrado entretanto.
 
 ### Fase 3 — Servicios (casos de uso)
 **Objetivo:** la lógica de "qué pasa al pulsar un botón" sale de la UI.
