@@ -1,7 +1,10 @@
 from datetime import date
 
+import pytest
 from openpyxl import Workbook
+from PyQt6.QtCore import QPoint
 from PyQt6.QtGui import QCloseEvent
+from PyQt6.QtWidgets import QApplication
 
 from carteis.services import ClientService, DriverService, InvoicingService
 from carteis.ui.main_window import status_date
@@ -178,3 +181,20 @@ def test_import_lists_at_most_15_rejections(window, prompts, tmp_path):
     detail = prompts.messages[-1][2].splitlines()
     assert len(detail) == 16
     assert detail[-1] == "… y 5 más."
+
+
+@pytest.mark.parametrize("size", [(1280, 720), (1600, 950)])
+def test_cards_and_tables_share_their_edges(window, size):
+    """Each tab's card and its tables must line up left and right at any window size."""
+    window.resize(*size)
+    window.show()
+    ui = window.ui
+    for tab, card, tables in (
+        (0, ui.driverForm, ui.tblDrivers),
+        (1, ui.invoiceForm, ui.invoiceTablesFrame),
+        (2, ui.clientForm, ui.tblClients),
+    ):
+        ui.mainTabs.setCurrentIndex(tab)
+        QApplication.processEvents()
+        card_x, tables_x = (w.mapTo(window, QPoint(0, 0)).x() for w in (card, tables))
+        assert (card_x, card_x + card.width()) == (tables_x, tables_x + tables.width())
