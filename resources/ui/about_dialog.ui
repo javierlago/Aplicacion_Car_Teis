@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AcercaDe</class>
- <widget class="QDialog" name="AcercaDe">
+ <class>AboutDialog</class>
+ <widget class="QDialog" name="AboutDialog">
   <property name="windowModality">
    <enum>Qt::WindowModal</enum>
   </property>
@@ -30,14 +30,14 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../img/taxiIcon.png</normaloff>../img/taxiIcon.png</iconset>
+    <normaloff>../../img/taxiIcon.png</normaloff>../../img/taxiIcon.png</iconset>
   </property>
   <property name="modal">
    <bool>true</bool>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="0" column="0">
-    <widget class="QFrame" name="frame">
+    <widget class="QFrame" name="aboutFrame">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -67,11 +67,7 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QFrame" name="frame_2">
-        <property name="styleSheet">
-         <string notr="true">border-radius:10px;
-background-color: rgb(222, 222, 222);</string>
-        </property>
+       <widget class="QFrame" name="aboutPanel">
         <property name="frameShape">
          <enum>QFrame::Panel</enum>
         </property>
@@ -80,7 +76,7 @@ background-color: rgb(222, 222, 222);</string>
         </property>
         <layout class="QGridLayout" name="gridLayout">
          <item row="2" column="0">
-          <widget class="QLabel" name="label_2">
+          <widget class="QLabel" name="lblLogo">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -106,7 +102,7 @@ background-color: rgb(222, 222, 222);</string>
             <enum>Qt::PlainText</enum>
            </property>
            <property name="pixmap">
-            <pixmap>../img/taxiIcon.png</pixmap>
+            <pixmap>../../img/taxiIcon.png</pixmap>
            </property>
            <property name="scaledContents">
             <bool>true</bool>
@@ -117,7 +113,7 @@ background-color: rgb(222, 222, 222);</string>
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QTextEdit" name="textEdit">
+          <widget class="QTextEdit" name="txtAbout">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -155,8 +151,8 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;Javier Lago Amoedo&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; font-weight:600;&quot;&gt;IES de Teis 6/10/2023&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
            </property>
-           <property name="tabStopWidth">
-            <number>0</number>
+           <property name="tabStopDistance">
+            <double>0.000000</double>
            </property>
           </widget>
          </item>
@@ -164,7 +160,7 @@ p, li { white-space: pre-wrap; }
        </widget>
       </item>
       <item alignment="Qt::AlignHCenter">
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="btnClose">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
           <horstretch>0</horstretch>
@@ -191,11 +187,6 @@ p, li { white-space: pre-wrap; }
           <italic>false</italic>
           <bold>true</bold>
          </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">border-radius:5px;
-background-color: rgb(203, 203, 203);
-</string>
         </property>
         <property name="text">
          <string>Cerrar</string>

@@ -42,16 +42,10 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../img/IconoInfome.png</normaloff>../img/IconoInfome.png</iconset>
+    <normaloff>../../img/IconoInfome.png</normaloff>../../img/IconoInfome.png</iconset>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
-  </property>
-  <property name="styleSheet">
-   <string notr="true">QWidget#centralwidget{
-	background-color: rgb(186, 186, 186);
-
-}</string>
   </property>
   <property name="iconSize">
    <size>
@@ -74,7 +68,7 @@
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
-     <widget class="QFrame" name="gridFrame">
+     <widget class="QFrame" name="mainFrame">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -83,7 +77,7 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_7">
        <item>
-        <widget class="QTabWidget" name="PanPrincipal">
+        <widget class="QTabWidget" name="mainTabs">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -105,9 +99,6 @@
            <bold>true</bold>
           </font>
          </property>
-         <property name="styleSheet">
-          <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
-         </property>
          <property name="tabPosition">
           <enum>QTabWidget::North</enum>
          </property>
@@ -117,7 +108,7 @@
          <property name="currentIndex">
           <number>0</number>
          </property>
-         <widget class="QWidget" name="tabDrivers">
+         <widget class="QWidget" name="driversTab">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
             <horstretch>0</horstretch>
@@ -153,7 +144,10 @@
               </spacer>
              </item>
              <item>
-              <widget class="QFrame" name="boxInfo">
+              <widget class="QFrame" name="driverForm">
+               <property name="role" stdset="0">
+                <string notr="true">panel</string>
+               </property>
                <property name="enabled">
                 <bool>true</bool>
                </property>
@@ -171,12 +165,6 @@
                </property>
                <property name="autoFillBackground">
                 <bool>false</bool>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QWidget#boxInfo{
-border-radius:10px;
-border: 2px solid black;
-}</string>
                </property>
                <property name="frameShape">
                 <enum>QFrame::Panel</enum>
@@ -212,7 +200,7 @@ border: 2px solid black;
                         <item>
                          <layout class="QVBoxLayout" name="verticalLayout">
                           <item>
-                           <widget class="QLabel" name="lblCodigo">
+                           <widget class="QLabel" name="lblDriverId">
                             <property name="sizePolicy">
                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                               <horstretch>0</horstretch>
@@ -240,9 +228,6 @@ border: 2px solid black;
                               <bold>true</bold>
                              </font>
                             </property>
-                            <property name="styleSheet">
-                             <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
-                            </property>
                             <property name="text">
                              <string>Codigo:</string>
                             </property>
@@ -252,7 +237,7 @@ border: 2px solid black;
                            </widget>
                           </item>
                           <item>
-                           <widget class="QLabel" name="lblSurname">
+                           <widget class="QLabel" name="lblDriverSurname">
                             <property name="sizePolicy">
                              <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                               <horstretch>0</horstretch>
@@ -273,9 +258,6 @@ border: 2px solid black;
                               <bold>true</bold>
                              </font>
                             </property>
-                            <property name="styleSheet">
-                             <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
-                            </property>
                             <property name="text">
                              <string>Apellidos:</string>
                             </property>
@@ -285,7 +267,7 @@ border: 2px solid black;
                            </widget>
                           </item>
                           <item>
-                           <widget class="QLabel" name="lblStreet">
+                           <widget class="QLabel" name="lblDriverAddress">
                             <property name="sizePolicy">
                              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                               <horstretch>0</horstretch>
@@ -304,9 +286,6 @@ border: 2px solid black;
                               <height>24</height>
                              </size>
                             </property>
-                            <property name="styleSheet">
-                             <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
-                            </property>
                             <property name="text">
                              <string>Dirección:</string>
                             </property>
@@ -316,7 +295,7 @@ border: 2px solid black;
                            </widget>
                           </item>
                           <item>
-                           <widget class="QLabel" name="lblMovil">
+                           <widget class="QLabel" name="lblDriverPhone">
                             <property name="sizePolicy">
                              <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                               <horstretch>0</horstretch>
@@ -334,9 +313,6 @@ border: 2px solid black;
                               <width>44</width>
                               <height>24</height>
                              </size>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
                             </property>
                             <property name="text">
                              <string>Móvil:</string>
@@ -366,7 +342,10 @@ border: 2px solid black;
                           <item>
                            <layout class="QHBoxLayout" name="horizontalLayout_5">
                             <item>
-                             <widget class="QLabel" name="lblCodDB">
+                             <widget class="QLabel" name="lblDriverIdValue">
+                              <property name="role" stdset="0">
+                               <string notr="true">highlight</string>
+                              </property>
                               <property name="enabled">
                                <bool>false</bool>
                               </property>
@@ -388,10 +367,6 @@ border: 2px solid black;
                                 <height>24</height>
                                </size>
                               </property>
-                              <property name="styleSheet">
-                               <string notr="true">background-color: rgb(247, 181, 0);border: 2px solid black; border-radius: 3px;
-color: rgb(0, 0, 0);</string>
-                              </property>
                               <property name="text">
                                <string/>
                               </property>
@@ -401,7 +376,7 @@ color: rgb(0, 0, 0);</string>
                              </widget>
                             </item>
                             <item>
-                             <widget class="QLabel" name="lblDNI">
+                             <widget class="QLabel" name="lblDriverDni">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                 <horstretch>0</horstretch>
@@ -431,7 +406,10 @@ color: rgb(0, 0, 0);</string>
                              </widget>
                             </item>
                             <item>
-                             <widget class="QLineEdit" name="txtDni">
+                             <widget class="QLineEdit" name="txtDriverDni">
+                              <property name="role" stdset="0">
+                               <string notr="true">field</string>
+                              </property>
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                 <horstretch>0</horstretch>
@@ -450,16 +428,13 @@ color: rgb(0, 0, 0);</string>
                                 <height>24</height>
                                </size>
                               </property>
-                              <property name="styleSheet">
-                               <string notr="true">border: 2px solid black; border-radius: 3px;</string>
-                              </property>
                               <property name="maxLength">
                                <number>9</number>
                               </property>
                              </widget>
                             </item>
                             <item>
-                             <widget class="QLabel" name="lblCheckDNI">
+                             <widget class="QLabel" name="lblDriverDniCheck">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                                 <horstretch>0</horstretch>
@@ -487,9 +462,6 @@ color: rgb(0, 0, 0);</string>
                                 <bold>true</bold>
                                </font>
                               </property>
-                              <property name="styleSheet">
-                               <string notr="true"/>
-                              </property>
                               <property name="text">
                                <string/>
                               </property>
@@ -502,7 +474,10 @@ color: rgb(0, 0, 0);</string>
                              </widget>
                             </item>
                             <item>
-                             <widget class="QPushButton" name="btnBuscarDri">
+                             <widget class="QPushButton" name="btnDriverSearch">
+                              <property name="role" stdset="0">
+                               <string notr="true">secondary</string>
+                              </property>
                               <property name="minimumSize">
                                <size>
                                 <width>24</width>
@@ -515,16 +490,12 @@ color: rgb(0, 0, 0);</string>
                                 <height>24</height>
                                </size>
                               </property>
-                              <property name="styleSheet">
-                               <string notr="true">border-radius:2px; 
-background-color: rgb(225, 225, 225);</string>
-                              </property>
                               <property name="text">
                                <string/>
                               </property>
                               <property name="icon">
                                <iconset>
-                                <normaloff>../img/lupa2.png</normaloff>../img/lupa2.png</iconset>
+                                <normaloff>../../img/lupa2.png</normaloff>../../img/lupa2.png</iconset>
                               </property>
                              </widget>
                             </item>
@@ -544,7 +515,10 @@ background-color: rgb(225, 225, 225);</string>
                            </layout>
                           </item>
                           <item>
-                           <widget class="QLineEdit" name="txtDni_2">
+                           <widget class="QLineEdit" name="txtDriverSurname">
+                            <property name="role" stdset="0">
+                             <string notr="true">field</string>
+                            </property>
                             <property name="sizePolicy">
                              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                               <horstretch>0</horstretch>
@@ -563,13 +537,13 @@ background-color: rgb(225, 225, 225);</string>
                               <height>16777215</height>
                              </size>
                             </property>
-                            <property name="styleSheet">
-                             <string notr="true">border: 2px solid black; border-radius: 3px;</string>
-                            </property>
                            </widget>
                           </item>
                           <item>
-                           <widget class="QLineEdit" name="txtDireccion">
+                           <widget class="QLineEdit" name="txtDriverAddress">
+                            <property name="role" stdset="0">
+                             <string notr="true">field</string>
+                            </property>
                             <property name="sizePolicy">
                              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                               <horstretch>0</horstretch>
@@ -588,15 +562,15 @@ background-color: rgb(225, 225, 225);</string>
                               <height>24</height>
                              </size>
                             </property>
-                            <property name="styleSheet">
-                             <string notr="true">border: 2px solid black; border-radius: 3px;</string>
-                            </property>
                            </widget>
                           </item>
                           <item>
                            <layout class="QHBoxLayout" name="horizontalLayout_2">
                             <item>
-                             <widget class="QLineEdit" name="txtMovil">
+                             <widget class="QLineEdit" name="txtDriverPhone">
+                              <property name="role" stdset="0">
+                               <string notr="true">field</string>
+                              </property>
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                 <horstretch>0</horstretch>
@@ -615,16 +589,13 @@ background-color: rgb(225, 225, 225);</string>
                                 <height>24</height>
                                </size>
                               </property>
-                              <property name="styleSheet">
-                               <string notr="true">border: 2px solid black; border-radius: 3px;</string>
-                              </property>
                               <property name="alignment">
                                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                               </property>
                              </widget>
                             </item>
                             <item>
-                             <widget class="QLabel" name="lblSalario">
+                             <widget class="QLabel" name="lblDriverSalary">
                               <property name="sizePolicy">
                                <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                                 <horstretch>0</horstretch>
@@ -639,9 +610,6 @@ background-color: rgb(225, 225, 225);</string>
                                 <bold>true</bold>
                                </font>
                               </property>
-                              <property name="styleSheet">
-                               <string notr="true"/>
-                              </property>
                               <property name="text">
                                <string>Salario</string>
                               </property>
@@ -651,7 +619,10 @@ background-color: rgb(225, 225, 225);</string>
                              </widget>
                             </item>
                             <item>
-                             <widget class="QLineEdit" name="txtSalario">
+                             <widget class="QLineEdit" name="txtDriverSalary">
+                              <property name="role" stdset="0">
+                               <string notr="true">field</string>
+                              </property>
                               <property name="minimumSize">
                                <size>
                                 <width>100</width>
@@ -664,9 +635,6 @@ background-color: rgb(225, 225, 225);</string>
                                 <height>24</height>
                                </size>
                               </property>
-                              <property name="styleSheet">
-                               <string notr="true">border: 2px solid black; border-radius: 3px;</string>
-                              </property>
                               <property name="text">
                                <string/>
                               </property>
@@ -676,7 +644,7 @@ background-color: rgb(225, 225, 225);</string>
                              </widget>
                             </item>
                             <item>
-                             <widget class="QLabel" name="label_2">
+                             <widget class="QLabel" name="lblDriverSalaryHint">
                               <property name="font">
                                <font>
                                 <family>Alef</family>
@@ -685,9 +653,6 @@ background-color: rgb(225, 225, 225);</string>
                                 <italic>false</italic>
                                 <bold>true</bold>
                                </font>
-                              </property>
-                              <property name="styleSheet">
-                               <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
                               </property>
                               <property name="text">
                                <string>(00000.00)</string>
@@ -732,7 +697,7 @@ background-color: rgb(225, 225, 225);</string>
                       <item>
                        <layout class="QVBoxLayout" name="verticalLayout_4">
                         <item>
-                         <widget class="QLabel" name="tltDate">
+                         <widget class="QLabel" name="lblDriverHiredOn">
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                             <horstretch>0</horstretch>
@@ -751,9 +716,6 @@ background-color: rgb(225, 225, 225);</string>
                             <height>24</height>
                            </size>
                           </property>
-                          <property name="styleSheet">
-                           <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
-                          </property>
                           <property name="text">
                            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Fecha de Alta:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                           </property>
@@ -763,7 +725,7 @@ background-color: rgb(225, 225, 225);</string>
                          </widget>
                         </item>
                         <item>
-                         <widget class="QLabel" name="lblName">
+                         <widget class="QLabel" name="lblDriverName">
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                             <horstretch>0</horstretch>
@@ -790,9 +752,6 @@ background-color: rgb(225, 225, 225);</string>
                             <bold>true</bold>
                            </font>
                           </property>
-                          <property name="styleSheet">
-                           <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
-                          </property>
                           <property name="text">
                            <string>Nombre:</string>
                           </property>
@@ -802,7 +761,7 @@ background-color: rgb(225, 225, 225);</string>
                          </widget>
                         </item>
                         <item>
-                         <widget class="QLabel" name="lblProvincia">
+                         <widget class="QLabel" name="lblDriverProvince">
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                             <horstretch>0</horstretch>
@@ -828,9 +787,6 @@ background-color: rgb(225, 225, 225);</string>
                             <weight>75</weight>
                             <bold>true</bold>
                            </font>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
                           </property>
                           <property name="text">
                            <string>Provincia:</string>
@@ -863,7 +819,10 @@ background-color: rgb(225, 225, 225);</string>
                         <item>
                          <layout class="QHBoxLayout" name="horizontalLayout">
                           <item>
-                           <widget class="QLineEdit" name="txtDate">
+                           <widget class="QLineEdit" name="txtDriverHiredOn">
+                            <property name="role" stdset="0">
+                             <string notr="true">field</string>
+                            </property>
                             <property name="enabled">
                              <bool>false</bool>
                             </property>
@@ -885,9 +844,6 @@ background-color: rgb(225, 225, 225);</string>
                               <height>24</height>
                              </size>
                             </property>
-                            <property name="styleSheet">
-                             <string notr="true">border: 2px solid black; border-radius: 3px;</string>
-                            </property>
                             <property name="alignment">
                              <set>Qt::AlignCenter</set>
                             </property>
@@ -897,23 +853,22 @@ background-color: rgb(225, 225, 225);</string>
                            </widget>
                           </item>
                           <item>
-                           <widget class="QPushButton" name="btnCalendar">
+                           <widget class="QPushButton" name="btnDriverHiredOnCalendar">
+                            <property name="role" stdset="0">
+                             <string notr="true">calendar</string>
+                            </property>
                             <property name="sizePolicy">
                              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                               <horstretch>0</horstretch>
                               <verstretch>0</verstretch>
                              </sizepolicy>
                             </property>
-                            <property name="styleSheet">
-                             <string notr="true">border-radius:2px;
-</string>
-                            </property>
                             <property name="text">
                              <string/>
                             </property>
                             <property name="icon">
                              <iconset>
-                              <normaloff>../img/calendario.png</normaloff>../img/calendario.png</iconset>
+                              <normaloff>../../img/calendario.png</normaloff>../../img/calendario.png</iconset>
                             </property>
                             <property name="iconSize">
                              <size>
@@ -924,7 +879,7 @@ background-color: rgb(225, 225, 225);</string>
                            </widget>
                           </item>
                           <item>
-                           <widget class="QFrame" name="frame">
+                           <widget class="QFrame" name="driverLeftOnFrame">
                             <property name="sizePolicy">
                              <sizepolicy hsizetype="Fixed" vsizetype="Minimum">
                               <horstretch>0</horstretch>
@@ -966,7 +921,7 @@ background-color: rgb(225, 225, 225);</string>
                               <number>0</number>
                              </property>
                              <item>
-                              <widget class="QLabel" name="tltDateBaja">
+                              <widget class="QLabel" name="lblDriverLeftOn">
                                <property name="sizePolicy">
                                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                                  <horstretch>0</horstretch>
@@ -985,9 +940,6 @@ background-color: rgb(225, 225, 225);</string>
                                  <height>24</height>
                                 </size>
                                </property>
-                               <property name="styleSheet">
-                                <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
-                               </property>
                                <property name="text">
                                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Fecha de Baja:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                                </property>
@@ -997,7 +949,10 @@ background-color: rgb(225, 225, 225);</string>
                               </widget>
                              </item>
                              <item>
-                              <widget class="QLineEdit" name="txtDate_2">
+                              <widget class="QLineEdit" name="txtDriverLeftOn">
+                               <property name="role" stdset="0">
+                                <string notr="true">field</string>
+                               </property>
                                <property name="enabled">
                                 <bool>false</bool>
                                </property>
@@ -1019,9 +974,6 @@ background-color: rgb(225, 225, 225);</string>
                                  <height>24</height>
                                 </size>
                                </property>
-                               <property name="styleSheet">
-                                <string notr="true">border: 2px solid black; border-radius: 3px;</string>
-                               </property>
                                <property name="alignment">
                                 <set>Qt::AlignCenter</set>
                                </property>
@@ -1031,7 +983,10 @@ background-color: rgb(225, 225, 225);</string>
                               </widget>
                              </item>
                              <item>
-                              <widget class="QPushButton" name="btnCalendar_2">
+                              <widget class="QPushButton" name="btnDriverLeftOnCalendar">
+                               <property name="role" stdset="0">
+                                <string notr="true">calendar</string>
+                               </property>
                                <property name="sizePolicy">
                                 <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                                  <horstretch>0</horstretch>
@@ -1050,16 +1005,12 @@ background-color: rgb(225, 225, 225);</string>
                                  <height>24</height>
                                 </size>
                                </property>
-                               <property name="styleSheet">
-                                <string notr="true">border-radius:2px;
-</string>
-                               </property>
                                <property name="text">
                                 <string/>
                                </property>
                                <property name="icon">
                                 <iconset>
-                                 <normaloff>../img/calendario.png</normaloff>../img/calendario.png</iconset>
+                                 <normaloff>../../img/calendario.png</normaloff>../../img/calendario.png</iconset>
                                </property>
                                <property name="iconSize">
                                 <size>
@@ -1088,7 +1039,10 @@ background-color: rgb(225, 225, 225);</string>
                          </layout>
                         </item>
                         <item>
-                         <widget class="QLineEdit" name="txtNombre">
+                         <widget class="QLineEdit" name="txtDriverName">
+                          <property name="role" stdset="0">
+                           <string notr="true">field</string>
+                          </property>
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                             <horstretch>0</horstretch>
@@ -1107,15 +1061,15 @@ background-color: rgb(225, 225, 225);</string>
                             <height>24</height>
                            </size>
                           </property>
-                          <property name="styleSheet">
-                           <string notr="true">border: 2px solid black; border-radius: 3px;</string>
-                          </property>
                          </widget>
                         </item>
                         <item>
                          <layout class="QHBoxLayout" name="horizontalLayout_3">
                           <item>
-                           <widget class="QComboBox" name="cmbProvincia">
+                           <widget class="QComboBox" name="cmbDriverProvince">
+                            <property name="role" stdset="0">
+                             <string notr="true">field</string>
+                            </property>
                             <property name="sizePolicy">
                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                               <horstretch>0</horstretch>
@@ -1134,13 +1088,10 @@ background-color: rgb(225, 225, 225);</string>
                               <height>24</height>
                              </size>
                             </property>
-                            <property name="styleSheet">
-                             <string notr="true">border: 2px solid black; border-radius: 3px;</string>
-                            </property>
                            </widget>
                           </item>
                           <item>
-                           <widget class="QLabel" name="lblLocalidad">
+                           <widget class="QLabel" name="lblDriverMunicipality">
                             <property name="sizePolicy">
                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                               <horstretch>0</horstretch>
@@ -1155,9 +1106,6 @@ background-color: rgb(225, 225, 225);</string>
                               <bold>true</bold>
                              </font>
                             </property>
-                            <property name="styleSheet">
-                             <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
-                            </property>
                             <property name="text">
                              <string>Localidad:</string>
                             </property>
@@ -1167,7 +1115,10 @@ background-color: rgb(225, 225, 225);</string>
                            </widget>
                           </item>
                           <item>
-                           <widget class="QComboBox" name="cmbLocalidad">
+                           <widget class="QComboBox" name="cmbDriverMunicipality">
+                            <property name="role" stdset="0">
+                             <string notr="true">field</string>
+                            </property>
                             <property name="minimumSize">
                              <size>
                               <width>170</width>
@@ -1179,9 +1130,6 @@ background-color: rgb(225, 225, 225);</string>
                               <width>170</width>
                               <height>24</height>
                              </size>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">border: 2px solid black; border-radius: 3px;</string>
                             </property>
                            </widget>
                           </item>
@@ -1242,7 +1190,7 @@ background-color: rgb(225, 225, 225);</string>
                        </spacer>
                       </item>
                       <item>
-                       <widget class="QLabel" name="lblCarnet">
+                       <widget class="QLabel" name="lblDriverLicenses">
                         <property name="font">
                          <font>
                           <family>Alef</family>
@@ -1273,10 +1221,7 @@ background-color: rgb(225, 225, 225);</string>
                        </spacer>
                       </item>
                       <item>
-                       <widget class="QCheckBox" name="chkA">
-                        <property name="styleSheet">
-                         <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
-                        </property>
+                       <widget class="QCheckBox" name="chkLicenseA">
                         <property name="text">
                          <string>A</string>
                         </property>
@@ -1302,10 +1247,7 @@ background-color: rgb(225, 225, 225);</string>
                        </spacer>
                       </item>
                       <item>
-                       <widget class="QCheckBox" name="chkB">
-                        <property name="styleSheet">
-                         <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
-                        </property>
+                       <widget class="QCheckBox" name="chkLicenseB">
                         <property name="text">
                          <string>B</string>
                         </property>
@@ -1328,10 +1270,7 @@ background-color: rgb(225, 225, 225);</string>
                        </spacer>
                       </item>
                       <item>
-                       <widget class="QCheckBox" name="chkC">
-                        <property name="styleSheet">
-                         <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
-                        </property>
+                       <widget class="QCheckBox" name="chkLicenseC">
                         <property name="text">
                          <string>C</string>
                         </property>
@@ -1354,10 +1293,7 @@ background-color: rgb(225, 225, 225);</string>
                        </spacer>
                       </item>
                       <item>
-                       <widget class="QCheckBox" name="chkD">
-                        <property name="styleSheet">
-                         <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
-                        </property>
+                       <widget class="QCheckBox" name="chkLicenseD">
                         <property name="text">
                          <string>D</string>
                         </property>
@@ -1380,7 +1316,7 @@ background-color: rgb(225, 225, 225);</string>
                        </spacer>
                       </item>
                       <item>
-                       <widget class="QLabel" name="label">
+                       <widget class="QLabel" name="lblDriverStatus">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                           <horstretch>0</horstretch>
@@ -1407,16 +1343,13 @@ background-color: rgb(225, 225, 225);</string>
                           <bold>true</bold>
                          </font>
                         </property>
-                        <property name="styleSheet">
-                         <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
-                        </property>
                         <property name="text">
                          <string>Estado:</string>
                         </property>
                        </widget>
                       </item>
                       <item>
-                       <widget class="QRadioButton" name="rbtTodos">
+                       <widget class="QRadioButton" name="rbtDriversAll">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                           <horstretch>0</horstretch>
@@ -1430,9 +1363,6 @@ background-color: rgb(225, 225, 225);</string>
                           <weight>75</weight>
                           <bold>true</bold>
                          </font>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
                         </property>
                         <property name="text">
                          <string>Todos</string>
@@ -1462,7 +1392,7 @@ background-color: rgb(225, 225, 225);</string>
                        </spacer>
                       </item>
                       <item>
-                       <widget class="QRadioButton" name="rbtAlta">
+                       <widget class="QRadioButton" name="rbtDriversActive">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                           <horstretch>0</horstretch>
@@ -1476,9 +1406,6 @@ background-color: rgb(225, 225, 225);</string>
                           <weight>75</weight>
                           <bold>true</bold>
                          </font>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
                         </property>
                         <property name="text">
                          <string>Alta</string>
@@ -1508,7 +1435,7 @@ background-color: rgb(225, 225, 225);</string>
                        </spacer>
                       </item>
                       <item>
-                       <widget class="QRadioButton" name="rbtBaja">
+                       <widget class="QRadioButton" name="rbtDriversInactive">
                         <property name="font">
                          <font>
                           <family>Alef</family>
@@ -1516,9 +1443,6 @@ background-color: rgb(225, 225, 225);</string>
                           <weight>75</weight>
                           <bold>true</bold>
                          </font>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
                         </property>
                         <property name="text">
                          <string>Baja</string>
@@ -1578,7 +1502,10 @@ background-color: rgb(225, 225, 225);</string>
                        </spacer>
                       </item>
                       <item>
-                       <widget class="QPushButton" name="btnaltaDriver">
+                       <widget class="QPushButton" name="btnDriverRegister">
+                        <property name="role" stdset="0">
+                         <string notr="true">primary</string>
+                        </property>
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                           <horstretch>0</horstretch>
@@ -1605,17 +1532,16 @@ background-color: rgb(225, 225, 225);</string>
                           <bold>true</bold>
                          </font>
                         </property>
-                        <property name="styleSheet">
-                         <string notr="true">border: 2px solid black; border-radius: 3px;
-background-color: rgb(247, 181, 0);</string>
-                        </property>
                         <property name="text">
                          <string>Alta</string>
                         </property>
                        </widget>
                       </item>
                       <item>
-                       <widget class="QPushButton" name="btnModifDriver">
+                       <widget class="QPushButton" name="btnDriverUpdate">
+                        <property name="role" stdset="0">
+                         <string notr="true">primary</string>
+                        </property>
                         <property name="enabled">
                          <bool>true</bool>
                         </property>
@@ -1648,17 +1574,16 @@ background-color: rgb(247, 181, 0);</string>
                         <property name="autoFillBackground">
                          <bool>false</bool>
                         </property>
-                        <property name="styleSheet">
-                         <string notr="true">border: 2px solid black; border-radius: 3px;
-background-color: rgb(247, 181, 0);</string>
-                        </property>
                         <property name="text">
                          <string>Modificar</string>
                         </property>
                        </widget>
                       </item>
                       <item>
-                       <widget class="QPushButton" name="btnBajaDriver">
+                       <widget class="QPushButton" name="btnDriverDeactivate">
+                        <property name="role" stdset="0">
+                         <string notr="true">primary</string>
+                        </property>
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                           <horstretch>0</horstretch>
@@ -1684,10 +1609,6 @@ background-color: rgb(247, 181, 0);</string>
                           <weight>75</weight>
                           <bold>true</bold>
                          </font>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true">border: 2px solid black; border-radius: 3px;
-background-color: rgb(247, 181, 0);</string>
                         </property>
                         <property name="text">
                          <string>Baja</string>
@@ -1760,7 +1681,10 @@ background-color: rgb(247, 181, 0);</string>
               </spacer>
              </item>
              <item>
-              <widget class="QTableWidget" name="tabDriver2">
+              <widget class="QTableWidget" name="tblDrivers">
+               <property name="role" stdset="0">
+                <string notr="true">table</string>
+               </property>
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                  <horstretch>0</horstretch>
@@ -1790,24 +1714,6 @@ background-color: rgb(247, 181, 0);</string>
                </property>
                <property name="focusPolicy">
                 <enum>Qt::NoFocus</enum>
-               </property>
-               <property name="styleSheet">
-                <string notr="true"> QHeaderView::section {
-        background-color: rgb(247, 181, 0);
-        border-radius: 1px;
-        color: black;
-        font-weight: bold;
-        border: 1px solid black;
-    }
-
- QTableView {
- selection-background-color: rgb(247, 181, 0);
-
-
-}
-
-
-</string>
                </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
@@ -1891,7 +1797,7 @@ background-color: rgb(247, 181, 0);</string>
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="tabFacturacion">
+         <widget class="QWidget" name="invoicingTab">
           <attribute name="title">
            <string>Facturación</string>
           </attribute>
@@ -1912,18 +1818,15 @@ background-color: rgb(247, 181, 0);</string>
               </spacer>
              </item>
              <item>
-              <widget class="QFrame" name="frame_2">
+              <widget class="QFrame" name="invoiceForm">
+               <property name="role" stdset="0">
+                <string notr="true">panel</string>
+               </property>
                <property name="maximumSize">
                 <size>
                  <width>940</width>
                  <height>16777215</height>
                 </size>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QFrame#frame_2{
-border-radius:10px;
-border: 2px solid black;
-}</string>
                </property>
                <property name="frameShape">
                 <enum>QFrame::StyledPanel</enum>
@@ -1950,7 +1853,10 @@ border: 2px solid black;
                      </spacer>
                     </item>
                     <item>
-                     <widget class="QLabel" name="label_titulo_facturacion">
+                     <widget class="QLabel" name="lblInvoicingTitle">
+                      <property name="role" stdset="0">
+                       <string notr="true">title</string>
+                      </property>
                       <property name="minimumSize">
                        <size>
                         <width>121</width>
@@ -1962,9 +1868,6 @@ border: 2px solid black;
                         <width>100</width>
                         <height>16777215</height>
                        </size>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">font: 81 14pt &quot;Montserrat ExtraBold&quot;;</string>
                       </property>
                       <property name="text">
                        <string>Facturación</string>
@@ -2006,7 +1909,7 @@ border: 2px solid black;
                          </spacer>
                         </item>
                         <item>
-                         <widget class="QLabel" name="label_num_factura">
+                         <widget class="QLabel" name="lblInvoiceNumber">
                           <property name="maximumSize">
                            <size>
                             <width>75</width>
@@ -2019,7 +1922,10 @@ border: 2px solid black;
                          </widget>
                         </item>
                         <item>
-                         <widget class="QLineEdit" name="txt_numero_factura">
+                         <widget class="QLineEdit" name="txtInvoiceNumber">
+                          <property name="role" stdset="0">
+                           <string notr="true">highlight</string>
+                          </property>
                           <property name="enabled">
                            <bool>false</bool>
                           </property>
@@ -2035,10 +1941,6 @@ border: 2px solid black;
                             <height>16777215</height>
                            </size>
                           </property>
-                          <property name="styleSheet">
-                           <string notr="true">background-color: rgb(247, 181, 0);border: 2px solid black; border-radius: 3px;
-color: rgb(0, 0, 0);</string>
-                          </property>
                           <property name="frame">
                            <bool>false</bool>
                           </property>
@@ -2048,7 +1950,7 @@ color: rgb(0, 0, 0);</string>
                          </widget>
                         </item>
                         <item>
-                         <widget class="QLabel" name="label_conductor">
+                         <widget class="QLabel" name="lblInvoiceDriver">
                           <property name="maximumSize">
                            <size>
                             <width>87</width>
@@ -2061,7 +1963,10 @@ color: rgb(0, 0, 0);</string>
                          </widget>
                         </item>
                         <item>
-                         <widget class="QComboBox" name="cmb_listado_conductores">
+                         <widget class="QComboBox" name="cmbInvoiceDriver">
+                          <property name="role" stdset="0">
+                           <string notr="true">field</string>
+                          </property>
                           <property name="minimumSize">
                            <size>
                             <width>200</width>
@@ -2073,9 +1978,6 @@ color: rgb(0, 0, 0);</string>
                             <width>200</width>
                             <height>16777215</height>
                            </size>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">border: 2px solid black; border-radius: 3px;</string>
                           </property>
                           <property name="sizeAdjustPolicy">
                            <enum>QComboBox::AdjustToContents</enum>
@@ -2113,22 +2015,22 @@ color: rgb(0, 0, 0);</string>
                          </spacer>
                         </item>
                         <item>
-                         <widget class="QLabel" name="label_Cliente">
+                         <widget class="QLabel" name="lblInvoiceClient">
                           <property name="text">
                            <string>Cliente</string>
                           </property>
                          </widget>
                         </item>
                         <item>
-                         <widget class="QLineEdit" name="txt_cif_cliente">
+                         <widget class="QLineEdit" name="txtInvoiceClientDni">
+                          <property name="role" stdset="0">
+                           <string notr="true">field</string>
+                          </property>
                           <property name="maximumSize">
                            <size>
                             <width>100</width>
                             <height>16777215</height>
                            </size>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">border: 2px solid black; border-radius: 3px;</string>
                           </property>
                           <property name="alignment">
                            <set>Qt::AlignCenter</set>
@@ -2136,7 +2038,10 @@ color: rgb(0, 0, 0);</string>
                          </widget>
                         </item>
                         <item>
-                         <widget class="QPushButton" name="btnBuscar_Cli_facturacion">
+                         <widget class="QPushButton" name="btnInvoiceClientSearch">
+                          <property name="role" stdset="0">
+                           <string notr="true">secondary</string>
+                          </property>
                           <property name="minimumSize">
                            <size>
                             <width>24</width>
@@ -2149,16 +2054,12 @@ color: rgb(0, 0, 0);</string>
                             <height>24</height>
                            </size>
                           </property>
-                          <property name="styleSheet">
-                           <string notr="true">border-radius:2px; 
-background-color: rgb(225, 225, 225);</string>
-                          </property>
                           <property name="text">
                            <string/>
                           </property>
                           <property name="icon">
                            <iconset>
-                            <normaloff>../img/lupa2.png</normaloff>../img/lupa2.png</iconset>
+                            <normaloff>../../img/lupa2.png</normaloff>../../img/lupa2.png</iconset>
                           </property>
                          </widget>
                         </item>
@@ -2179,22 +2080,22 @@ background-color: rgb(225, 225, 225);</string>
                          </spacer>
                         </item>
                         <item>
-                         <widget class="QLabel" name="label_fecha_factuta">
+                         <widget class="QLabel" name="lblInvoiceDate">
                           <property name="text">
                            <string>Fecha factura:</string>
                           </property>
                          </widget>
                         </item>
                         <item>
-                         <widget class="QLineEdit" name="txt_fecha_factura">
+                         <widget class="QLineEdit" name="txtInvoiceDate">
+                          <property name="role" stdset="0">
+                           <string notr="true">field</string>
+                          </property>
                           <property name="maximumSize">
                            <size>
                             <width>100</width>
                             <height>16777215</height>
                            </size>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">border: 2px solid black; border-radius: 3px;</string>
                           </property>
                           <property name="alignment">
                            <set>Qt::AlignCenter</set>
@@ -2202,7 +2103,10 @@ background-color: rgb(225, 225, 225);</string>
                          </widget>
                         </item>
                         <item>
-                         <widget class="QPushButton" name="btn_fecha_factura">
+                         <widget class="QPushButton" name="btnInvoiceDateCalendar">
+                          <property name="role" stdset="0">
+                           <string notr="true">secondary</string>
+                          </property>
                           <property name="minimumSize">
                            <size>
                             <width>24</width>
@@ -2215,16 +2119,12 @@ background-color: rgb(225, 225, 225);</string>
                             <height>24</height>
                            </size>
                           </property>
-                          <property name="styleSheet">
-                           <string notr="true">border-radius:2px; 
-background-color: rgb(225, 225, 225);</string>
-                          </property>
                           <property name="text">
                            <string/>
                           </property>
                           <property name="icon">
                            <iconset>
-                            <normaloff>../img/calendario.png</normaloff>../img/calendario.png</iconset>
+                            <normaloff>../../img/calendario.png</normaloff>../../img/calendario.png</iconset>
                           </property>
                           <property name="iconSize">
                            <size>
@@ -2297,16 +2197,15 @@ background-color: rgb(225, 225, 225);</string>
                          </spacer>
                         </item>
                         <item>
-                         <widget class="QPushButton" name="btn_facturar">
+                         <widget class="QPushButton" name="btnInvoiceCreate">
+                          <property name="role" stdset="0">
+                           <string notr="true">primary</string>
+                          </property>
                           <property name="minimumSize">
                            <size>
                             <width>0</width>
                             <height>24</height>
                            </size>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">border: 2px solid black; border-radius: 3px;
-background-color: rgb(247, 181, 0);</string>
                           </property>
                           <property name="text">
                            <string>Facturar</string>
@@ -2327,7 +2226,10 @@ background-color: rgb(247, 181, 0);</string>
                          </spacer>
                         </item>
                         <item>
-                         <widget class="QPushButton" name="btn_limpiar_facturas">
+                         <widget class="QPushButton" name="btnInvoiceClear">
+                          <property name="role" stdset="0">
+                           <string notr="true">secondary</string>
+                          </property>
                           <property name="minimumSize">
                            <size>
                             <width>24</width>
@@ -2340,16 +2242,12 @@ background-color: rgb(247, 181, 0);</string>
                             <height>24</height>
                            </size>
                           </property>
-                          <property name="styleSheet">
-                           <string notr="true">border-radius:2px; 
-background-color: rgb(225, 225, 225);</string>
-                          </property>
                           <property name="text">
                            <string/>
                           </property>
                           <property name="icon">
                            <iconset>
-                            <normaloff>../img/pincel.png</normaloff>../img/pincel.png</iconset>
+                            <normaloff>../../img/pincel.png</normaloff>../../img/pincel.png</iconset>
                           </property>
                           <property name="iconSize">
                            <size>
@@ -2368,7 +2266,7 @@ background-color: rgb(225, 225, 225);</string>
                  </layout>
                 </item>
                 <item>
-                 <widget class="Line" name="line">
+                 <widget class="Line" name="invoiceSeparator">
                   <property name="frameShadow">
                    <enum>QFrame::Plain</enum>
                   </property>
@@ -2398,7 +2296,10 @@ background-color: rgb(225, 225, 225);</string>
                      </spacer>
                     </item>
                     <item>
-                     <widget class="QLabel" name="label_conductor_3">
+                     <widget class="QLabel" name="lblTripsTitle">
+                      <property name="role" stdset="0">
+                       <string notr="true">title</string>
+                      </property>
                       <property name="minimumSize">
                        <size>
                         <width>154</width>
@@ -2419,9 +2320,6 @@ background-color: rgb(225, 225, 225);</string>
                         <italic>false</italic>
                         <bold>false</bold>
                        </font>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">font: 81 14pt &quot;Montserrat ExtraBold&quot;;</string>
                       </property>
                       <property name="text">
                        <string>Registro de viajes</string>
@@ -2459,7 +2357,7 @@ background-color: rgb(225, 225, 225);</string>
                      </spacer>
                     </item>
                     <item>
-                     <widget class="QLabel" name="lblProvincia_3">
+                     <widget class="QLabel" name="lblTripOrigin">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                         <horstretch>0</horstretch>
@@ -2492,9 +2390,6 @@ background-color: rgb(225, 225, 225);</string>
                         <bold>true</bold>
                        </font>
                       </property>
-                      <property name="styleSheet">
-                       <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
-                      </property>
                       <property name="text">
                        <string>Origen:</string>
                       </property>
@@ -2504,7 +2399,10 @@ background-color: rgb(225, 225, 225);</string>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QComboBox" name="cmb_provincia_origen">
+                     <widget class="QComboBox" name="cmbTripOriginProvince">
+                      <property name="role" stdset="0">
+                       <string notr="true">field</string>
+                      </property>
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                         <horstretch>0</horstretch>
@@ -2523,13 +2421,13 @@ background-color: rgb(225, 225, 225);</string>
                         <height>24</height>
                        </size>
                       </property>
-                      <property name="styleSheet">
-                       <string notr="true">border: 2px solid black; border-radius: 3px;</string>
-                      </property>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QComboBox" name="cmb_localidad_origen">
+                     <widget class="QComboBox" name="cmbTripOriginMunicipality">
+                      <property name="role" stdset="0">
+                       <string notr="true">field</string>
+                      </property>
                       <property name="minimumSize">
                        <size>
                         <width>170</width>
@@ -2541,9 +2439,6 @@ background-color: rgb(225, 225, 225);</string>
                         <width>170</width>
                         <height>24</height>
                        </size>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">border: 2px solid black; border-radius: 3px;</string>
                       </property>
                      </widget>
                     </item>
@@ -2578,7 +2473,7 @@ background-color: rgb(225, 225, 225);</string>
                      </spacer>
                     </item>
                     <item>
-                     <widget class="QLabel" name="lblProvincia_4">
+                     <widget class="QLabel" name="lblTripDestination">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                         <horstretch>0</horstretch>
@@ -2611,9 +2506,6 @@ background-color: rgb(225, 225, 225);</string>
                         <bold>true</bold>
                        </font>
                       </property>
-                      <property name="styleSheet">
-                       <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
-                      </property>
                       <property name="text">
                        <string>Destitno:</string>
                       </property>
@@ -2623,7 +2515,10 @@ background-color: rgb(225, 225, 225);</string>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QComboBox" name="cmb_provincia_destino">
+                     <widget class="QComboBox" name="cmbTripDestinationProvince">
+                      <property name="role" stdset="0">
+                       <string notr="true">field</string>
+                      </property>
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                         <horstretch>0</horstretch>
@@ -2642,13 +2537,13 @@ background-color: rgb(225, 225, 225);</string>
                         <height>24</height>
                        </size>
                       </property>
-                      <property name="styleSheet">
-                       <string notr="true">border: 2px solid black; border-radius: 3px;</string>
-                      </property>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QComboBox" name="cmb_localidad_destino">
+                     <widget class="QComboBox" name="cmbTripDestinationMunicipality">
+                      <property name="role" stdset="0">
+                       <string notr="true">field</string>
+                      </property>
                       <property name="minimumSize">
                        <size>
                         <width>170</width>
@@ -2660,9 +2555,6 @@ background-color: rgb(225, 225, 225);</string>
                         <width>170</width>
                         <height>24</height>
                        </size>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">border: 2px solid black; border-radius: 3px;</string>
                       </property>
                      </widget>
                     </item>
@@ -2697,7 +2589,7 @@ background-color: rgb(225, 225, 225);</string>
                      </spacer>
                     </item>
                     <item>
-                     <widget class="QLabel" name="label_Cliente_2">
+                     <widget class="QLabel" name="lblTripKm">
                       <property name="minimumSize">
                        <size>
                         <width>60</width>
@@ -2716,7 +2608,10 @@ background-color: rgb(225, 225, 225);</string>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QLineEdit" name="txt_kilometros">
+                     <widget class="QLineEdit" name="txtTripKm">
+                      <property name="role" stdset="0">
+                       <string notr="true">field</string>
+                      </property>
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                         <horstretch>0</horstretch>
@@ -2734,9 +2629,6 @@ background-color: rgb(225, 225, 225);</string>
                         <width>40</width>
                         <height>24</height>
                        </size>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">border: 2px solid black; border-radius: 3px;</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignCenter</set>
@@ -2787,19 +2679,19 @@ background-color: rgb(225, 225, 225);</string>
                      </spacer>
                     </item>
                     <item>
-                     <widget class="QLabel" name="label_Cliente_3">
+                     <widget class="QLabel" name="lblTripFare">
                       <property name="text">
                        <string>Tarifa:</string>
                       </property>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QRadioButton" name="rbt_tarifa_nacional">
+                     <widget class="QRadioButton" name="rbtFareNational">
+                      <property name="role" stdset="0">
+                       <string notr="true">fare</string>
+                      </property>
                       <property name="enabled">
                        <bool>false</bool>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">color: rgb(0, 0, 0);</string>
                       </property>
                       <property name="text">
                        <string>Nacional</string>
@@ -2810,12 +2702,12 @@ background-color: rgb(225, 225, 225);</string>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QRadioButton" name="rbt_tarifa_provincia">
+                     <widget class="QRadioButton" name="rbtFareProvincial">
+                      <property name="role" stdset="0">
+                       <string notr="true">fare</string>
+                      </property>
                       <property name="enabled">
                        <bool>false</bool>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">color: rgb(0, 0, 0);</string>
                       </property>
                       <property name="text">
                        <string>Provincia</string>
@@ -2826,12 +2718,12 @@ background-color: rgb(225, 225, 225);</string>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QRadioButton" name="rbt_tarifa_local">
+                     <widget class="QRadioButton" name="rbtFareLocal">
+                      <property name="role" stdset="0">
+                       <string notr="true">fare</string>
+                      </property>
                       <property name="enabled">
                        <bool>false</bool>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">color: rgb(0, 0, 0);</string>
                       </property>
                       <property name="text">
                        <string>Local</string>
@@ -2872,7 +2764,10 @@ background-color: rgb(225, 225, 225);</string>
                      </spacer>
                     </item>
                     <item>
-                     <widget class="QPushButton" name="btn_grabar_registro_viaje">
+                     <widget class="QPushButton" name="btnTripSave">
+                      <property name="role" stdset="0">
+                       <string notr="true">primary</string>
+                      </property>
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
@@ -2885,26 +2780,21 @@ background-color: rgb(225, 225, 225);</string>
                         <height>24</height>
                        </size>
                       </property>
-                      <property name="styleSheet">
-                       <string notr="true">border: 2px solid black; border-radius: 3px;
-background-color: rgb(247, 181, 0);</string>
-                      </property>
                       <property name="text">
                        <string>Grabar</string>
                       </property>
                      </widget>
                     </item>
                     <item>
-                     <widget class="QPushButton" name="btn_modificar_viaje">
+                     <widget class="QPushButton" name="btnTripUpdate">
+                      <property name="role" stdset="0">
+                       <string notr="true">primary</string>
+                      </property>
                       <property name="minimumSize">
                        <size>
                         <width>0</width>
                         <height>24</height>
                        </size>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">border: 2px solid black; border-radius: 3px;
-background-color: rgb(247, 181, 0);</string>
                       </property>
                       <property name="text">
                        <string>Modificar</string>
@@ -2925,7 +2815,10 @@ background-color: rgb(247, 181, 0);</string>
                      </spacer>
                     </item>
                     <item>
-                     <widget class="QPushButton" name="btn_limpiar_viajes">
+                     <widget class="QPushButton" name="btnTripClear">
+                      <property name="role" stdset="0">
+                       <string notr="true">secondary</string>
+                      </property>
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                         <horstretch>0</horstretch>
@@ -2944,16 +2837,12 @@ background-color: rgb(247, 181, 0);</string>
                         <height>24</height>
                        </size>
                       </property>
-                      <property name="styleSheet">
-                       <string notr="true">border-radius:2px; 
-background-color: rgb(225, 225, 225);</string>
-                      </property>
                       <property name="text">
                        <string/>
                       </property>
                       <property name="icon">
                        <iconset>
-                        <normaloff>../img/pincel.png</normaloff>../img/pincel.png</iconset>
+                        <normaloff>../../img/pincel.png</normaloff>../../img/pincel.png</iconset>
                       </property>
                       <property name="iconSize">
                        <size>
@@ -3001,7 +2890,7 @@ background-color: rgb(225, 225, 225);</string>
               </spacer>
              </item>
              <item>
-              <widget class="QFrame" name="frame_3">
+              <widget class="QFrame" name="invoiceTablesFrame">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                  <horstretch>0</horstretch>
@@ -3022,7 +2911,10 @@ background-color: rgb(225, 225, 225);</string>
                </property>
                <layout class="QHBoxLayout" name="horizontalLayout_38">
                 <item>
-                 <widget class="QTableWidget" name="tab_facturas">
+                 <widget class="QTableWidget" name="tblInvoices">
+                  <property name="role" stdset="0">
+                   <string notr="true">table</string>
+                  </property>
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                     <horstretch>0</horstretch>
@@ -3052,23 +2944,6 @@ background-color: rgb(225, 225, 225);</string>
                   </property>
                   <property name="focusPolicy">
                    <enum>Qt::NoFocus</enum>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true"> QHeaderView::section {
-        background-color: rgb(247, 181, 0);
-        border-radius: 1px;
-        color: black;
-        font-weight: bold;
-        border: 1px solid black;
-    }
-
- QTableView {
- selection-background-color: rgb(247, 181, 0);
- border: 1px solid black;
-}
-
-
-</string>
                   </property>
                   <property name="frameShape">
                    <enum>QFrame::NoFrame</enum>
@@ -3142,7 +3017,10 @@ background-color: rgb(225, 225, 225);</string>
                 <item>
                  <layout class="QVBoxLayout" name="verticalLayout_17">
                   <item>
-                   <widget class="QTableWidget" name="tab_lineas_de_viaje">
+                   <widget class="QTableWidget" name="tblTrips">
+                    <property name="role" stdset="0">
+                     <string notr="true">table</string>
+                    </property>
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
                       <horstretch>0</horstretch>
@@ -3172,23 +3050,6 @@ background-color: rgb(225, 225, 225);</string>
                     </property>
                     <property name="focusPolicy">
                      <enum>Qt::NoFocus</enum>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true"> QHeaderView::section {
-        background-color: rgb(247, 181, 0);
-        border-radius: 1px;
-        color: black;
-        font-weight: bold;
-        border: 1px solid black;
-    }
-
- QTableView {
- selection-background-color: rgb(247, 181, 0);
- border: 1px solid black;
-}
-
-
-</string>
                     </property>
                     <property name="frameShape">
                      <enum>QFrame::NoFrame</enum>
@@ -3274,7 +3135,7 @@ background-color: rgb(225, 225, 225);</string>
                       <item>
                        <layout class="QHBoxLayout" name="horizontalLayout_34">
                         <item>
-                         <widget class="QLabel" name="label_subtotal">
+                         <widget class="QLabel" name="lblSubtotal">
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                             <horstretch>0</horstretch>
@@ -3293,7 +3154,10 @@ background-color: rgb(225, 225, 225);</string>
                          </widget>
                         </item>
                         <item>
-                         <widget class="QLineEdit" name="txt_subtotal">
+                         <widget class="QLineEdit" name="txtSubtotal">
+                          <property name="role" stdset="0">
+                           <string notr="true">total</string>
+                          </property>
                           <property name="enabled">
                            <bool>false</bool>
                           </property>
@@ -3309,10 +3173,6 @@ background-color: rgb(225, 225, 225);</string>
                             <height>16777215</height>
                            </size>
                           </property>
-                          <property name="styleSheet">
-                           <string notr="true">background-color: rgb(247, 181, 0); border-radius: 3px;
-color: rgb(0, 0, 0);</string>
-                          </property>
                           <property name="frame">
                            <bool>false</bool>
                           </property>
@@ -3326,7 +3186,7 @@ color: rgb(0, 0, 0);</string>
                       <item>
                        <layout class="QHBoxLayout" name="horizontalLayout_35">
                         <item>
-                         <widget class="QLabel" name="label_iva">
+                         <widget class="QLabel" name="lblVat">
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                             <horstretch>0</horstretch>
@@ -3351,7 +3211,10 @@ color: rgb(0, 0, 0);</string>
                          </widget>
                         </item>
                         <item>
-                         <widget class="QLineEdit" name="txt_iva">
+                         <widget class="QLineEdit" name="txtVat">
+                          <property name="role" stdset="0">
+                           <string notr="true">total</string>
+                          </property>
                           <property name="enabled">
                            <bool>false</bool>
                           </property>
@@ -3367,10 +3230,6 @@ color: rgb(0, 0, 0);</string>
                             <height>16777215</height>
                            </size>
                           </property>
-                          <property name="styleSheet">
-                           <string notr="true">background-color: rgb(247, 181, 0); border-radius: 3px;
-color: rgb(0, 0, 0);</string>
-                          </property>
                           <property name="frame">
                            <bool>false</bool>
                           </property>
@@ -3384,7 +3243,7 @@ color: rgb(0, 0, 0);</string>
                       <item>
                        <layout class="QHBoxLayout" name="horizontalLayout_36">
                         <item>
-                         <widget class="QLabel" name="label_total">
+                         <widget class="QLabel" name="lblTotal">
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                             <horstretch>0</horstretch>
@@ -3409,7 +3268,10 @@ color: rgb(0, 0, 0);</string>
                          </widget>
                         </item>
                         <item>
-                         <widget class="QLineEdit" name="txt_total">
+                         <widget class="QLineEdit" name="txtTotal">
+                          <property name="role" stdset="0">
+                           <string notr="true">total</string>
+                          </property>
                           <property name="enabled">
                            <bool>false</bool>
                           </property>
@@ -3424,10 +3286,6 @@ color: rgb(0, 0, 0);</string>
                             <width>65</width>
                             <height>16777215</height>
                            </size>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">background-color: rgb(247, 181, 0); border-radius: 3px;
-color: rgb(0, 0, 0);</string>
                           </property>
                           <property name="frame">
                            <bool>false</bool>
@@ -3465,7 +3323,7 @@ color: rgb(0, 0, 0);</string>
            </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="tabCars">
+         <widget class="QWidget" name="clientsTab">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
             <horstretch>0</horstretch>
@@ -3495,7 +3353,10 @@ color: rgb(0, 0, 0);</string>
               </spacer>
              </item>
              <item>
-              <widget class="QFrame" name="boxInfo_2">
+              <widget class="QFrame" name="clientForm">
+               <property name="role" stdset="0">
+                <string notr="true">panel</string>
+               </property>
                <property name="enabled">
                 <bool>true</bool>
                </property>
@@ -3513,12 +3374,6 @@ color: rgb(0, 0, 0);</string>
                </property>
                <property name="autoFillBackground">
                 <bool>false</bool>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">QWidget#boxInfo_2{
-border-radius:10px;
-border: 2px solid black;
-}</string>
                </property>
                <property name="frameShape">
                 <enum>QFrame::Panel</enum>
@@ -3550,7 +3405,7 @@ border: 2px solid black;
                     <item>
                      <layout class="QVBoxLayout" name="verticalLayout_9">
                       <item>
-                       <widget class="QLabel" name="lblCodigo_2">
+                       <widget class="QLabel" name="lblClientId">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                           <horstretch>0</horstretch>
@@ -3578,9 +3433,6 @@ border: 2px solid black;
                           <bold>true</bold>
                          </font>
                         </property>
-                        <property name="styleSheet">
-                         <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
-                        </property>
                         <property name="text">
                          <string>Codigo:</string>
                         </property>
@@ -3590,7 +3442,7 @@ border: 2px solid black;
                        </widget>
                       </item>
                       <item>
-                       <widget class="QLabel" name="lblSurname_2">
+                       <widget class="QLabel" name="lblClientCompanyName">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                           <horstretch>0</horstretch>
@@ -3617,9 +3469,6 @@ border: 2px solid black;
                           <bold>true</bold>
                          </font>
                         </property>
-                        <property name="styleSheet">
-                         <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
-                        </property>
                         <property name="text">
                          <string>RazonSocial</string>
                         </property>
@@ -3629,7 +3478,7 @@ border: 2px solid black;
                        </widget>
                       </item>
                       <item>
-                       <widget class="QLabel" name="lblStreet_2">
+                       <widget class="QLabel" name="lblClientAddress">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                           <horstretch>0</horstretch>
@@ -3648,9 +3497,6 @@ border: 2px solid black;
                           <height>24</height>
                          </size>
                         </property>
-                        <property name="styleSheet">
-                         <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
-                        </property>
                         <property name="text">
                          <string>Direccion:</string>
                         </property>
@@ -3660,7 +3506,7 @@ border: 2px solid black;
                        </widget>
                       </item>
                       <item>
-                       <widget class="QLabel" name="lblMovil_Cliente">
+                       <widget class="QLabel" name="lblClientPhone">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                           <horstretch>0</horstretch>
@@ -3678,9 +3524,6 @@ border: 2px solid black;
                           <width>70</width>
                           <height>24</height>
                          </size>
-                        </property>
-                        <property name="styleSheet">
-                         <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
                         </property>
                         <property name="text">
                          <string>Telefono:</string>
@@ -3710,7 +3553,10 @@ border: 2px solid black;
                       <item>
                        <layout class="QHBoxLayout" name="horizontalLayout_16">
                         <item>
-                         <widget class="QLabel" name="lblCodDB_Cliente">
+                         <widget class="QLabel" name="lblClientIdValue">
+                          <property name="role" stdset="0">
+                           <string notr="true">highlight</string>
+                          </property>
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                             <horstretch>0</horstretch>
@@ -3729,10 +3575,6 @@ border: 2px solid black;
                             <height>24</height>
                            </size>
                           </property>
-                          <property name="styleSheet">
-                           <string notr="true">background-color: rgb(247, 181, 0);border: 2px solid black; border-radius: 3px;
-color: rgb(0, 0, 0);</string>
-                          </property>
                           <property name="text">
                            <string/>
                           </property>
@@ -3742,7 +3584,7 @@ color: rgb(0, 0, 0);</string>
                          </widget>
                         </item>
                         <item>
-                         <widget class="QLabel" name="lblDNI_2">
+                         <widget class="QLabel" name="lblClientDni">
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                             <horstretch>0</horstretch>
@@ -3772,7 +3614,10 @@ color: rgb(0, 0, 0);</string>
                          </widget>
                         </item>
                         <item>
-                         <widget class="QLineEdit" name="txtDni_3">
+                         <widget class="QLineEdit" name="txtClientDni">
+                          <property name="role" stdset="0">
+                           <string notr="true">field</string>
+                          </property>
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                             <horstretch>0</horstretch>
@@ -3791,16 +3636,13 @@ color: rgb(0, 0, 0);</string>
                             <height>24</height>
                            </size>
                           </property>
-                          <property name="styleSheet">
-                           <string notr="true">border: 2px solid black; border-radius: 3px;</string>
-                          </property>
                           <property name="maxLength">
                            <number>9</number>
                           </property>
                          </widget>
                         </item>
                         <item>
-                         <widget class="QLabel" name="lblCheckDNI_Cliente">
+                         <widget class="QLabel" name="lblClientDniCheck">
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                             <horstretch>0</horstretch>
@@ -3828,9 +3670,6 @@ color: rgb(0, 0, 0);</string>
                             <bold>true</bold>
                            </font>
                           </property>
-                          <property name="styleSheet">
-                           <string notr="true"/>
-                          </property>
                           <property name="text">
                            <string/>
                           </property>
@@ -3843,7 +3682,10 @@ color: rgb(0, 0, 0);</string>
                          </widget>
                         </item>
                         <item>
-                         <widget class="QPushButton" name="btnBuscarCliente">
+                         <widget class="QPushButton" name="btnClientSearch">
+                          <property name="role" stdset="0">
+                           <string notr="true">secondary</string>
+                          </property>
                           <property name="minimumSize">
                            <size>
                             <width>24</width>
@@ -3856,16 +3698,12 @@ color: rgb(0, 0, 0);</string>
                             <height>24</height>
                            </size>
                           </property>
-                          <property name="styleSheet">
-                           <string notr="true">border-radius:2px; 
-background-color: rgb(225, 225, 225);</string>
-                          </property>
                           <property name="text">
                            <string/>
                           </property>
                           <property name="icon">
                            <iconset>
-                            <normaloff>../img/lupa2.png</normaloff>../img/lupa2.png</iconset>
+                            <normaloff>../../img/lupa2.png</normaloff>../../img/lupa2.png</iconset>
                           </property>
                          </widget>
                         </item>
@@ -3885,7 +3723,10 @@ background-color: rgb(225, 225, 225);</string>
                        </layout>
                       </item>
                       <item>
-                       <widget class="QLineEdit" name="txtRazonSocial">
+                       <widget class="QLineEdit" name="txtClientCompanyName">
+                        <property name="role" stdset="0">
+                         <string notr="true">field</string>
+                        </property>
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                           <horstretch>0</horstretch>
@@ -3904,13 +3745,13 @@ background-color: rgb(225, 225, 225);</string>
                           <height>16777215</height>
                          </size>
                         </property>
-                        <property name="styleSheet">
-                         <string notr="true">border: 2px solid black; border-radius: 3px;</string>
-                        </property>
                        </widget>
                       </item>
                       <item>
-                       <widget class="QLineEdit" name="txtDireccion_Cliente">
+                       <widget class="QLineEdit" name="txtClientAddress">
+                        <property name="role" stdset="0">
+                         <string notr="true">field</string>
+                        </property>
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                           <horstretch>0</horstretch>
@@ -3929,15 +3770,15 @@ background-color: rgb(225, 225, 225);</string>
                           <height>24</height>
                          </size>
                         </property>
-                        <property name="styleSheet">
-                         <string notr="true">border: 2px solid black; border-radius: 3px;</string>
-                        </property>
                        </widget>
                       </item>
                       <item>
                        <layout class="QHBoxLayout" name="horizontalLayout_17">
                         <item>
-                         <widget class="QLineEdit" name="txtMovil_Cliente">
+                         <widget class="QLineEdit" name="txtClientPhone">
+                          <property name="role" stdset="0">
+                           <string notr="true">field</string>
+                          </property>
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                             <horstretch>0</horstretch>
@@ -3955,9 +3796,6 @@ background-color: rgb(225, 225, 225);</string>
                             <width>80</width>
                             <height>24</height>
                            </size>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">border: 2px solid black; border-radius: 3px;</string>
                           </property>
                           <property name="alignment">
                            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -4015,7 +3853,7 @@ background-color: rgb(225, 225, 225);</string>
                   <item>
                    <layout class="QVBoxLayout" name="verticalLayout_12">
                     <item>
-                     <widget class="QFrame" name="frame_baja">
+                     <widget class="QFrame" name="clientLeftOnFrame">
                       <property name="frameShape">
                        <enum>QFrame::StyledPanel</enum>
                       </property>
@@ -4039,7 +3877,7 @@ background-color: rgb(225, 225, 225);</string>
                         <number>0</number>
                        </property>
                        <item>
-                        <widget class="QLabel" name="tltDateBaja_Cliente">
+                        <widget class="QLabel" name="lblClientLeftOn">
                          <property name="sizePolicy">
                           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                            <horstretch>0</horstretch>
@@ -4058,9 +3896,6 @@ background-color: rgb(225, 225, 225);</string>
                            <height>24</height>
                           </size>
                          </property>
-                         <property name="styleSheet">
-                          <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
-                         </property>
                          <property name="text">
                           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Fecha de Baja:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                          </property>
@@ -4070,7 +3905,10 @@ background-color: rgb(225, 225, 225);</string>
                         </widget>
                        </item>
                        <item>
-                        <widget class="QLineEdit" name="txtDate_Cliente">
+                        <widget class="QLineEdit" name="txtClientLeftOn">
+                         <property name="role" stdset="0">
+                          <string notr="true">field</string>
+                         </property>
                          <property name="enabled">
                           <bool>false</bool>
                          </property>
@@ -4092,9 +3930,6 @@ background-color: rgb(225, 225, 225);</string>
                            <height>24</height>
                           </size>
                          </property>
-                         <property name="styleSheet">
-                          <string notr="true">border: 2px solid black; border-radius: 3px;</string>
-                         </property>
                          <property name="alignment">
                           <set>Qt::AlignCenter</set>
                          </property>
@@ -4104,7 +3939,10 @@ background-color: rgb(225, 225, 225);</string>
                         </widget>
                        </item>
                        <item>
-                        <widget class="QPushButton" name="btnCalendar_Cliente">
+                        <widget class="QPushButton" name="btnClientLeftOnCalendar">
+                         <property name="role" stdset="0">
+                          <string notr="true">calendar</string>
+                         </property>
                          <property name="sizePolicy">
                           <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                            <horstretch>0</horstretch>
@@ -4123,16 +3961,12 @@ background-color: rgb(225, 225, 225);</string>
                            <height>24</height>
                           </size>
                          </property>
-                         <property name="styleSheet">
-                          <string notr="true">border-radius:2px;
-</string>
-                         </property>
                          <property name="text">
                           <string/>
                          </property>
                          <property name="icon">
                           <iconset>
-                           <normaloff>../img/calendario.png</normaloff>../img/calendario.png</iconset>
+                           <normaloff>../../img/calendario.png</normaloff>../../img/calendario.png</iconset>
                          </property>
                          <property name="iconSize">
                           <size>
@@ -4163,7 +3997,7 @@ background-color: rgb(225, 225, 225);</string>
                       <item>
                        <layout class="QVBoxLayout" name="verticalLayout_8">
                         <item>
-                         <widget class="QLabel" name="lblProvincia_2">
+                         <widget class="QLabel" name="lblClientProvince">
                           <property name="sizePolicy">
                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                             <horstretch>0</horstretch>
@@ -4189,9 +4023,6 @@ background-color: rgb(225, 225, 225);</string>
                             <weight>75</weight>
                             <bold>true</bold>
                            </font>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
                           </property>
                           <property name="text">
                            <string>Provincia:</string>
@@ -4224,7 +4055,10 @@ background-color: rgb(225, 225, 225);</string>
                         <item>
                          <layout class="QHBoxLayout" name="horizontalLayout_20">
                           <item>
-                           <widget class="QComboBox" name="cmbProvincia_Cliente">
+                           <widget class="QComboBox" name="cmbClientProvince">
+                            <property name="role" stdset="0">
+                             <string notr="true">field</string>
+                            </property>
                             <property name="sizePolicy">
                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                               <horstretch>0</horstretch>
@@ -4243,13 +4077,10 @@ background-color: rgb(225, 225, 225);</string>
                               <height>24</height>
                              </size>
                             </property>
-                            <property name="styleSheet">
-                             <string notr="true">border: 2px solid black; border-radius: 3px;</string>
-                            </property>
                            </widget>
                           </item>
                           <item>
-                           <widget class="QLabel" name="lblLocalidad_2">
+                           <widget class="QLabel" name="lblClientMunicipality">
                             <property name="sizePolicy">
                              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                               <horstretch>0</horstretch>
@@ -4264,9 +4095,6 @@ background-color: rgb(225, 225, 225);</string>
                               <bold>true</bold>
                              </font>
                             </property>
-                            <property name="styleSheet">
-                             <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
-                            </property>
                             <property name="text">
                              <string>Localidad:</string>
                             </property>
@@ -4276,7 +4104,10 @@ background-color: rgb(225, 225, 225);</string>
                            </widget>
                           </item>
                           <item>
-                           <widget class="QComboBox" name="cmbLocalidad_Cliente">
+                           <widget class="QComboBox" name="cmbClientMunicipality">
+                            <property name="role" stdset="0">
+                             <string notr="true">field</string>
+                            </property>
                             <property name="minimumSize">
                              <size>
                               <width>170</width>
@@ -4288,9 +4119,6 @@ background-color: rgb(225, 225, 225);</string>
                               <width>170</width>
                               <height>24</height>
                              </size>
-                            </property>
-                            <property name="styleSheet">
-                             <string notr="true">border: 2px solid black; border-radius: 3px;</string>
                             </property>
                            </widget>
                           </item>
@@ -4368,7 +4196,7 @@ background-color: rgb(225, 225, 225);</string>
                    </spacer>
                   </item>
                   <item>
-                   <widget class="QLabel" name="label_4">
+                   <widget class="QLabel" name="lblClientStatus">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                       <horstretch>0</horstretch>
@@ -4395,16 +4223,13 @@ background-color: rgb(225, 225, 225);</string>
                       <bold>true</bold>
                      </font>
                     </property>
-                    <property name="styleSheet">
-                     <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
-                    </property>
                     <property name="text">
                      <string>Estado:</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QRadioButton" name="rbtTodosCliente">
+                   <widget class="QRadioButton" name="rbtClientsAll">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                       <horstretch>0</horstretch>
@@ -4418,9 +4243,6 @@ background-color: rgb(225, 225, 225);</string>
                       <weight>75</weight>
                       <bold>true</bold>
                      </font>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
                     </property>
                     <property name="text">
                      <string>Todos</string>
@@ -4450,7 +4272,7 @@ background-color: rgb(225, 225, 225);</string>
                    </spacer>
                   </item>
                   <item>
-                   <widget class="QRadioButton" name="rbtAltaCliente">
+                   <widget class="QRadioButton" name="rbtClientsActive">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                       <horstretch>0</horstretch>
@@ -4464,9 +4286,6 @@ background-color: rgb(225, 225, 225);</string>
                       <weight>75</weight>
                       <bold>true</bold>
                      </font>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
                     </property>
                     <property name="text">
                      <string>Alta</string>
@@ -4496,7 +4315,7 @@ background-color: rgb(225, 225, 225);</string>
                    </spacer>
                   </item>
                   <item>
-                   <widget class="QRadioButton" name="rbtBajaCliente">
+                   <widget class="QRadioButton" name="rbtClientsInactive">
                     <property name="font">
                      <font>
                       <family>Alef</family>
@@ -4504,9 +4323,6 @@ background-color: rgb(225, 225, 225);</string>
                       <weight>75</weight>
                       <bold>true</bold>
                      </font>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">font: 75 10pt &quot;Alef&quot;; font-weight: bold;</string>
                     </property>
                     <property name="text">
                      <string>Baja</string>
@@ -4566,7 +4382,10 @@ background-color: rgb(225, 225, 225);</string>
                    </spacer>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="btnaltaCliente">
+                   <widget class="QPushButton" name="btnClientRegister">
+                    <property name="role" stdset="0">
+                     <string notr="true">primary</string>
+                    </property>
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                       <horstretch>0</horstretch>
@@ -4593,17 +4412,16 @@ background-color: rgb(225, 225, 225);</string>
                       <bold>true</bold>
                      </font>
                     </property>
-                    <property name="styleSheet">
-                     <string notr="true">border: 2px solid black; border-radius: 3px;
-background-color: rgb(247, 181, 0);</string>
-                    </property>
                     <property name="text">
                      <string>Alta</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="btnModifCliente">
+                   <widget class="QPushButton" name="btnClientUpdate">
+                    <property name="role" stdset="0">
+                     <string notr="true">primary</string>
+                    </property>
                     <property name="enabled">
                      <bool>true</bool>
                     </property>
@@ -4636,17 +4454,16 @@ background-color: rgb(247, 181, 0);</string>
                     <property name="autoFillBackground">
                      <bool>false</bool>
                     </property>
-                    <property name="styleSheet">
-                     <string notr="true">border: 2px solid black; border-radius: 3px;
-background-color: rgb(247, 181, 0);</string>
-                    </property>
                     <property name="text">
                      <string>Modificar</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QPushButton" name="btnBajaCliente">
+                   <widget class="QPushButton" name="btnClientDeactivate">
+                    <property name="role" stdset="0">
+                     <string notr="true">primary</string>
+                    </property>
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
                       <horstretch>0</horstretch>
@@ -4672,10 +4489,6 @@ background-color: rgb(247, 181, 0);</string>
                       <weight>75</weight>
                       <bold>true</bold>
                      </font>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">border: 2px solid black; border-radius: 3px;
-background-color: rgb(247, 181, 0);</string>
                     </property>
                     <property name="text">
                      <string>Baja</string>
@@ -4731,7 +4544,10 @@ background-color: rgb(247, 181, 0);</string>
               </spacer>
              </item>
              <item>
-              <widget class="QTableWidget" name="tabClientes">
+              <widget class="QTableWidget" name="tblClients">
+               <property name="role" stdset="0">
+                <string notr="true">table</string>
+               </property>
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
                  <horstretch>0</horstretch>
@@ -4761,22 +4577,6 @@ background-color: rgb(247, 181, 0);</string>
                </property>
                <property name="focusPolicy">
                 <enum>Qt::NoFocus</enum>
-               </property>
-               <property name="styleSheet">
-                <string notr="true"> QHeaderView::section {
-        background-color: rgb(247, 181, 0);
-        border-radius: 1px;
-        color: black;
-        font-weight: bold;
-        border: 1px solid black;
-    }
-
- QTableView {
- selection-background-color: rgb(247, 181, 0);
-}
-
-
-</string>
                </property>
                <property name="frameShape">
                 <enum>QFrame::NoFrame</enum>
@@ -4883,14 +4683,14 @@ background-color: rgb(247, 181, 0);</string>
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
-   <addaction name="btn_menu_print"/>
+   <addaction name="actionPrintReports"/>
    <addaction name="separator"/>
-   <addaction name="actionCrear_Copia_Seguridad"/>
-   <addaction name="actionRestarurar_Copia"/>
+   <addaction name="actionBackupCreate"/>
+   <addaction name="actionBackupRestore"/>
    <addaction name="separator"/>
-   <addaction name="btnLimpiar"/>
+   <addaction name="actionClearForms"/>
    <addaction name="separator"/>
-   <addaction name="Salir"/>
+   <addaction name="actionToolbarExit"/>
    <addaction name="separator"/>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -4902,93 +4702,93 @@ background-color: rgb(247, 181, 0);</string>
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuArchivo">
+   <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>Archivo</string>
     </property>
-    <addaction name="actionSalir"/>
+    <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Ayuda</string>
     </property>
-    <addaction name="actionAcerca_de"/>
+    <addaction name="actionAbout"/>
    </widget>
-   <widget class="QMenu" name="menuHerramientas">
+   <widget class="QMenu" name="menuTools">
     <property name="title">
      <string>Herramientas</string>
     </property>
-    <addaction name="actionCrear_Copia_Seguridad"/>
-    <addaction name="actionRestarurar_Copia"/>
+    <addaction name="actionBackupCreate"/>
+    <addaction name="actionBackupRestore"/>
     <addaction name="separator"/>
-    <addaction name="actionImportar_Datos_XLS"/>
-    <addaction name="actionExportar_Datos_XLS"/>
+    <addaction name="actionDriversImport"/>
+    <addaction name="actionDriversExport"/>
     <addaction name="separator"/>
-    <addaction name="actionImportar_Datos_Cliente_XLS"/>
-    <addaction name="actionExportar_Datos_Cliente_XLS"/>
+    <addaction name="actionClientsImport"/>
+    <addaction name="actionClientsExport"/>
    </widget>
-   <widget class="QMenu" name="menuInformes">
+   <widget class="QMenu" name="menuReports">
     <property name="title">
      <string>Informes</string>
     </property>
-    <addaction name="actionListarConductores"/>
-    <addaction name="actionListar_Clientes"/>
+    <addaction name="actionReportDrivers"/>
+    <addaction name="actionReportClients"/>
     <addaction name="separator"/>
-    <addaction name="actionImprimir_Factura"/>
+    <addaction name="actionReportInvoice"/>
    </widget>
-   <addaction name="menuArchivo"/>
-   <addaction name="menuHerramientas"/>
-   <addaction name="menuInformes"/>
+   <addaction name="menuFile"/>
+   <addaction name="menuTools"/>
+   <addaction name="menuReports"/>
    <addaction name="menuHelp"/>
   </widget>
-  <action name="actionAcerca_de">
+  <action name="actionAbout">
    <property name="enabled">
     <bool>true</bool>
    </property>
    <property name="icon">
     <iconset>
-     <normaloff>../img/OkIco.svg</normaloff>../img/OkIco.svg</iconset>
+     <normaloff>../../img/OkIco.svg</normaloff>../../img/OkIco.svg</iconset>
    </property>
    <property name="text">
     <string>Acerca de...</string>
    </property>
   </action>
-  <action name="Salir">
+  <action name="actionToolbarExit">
    <property name="icon">
     <iconset>
-     <normaloff>../img/salir.png</normaloff>../img/salir.png</iconset>
+     <normaloff>../../img/salir.png</normaloff>../../img/salir.png</iconset>
    </property>
    <property name="text">
     <string>salir</string>
    </property>
   </action>
-  <action name="btnLimpiar">
+  <action name="actionClearForms">
    <property name="icon">
     <iconset>
-     <normaloff>../img/pincel.png</normaloff>../img/pincel.png</iconset>
+     <normaloff>../../img/pincel.png</normaloff>../../img/pincel.png</iconset>
    </property>
    <property name="text">
     <string/>
    </property>
   </action>
-  <action name="actionSalir">
+  <action name="actionExit">
    <property name="icon">
     <iconset>
-     <normaloff>../img/salir.png</normaloff>../img/salir.png</iconset>
+     <normaloff>../../img/salir.png</normaloff>../../img/salir.png</iconset>
    </property>
    <property name="text">
     <string>Salir</string>
    </property>
   </action>
-  <action name="actionHerramientas">
+  <action name="actionTools">
    <property name="text">
     <string>Herramientas</string>
    </property>
   </action>
-  <action name="actionCrear_Copia_Seguridad">
+  <action name="actionBackupCreate">
    <property name="icon">
     <iconset>
-     <normaloff>../img/actualizar.png</normaloff>../img/actualizar.png</iconset>
+     <normaloff>../../img/actualizar.png</normaloff>../../img/actualizar.png</iconset>
    </property>
    <property name="text">
     <string>Crear Copia Seguridad</string>
@@ -4997,10 +4797,10 @@ background-color: rgb(247, 181, 0);</string>
     <string>Alt+S</string>
    </property>
   </action>
-  <action name="actionRestarurar_Copia">
+  <action name="actionBackupRestore">
    <property name="icon">
     <iconset>
-     <normaloff>../img/restaura_bbdd.png</normaloff>../img/restaura_bbdd.png</iconset>
+     <normaloff>../../img/restaura_bbdd.png</normaloff>../../img/restaura_bbdd.png</iconset>
    </property>
    <property name="text">
     <string>Restarurar Copia</string>
@@ -5009,35 +4809,35 @@ background-color: rgb(247, 181, 0);</string>
     <string>Alt+R</string>
    </property>
   </action>
-  <action name="actionExportar_Datos_XLS">
+  <action name="actionDriversExport">
    <property name="text">
     <string>Exportar DatosConductores  XLS</string>
    </property>
   </action>
-  <action name="actionImportar_Datos_XLS">
+  <action name="actionDriversImport">
    <property name="text">
     <string>Importar Datos Conductores XLS</string>
    </property>
   </action>
-  <action name="actionImportar_Datos_Cliente_XLS">
+  <action name="actionClientsImport">
    <property name="text">
     <string>Importar Datos Cliente XLS</string>
    </property>
   </action>
-  <action name="actionListarConductores">
+  <action name="actionReportDrivers">
    <property name="text">
     <string>ListarConductores</string>
    </property>
   </action>
-  <action name="actionListar_Clientes">
+  <action name="actionReportClients">
    <property name="text">
     <string>Listar Clientes</string>
    </property>
   </action>
-  <action name="btn_menu_print">
+  <action name="actionPrintReports">
    <property name="icon">
     <iconset>
-     <normalon>../img/impresora.png</normalon>
+     <normalon>../../img/impresora.png</normalon>
     </iconset>
    </property>
    <property name="text">
@@ -5050,41 +4850,41 @@ background-color: rgb(247, 181, 0);</string>
     <bool>true</bool>
    </property>
   </action>
-  <action name="actionImprimir_Factura">
+  <action name="actionReportInvoice">
    <property name="text">
     <string>Imprimir Factura</string>
    </property>
   </action>
-  <action name="actionExportar_Datos_Cliente_XLS">
+  <action name="actionClientsExport">
    <property name="text">
     <string>Exportar Datos Cliente XLS</string>
    </property>
   </action>
  </widget>
  <tabstops>
-  <tabstop>btnBajaDriver</tabstop>
-  <tabstop>txtDni</tabstop>
-  <tabstop>txtDate</tabstop>
-  <tabstop>btnCalendar</tabstop>
-  <tabstop>txtDni_2</tabstop>
-  <tabstop>txtNombre</tabstop>
-  <tabstop>txtDireccion</tabstop>
-  <tabstop>cmbLocalidad</tabstop>
-  <tabstop>txtMovil</tabstop>
-  <tabstop>txtSalario</tabstop>
-  <tabstop>chkA</tabstop>
-  <tabstop>chkB</tabstop>
-  <tabstop>chkC</tabstop>
-  <tabstop>chkD</tabstop>
-  <tabstop>rbtTodos</tabstop>
-  <tabstop>rbtBaja</tabstop>
-  <tabstop>btnModifDriver</tabstop>
+  <tabstop>btnDriverDeactivate</tabstop>
+  <tabstop>txtDriverDni</tabstop>
+  <tabstop>txtDriverHiredOn</tabstop>
+  <tabstop>btnDriverHiredOnCalendar</tabstop>
+  <tabstop>txtDriverSurname</tabstop>
+  <tabstop>txtDriverName</tabstop>
+  <tabstop>txtDriverAddress</tabstop>
+  <tabstop>cmbDriverMunicipality</tabstop>
+  <tabstop>txtDriverPhone</tabstop>
+  <tabstop>txtDriverSalary</tabstop>
+  <tabstop>chkLicenseA</tabstop>
+  <tabstop>chkLicenseB</tabstop>
+  <tabstop>chkLicenseC</tabstop>
+  <tabstop>chkLicenseD</tabstop>
+  <tabstop>rbtDriversAll</tabstop>
+  <tabstop>rbtDriversInactive</tabstop>
+  <tabstop>btnDriverUpdate</tabstop>
  </tabstops>
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroup"/>
-  <buttongroup name="botonesDeCliente"/>
-  <buttongroup name="btn_group_tarifas"/>
+  <buttongroup name="grpDriverStatus"/>
+  <buttongroup name="grpClientStatus"/>
+  <buttongroup name="grpFare"/>
  </buttongroups>
 </ui>

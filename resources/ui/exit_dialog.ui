@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ventanaSalir</class>
- <widget class="QDialog" name="ventanaSalir">
+ <class>ExitDialog</class>
+ <widget class="QDialog" name="ExitDialog">
   <property name="windowModality">
    <enum>Qt::ApplicationModal</enum>
   </property>
@@ -21,13 +21,10 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>img/taxiIcon.png</normaloff>img/taxiIcon.png</iconset>
+    <normaloff>../../img/taxiIcon.png</normaloff>../../img/taxiIcon.png</iconset>
   </property>
   <property name="layoutDirection">
    <enum>Qt::LeftToRight</enum>
-  </property>
-  <property name="styleSheet">
-   <string notr="true">background-color: rgb(200, 200, 200);</string>
   </property>
   <property name="sizeGripEnabled">
    <bool>true</bool>
@@ -49,7 +46,7 @@
     <number>5</number>
    </property>
    <item>
-    <widget class="QFrame" name="frame">
+    <widget class="QFrame" name="exitFrame">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
        <horstretch>0</horstretch>
@@ -64,7 +61,7 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item alignment="Qt::AlignHCenter">
-       <widget class="QLabel" name="label">
+       <widget class="QLabel" name="lblIcon">
         <property name="enabled">
          <bool>true</bool>
         </property>
@@ -93,7 +90,7 @@
          <enum>Qt::PlainText</enum>
         </property>
         <property name="pixmap">
-         <pixmap>img/taxiIcon.png</pixmap>
+         <pixmap>../../img/taxiIcon.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -104,7 +101,7 @@
        </widget>
       </item>
       <item alignment="Qt::AlignHCenter">
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="lblQuestion">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
           <horstretch>0</horstretch>
@@ -117,17 +114,13 @@
           <height>0</height>
          </size>
         </property>
-        <property name="styleSheet">
-         <string notr="true">color: rgb(0, 0, 0);
-font: 75 14pt &quot;MS Shell Dlg 2&quot;;</string>
-        </property>
         <property name="text">
          <string>Estas seguro que deseas salir</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QFrame" name="frame_3">
+       <widget class="QFrame" name="buttonsFrame">
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
         </property>
@@ -136,7 +129,7 @@ font: 75 14pt &quot;MS Shell Dlg 2&quot;;</string>
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
-          <widget class="QPushButton" name="btnAcept">
+          <widget class="QPushButton" name="btnAccept">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -155,21 +148,17 @@ font: 75 14pt &quot;MS Shell Dlg 2&quot;;</string>
              <height>16777215</height>
             </size>
            </property>
-           <property name="styleSheet">
-            <string notr="true">background-color: rgb(197, 197, 197);
-border-radiu:8px;</string>
-           </property>
            <property name="text">
             <string>Aceptar</string>
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>img/OkIco.svg</normaloff>img/OkIco.svg</iconset>
+             <normaloff>../../img/OkIco.svg</normaloff>../../img/OkIco.svg</iconset>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="btnCancelar">
+          <widget class="QPushButton" name="btnCancel">
            <property name="minimumSize">
             <size>
              <width>75</width>
@@ -187,7 +176,7 @@ border-radiu:8px;</string>
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>img/CancelIco.ico</normaloff>img/CancelIco.ico</iconset>
+             <normaloff>../../img/CancelIco.ico</normaloff>../../img/CancelIco.ico</iconset>
            </property>
           </widget>
          </item>

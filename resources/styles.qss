@@ -1,0 +1,134 @@
+/*
+ * CarTeis application style sheet, loaded once at start-up.
+ *
+ * Widgets that share a look carry a dynamic "role" property in the .ui files (Qt Designer:
+ * "Add dynamic property" > String > role). Rules ending in ", X *" reproduce styles that used
+ * to be set on a container without a selector, which Qt applies to all its children too.
+ */
+
+/* ---- Main window -------------------------------------------------------------------- */
+
+QWidget#centralwidget {
+    background-color: rgb(186, 186, 186);
+}
+
+#mainTabs,
+#mainTabs * {
+    font: 75 10pt "Alef";
+    font-weight: bold;
+}
+
+/* Panels holding each tab's form */
+*[role="panel"] {
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+/* Section titles. Needs #mainTabs to win over the tab-wide font above. */
+#mainTabs *[role="title"] {
+    font: 81 14pt "Montserrat ExtraBold";
+}
+
+/* Text boxes and combo boxes */
+*[role="field"],
+*[role="field"] * {
+    border: 2px solid black;
+    border-radius: 3px;
+}
+
+/* Read-only values that identify the current record (codes, invoice number) */
+*[role="highlight"],
+*[role="highlight"] * {
+    background-color: rgb(247, 181, 0);
+    border: 2px solid black;
+    border-radius: 3px;
+    color: rgb(0, 0, 0);
+}
+
+/* Invoice subtotal, VAT and total */
+*[role="total"],
+*[role="total"] * {
+    background-color: rgb(247, 181, 0);
+    border-radius: 3px;
+    color: rgb(0, 0, 0);
+}
+
+/* Main actions: Alta, Modificar, Baja, Facturar, Grabar */
+*[role="primary"],
+*[role="primary"] * {
+    border: 2px solid black;
+    border-radius: 3px;
+    background-color: rgb(247, 181, 0);
+}
+
+/* Icon buttons: search, clear, invoice date */
+*[role="secondary"],
+*[role="secondary"] * {
+    border-radius: 2px;
+    background-color: rgb(225, 225, 225);
+}
+
+*[role="calendar"],
+*[role="calendar"] * {
+    border-radius: 2px;
+}
+
+*[role="fare"],
+*[role="fare"] * {
+    color: rgb(0, 0, 0);
+}
+
+/* Tables */
+*[role="table"] QHeaderView::section {
+    background-color: rgb(247, 181, 0);
+    border-radius: 1px;
+    color: black;
+    font-weight: bold;
+    border: 1px solid black;
+}
+
+*[role="table"] {
+    selection-background-color: rgb(247, 181, 0);
+}
+
+/* Empty header area right of the last column. A per-table style sheet painted it with the
+   button colour; an application-wide one would use the base colour instead. */
+*[role="table"] QHeaderView {
+    background-color: palette(button);
+}
+
+#tblInvoices,
+#tblTrips {
+    border: 1px solid black;
+}
+
+/* ---- About dialog ------------------------------------------------------------------- */
+
+#aboutPanel,
+#aboutPanel * {
+    border-radius: 10px;
+    background-color: rgb(222, 222, 222);
+}
+
+#btnClose,
+#btnClose * {
+    border-radius: 5px;
+    background-color: rgb(203, 203, 203);
+}
+
+/* ---- Exit dialog -------------------------------------------------------------------- */
+
+#ExitDialog,
+#ExitDialog * {
+    background-color: rgb(200, 200, 200);
+}
+
+#ExitDialog #lblQuestion {
+    color: rgb(0, 0, 0);
+    font: 75 14pt "MS Shell Dlg 2";
+}
+
+/* Needs #ExitDialog to win over the dialog-wide background above. */
+#ExitDialog #btnAccept {
+    background-color: rgb(197, 197, 197);
+}
