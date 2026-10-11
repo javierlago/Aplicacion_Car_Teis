@@ -8,7 +8,9 @@ from PyQt6.QtCore import QAbstractTableModel, QModelIndex, QObject, QSize, Qt
 from PyQt6.QtGui import QFont, QFontMetrics, QIcon
 from PyQt6.QtWidgets import QHeaderView, QPushButton, QTableView
 
-_CENTER = Qt.AlignmentFlag.AlignCenter
+LEFT = Qt.AlignmentFlag.AlignLeft
+CENTER = Qt.AlignmentFlag.AlignHCenter
+RIGHT = Qt.AlignmentFlag.AlignRight
 _HEADER_MARGIN = 24  # horizontal space around each header title
 
 
@@ -17,6 +19,7 @@ class Column[T]:
     header: str
     value: Callable[[T], Any]
     stretch: bool = False  # take the spare width; other columns fit their contents
+    align: Qt.AlignmentFlag = LEFT  # text left, short codes centred, amounts right
 
 
 class RecordTableModel[T](QAbstractTableModel):
@@ -50,7 +53,7 @@ class RecordTableModel[T](QAbstractTableModel):
             value = self._columns[index.column()].value(self._records[index.row()])
             return "" if value is None else str(value)
         if role == Qt.ItemDataRole.TextAlignmentRole:
-            return _CENTER
+            return self._columns[index.column()].align | Qt.AlignmentFlag.AlignVCenter
         return None
 
     def headerData(  # noqa: N802
@@ -60,6 +63,8 @@ class RecordTableModel[T](QAbstractTableModel):
             return None
         if role == Qt.ItemDataRole.DisplayRole:
             return self._columns[section].header
+        if role == Qt.ItemDataRole.TextAlignmentRole:
+            return self._columns[section].align | Qt.AlignmentFlag.AlignVCenter
         if role == Qt.ItemDataRole.SizeHintRole and self._header_sizes:
             return self._header_sizes[section]
         return None

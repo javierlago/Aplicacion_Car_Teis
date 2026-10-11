@@ -53,6 +53,8 @@ class Ui_ExitDialog(object):
         self.btnCancel.setMinimumSize(QtCore.QSize(110, 0))
         self.btnCancel.setObjectName("btnCancel")
         self.buttonsLayout.addWidget(self.btnCancel)
+        spacerItem1 = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.buttonsLayout.addItem(spacerItem1)
         self.exitLayout.addWidget(self.buttonsFrame)
         self.dialogLayout.addWidget(self.exitFrame)
 

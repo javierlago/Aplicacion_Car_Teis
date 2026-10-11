@@ -16,10 +16,10 @@ from carteis.ui.forms import (
 )
 from carteis.ui.generated.main_window import Ui_MainWindow
 from carteis.ui.prompts import Prompts
-from carteis.ui.table_models import Column, attach_model, select_row
+from carteis.ui.table_models import CENTER, Column, attach_model, select_row
 
 COLUMNS = [
-    Column[Client]("Código", lambda c: c.id),
+    Column[Client]("Código", lambda c: c.id, align=CENTER),
     Column[Client]("Razón social", lambda c: c.company_name, stretch=True),
     Column[Client]("Teléfono", lambda c: c.phone),
     Column[Client]("Provincia", lambda c: c.province, stretch=True),

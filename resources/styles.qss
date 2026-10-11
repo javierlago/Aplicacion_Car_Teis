@@ -212,6 +212,7 @@ QComboBox QAbstractItemView {
     padding: 2px 4px; /* narrow fixed-size boxes until the layout step */
     color: @text;
     font-weight: 600;
+    min-height: 22px;
 }
 
 /* Invoice subtotal, VAT and total */
@@ -222,6 +223,7 @@ QComboBox QAbstractItemView {
     padding: 2px 4px; /* narrow fixed-size boxes until the layout step */
     color: @text;
     font-weight: 600;
+    min-height: 22px;
 }
 
 #txtTotal {
@@ -362,9 +364,10 @@ QPushButton:pressed {
 *[role="table"] QHeaderView::section {
     background-color: @surface;
     color: @muted;
+    font-weight: 600; /* the model sizes sections with this weight (set_header_metrics) */
     border: none;
     border-bottom: 1px solid @border;
-    padding: 6px 0; /* no horizontal padding: Qt leaves it out when sizing sections */
+    padding: 6px; /* same inset as the cells; the width comes from the model */
 }
 
 *[role="table"] QTableCornerButton::section {

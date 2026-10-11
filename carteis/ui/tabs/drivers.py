@@ -22,15 +22,15 @@ from carteis.ui.forms import (
 )
 from carteis.ui.generated.main_window import Ui_MainWindow
 from carteis.ui.prompts import Prompts
-from carteis.ui.table_models import Column, attach_model, select_row
+from carteis.ui.table_models import CENTER, Column, attach_model, select_row
 
 COLUMNS = [
-    Column[Driver]("Código", lambda d: d.id),
+    Column[Driver]("Código", lambda d: d.id, align=CENTER),
     Column[Driver]("Apellidos", lambda d: d.surname, stretch=True),
     Column[Driver]("Nombre", lambda d: d.name, stretch=True),
     Column[Driver]("Móvil", lambda d: d.phone),
-    Column[Driver]("Licencias", lambda d: "-".join(sorted(d.licenses))),
-    Column[Driver]("Fecha baja", lambda d: format_date(d.left_on)),
+    Column[Driver]("Licencias", lambda d: "-".join(sorted(d.licenses)), align=CENTER),
+    Column[Driver]("Fecha baja", lambda d: format_date(d.left_on), align=CENTER),
 ]
 
 

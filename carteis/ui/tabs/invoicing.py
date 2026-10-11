@@ -21,21 +21,21 @@ from carteis.ui.forms import (
 )
 from carteis.ui.generated.main_window import Ui_MainWindow
 from carteis.ui.prompts import Prompts
-from carteis.ui.table_models import Column, add_row_buttons, attach_model, select_row
+from carteis.ui.table_models import CENTER, RIGHT, Column, add_row_buttons, attach_model, select_row
 
 INVOICE_COLUMNS = [
-    Column[Invoice]("Factura", lambda i: i.id),
+    Column[Invoice]("Factura", lambda i: i.id, align=CENTER),
     Column[Invoice]("Cliente", lambda i: i.client_dni, stretch=True),
-    Column[Invoice]("", lambda i: None),  # delete button
+    Column[Invoice]("", lambda i: None, align=CENTER),  # delete button
 ]
 TRIP_COLUMNS = [
-    Column[Trip]("Viaje", lambda t: t.id),
+    Column[Trip]("Viaje", lambda t: t.id, align=CENTER),
     Column[Trip]("Origen", lambda t: t.origin.municipality, stretch=True),
     Column[Trip]("Destino", lambda t: t.destination.municipality, stretch=True),
-    Column[Trip]("Km", lambda t: t.km),
-    Column[Trip]("Tarifa", lambda t: format_money(t.rate)),
-    Column[Trip]("Total", lambda t: format_money(t.amount)),
-    Column[Trip]("", lambda t: None),  # delete button
+    Column[Trip]("Km", lambda t: t.km, align=RIGHT),
+    Column[Trip]("Tarifa", lambda t: format_money(t.rate), align=RIGHT),
+    Column[Trip]("Total", lambda t: format_money(t.amount), align=RIGHT),
+    Column[Trip]("", lambda t: None, align=CENTER),  # delete button
 ]
 _DELETE_INVOICE_COLUMN = len(INVOICE_COLUMNS) - 1
 _DELETE_TRIP_COLUMN = len(TRIP_COLUMNS) - 1
