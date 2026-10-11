@@ -3,10 +3,10 @@ from datetime import date
 from openpyxl import Workbook
 from PyQt6.QtGui import QCloseEvent
 
-from carteis.services import ClientService, DriverService
+from carteis.services import ClientService, DriverService, InvoicingService
 from carteis.ui.main_window import status_date
-from tests.factories import make_client, make_driver
-from tests.ui.conftest import table_texts
+from tests.factories import VIGO, make_client, make_driver
+from tests.ui.conftest import click_row, table_texts
 
 
 def test_status_bar(window):
@@ -16,9 +16,48 @@ def test_status_bar(window):
     assert status_date(date(2024, 1, 1)) == "lunes-01-01-2024"
 
 
-def test_reports_are_disabled_until_phase_5(window):
-    for action in (window.ui.actionReportDrivers, window.ui.actionPrintReports):
-        assert not action.isEnabled()
+def test_list_reports(window, prompts, conn):
+    DriverService(conn).register(make_driver())
+    window.ui.actionReportDrivers.trigger()
+    window.ui.actionReportClients.trigger()
+    names = [path.name for path in prompts.opened]
+    assert names[0].endswith("_listadoconductores.pdf")
+    assert names[1].endswith("_listadoclientes.pdf")
+    assert all(path.is_file() for path in prompts.opened)
+
+
+def test_invoice_report_needs_a_selected_invoice(window, prompts, conn):
+    window.ui.actionReportInvoice.trigger()
+    assert prompts.last == (
+        "warning",
+        "Selecciona una factura en la pestaña Facturación para imprimirla.",
+    )
+    driver = DriverService(conn).register(make_driver())
+    client = ClientService(conn).register(make_client())
+    service = InvoicingService(conn)
+    invoice = service.create_invoice(client.dni, driver.id, [service.new_trip(VIGO, VIGO, 1)])
+    window.invoicing.refresh()
+    click_row(window.ui.tblInvoices, 0)
+    window.ui.actionReportInvoice.trigger()
+    assert prompts.opened[-1].name.endswith(f"_factura_{invoice.id}.pdf")
+
+
+def test_print_button_asks_which_reports(window, prompts):
+    window.ui.actionPrintReports.trigger()  # cancelled
+    assert prompts.opened == []
+    assert prompts.offered == ["Listado de conductores", "Listado de clientes"]
+
+    prompts.choices.append([])
+    window.ui.actionPrintReports.trigger()
+    assert prompts.last == ("warning", "No se ha seleccionado ningún informe.")  # bug F3
+
+    prompts.choices.append(["Listado de conductores"])  # bug F2: it printed the clients list
+    window.ui.actionPrintReports.trigger()
+    assert [p.name.split("_")[-1] for p in prompts.opened] == ["listadoconductores.pdf"]
+
+    prompts.choices.append(["Listado de conductores", "Listado de clientes"])
+    window.ui.actionPrintReports.trigger()
+    assert len(prompts.opened) == 3
 
 
 def test_close_asks_for_confirmation(window, prompts):

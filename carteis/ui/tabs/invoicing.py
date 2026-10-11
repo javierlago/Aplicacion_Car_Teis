@@ -101,6 +101,10 @@ class InvoicingTab:
         self.reload_drivers()
         self.clear()
 
+    @property
+    def selected_invoice(self) -> Invoice | None:
+        return self._invoice
+
     # ---- invoices --------------------------------------------------------------------
 
     def reload_drivers(self) -> None:

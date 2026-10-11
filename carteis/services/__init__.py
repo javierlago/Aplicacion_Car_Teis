@@ -7,6 +7,7 @@ subclasses whose messages are ready to show to the user.
 from carteis.services.backup import BackupService
 from carteis.services.invoicing import InvoicingService
 from carteis.services.people import ClientService, DriverService
+from carteis.services.reports import ReportService
 from carteis.services.spreadsheets import ImportResult, SpreadsheetService
 
 __all__ = [
@@ -15,5 +16,6 @@ __all__ = [
     "DriverService",
     "ImportResult",
     "InvoicingService",
+    "ReportService",
     "SpreadsheetService",
 ]

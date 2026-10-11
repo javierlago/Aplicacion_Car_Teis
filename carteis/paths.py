@@ -19,6 +19,7 @@ def _bundle_root() -> Path:
 
 RESOURCES_DIR = _bundle_root() / "resources"
 IMAGES_DIR = _bundle_root() / "img"  # moves to resources/img when the legacy code is removed
+REPORT_LOGO = IMAGES_DIR / "IconoInfome.png"
 STYLE_SHEET = RESOURCES_DIR / "styles.qss"
 SEED_DATABASE = RESOURCES_DIR / "seed.sqlite"
 
@@ -34,6 +35,12 @@ def data_dir() -> Path:
 def database_path() -> Path:
     override = os.environ.get(DATABASE_ENV)
     return Path(override) if override else data_dir() / "carteis.sqlite"
+
+
+def reports_dir() -> Path:
+    """Where PDFs are saved, e.g. Documents/CarTeis."""
+    location = QStandardPaths.writableLocation(QStandardPaths.StandardLocation.DocumentsLocation)
+    return Path(location) / "CarTeis"
 
 
 def log_path() -> Path:

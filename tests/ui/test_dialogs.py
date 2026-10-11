@@ -5,7 +5,8 @@ from pathlib import Path
 
 import pytest
 from PyQt6.QtCore import QDate, Qt
-from PyQt6.QtWidgets import QDialog, QFileDialog, QMessageBox, QWidget
+from PyQt6.QtGui import QDesktopServices
+from PyQt6.QtWidgets import QCheckBox, QDialog, QFileDialog, QMessageBox, QWidget
 
 from carteis.ui.dialogs import AboutDialog, CalendarDialog, ExitDialog
 from carteis.ui.prompts import Prompts
@@ -117,3 +118,28 @@ def test_table_model_edges():
     assert model.data(model.index(0, 0), role=999) is None
     assert model.headerData(0, Qt.Orientation.Vertical) is None
     assert model.rowCount(model.index(0, 0)) == 0  # no children
+
+
+def test_choose(monkeypatch, parent):
+    def tick_second_and(result):
+        def fake_exec(dialog):
+            dialog.findChildren(QCheckBox)[1].setChecked(True)
+            return result
+
+        return fake_exec
+
+    monkeypatch.setattr(QDialog, "exec", tick_second_and(QDialog.DialogCode.Accepted))
+    assert Prompts(parent).choose("t", "Elige", ["Uno", "Dos"]) == ["Dos"]
+    monkeypatch.setattr(QDialog, "exec", tick_second_and(QDialog.DialogCode.Rejected))
+    assert Prompts(parent).choose("t", "Elige", ["Uno", "Dos"]) is None
+
+
+def test_open_document_falls_back_to_a_message(monkeypatch, parent, shown, tmp_path):
+    opened = []
+    monkeypatch.setattr(QDesktopServices, "openUrl", lambda url: opened.append(url) or True)
+    Prompts(parent).open_document(tmp_path / "a.pdf")
+    assert opened[0].toLocalFile().endswith("a.pdf")
+    assert shown == []
+    monkeypatch.setattr(QDesktopServices, "openUrl", lambda url: False)
+    Prompts(parent).open_document(tmp_path / "a.pdf")
+    assert "Documento guardado en" in shown[0].text()

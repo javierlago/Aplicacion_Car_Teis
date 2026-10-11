@@ -1,13 +1,15 @@
 import sqlite3
 from collections.abc import Callable
 from datetime import date
+from pathlib import Path
 
 from PyQt6.QtCore import Qt
 from PyQt6.QtGui import QCloseEvent
 from PyQt6.QtWidgets import QLabel, QMainWindow, QWidget
 
-from carteis import __version__
-from carteis.services import BackupService, ImportResult, SpreadsheetService
+from carteis import __version__, paths
+from carteis.domain.errors import ValidationError
+from carteis.services import BackupService, ImportResult, ReportService, SpreadsheetService
 from carteis.ui.forms import user_action
 from carteis.ui.generated.main_window import Ui_MainWindow
 from carteis.ui.prompts import Prompts
@@ -19,6 +21,8 @@ _WEEKDAYS = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "d
 _EXCEL_FILTER = "Libro de Excel (*.xlsx)"
 _BACKUP_FILTER = "Copia de seguridad (*.zip)"
 _MAX_LISTED_REJECTIONS = 15
+_DRIVERS_LIST = "Listado de conductores"
+_CLIENTS_LIST = "Listado de clientes"
 
 
 def status_date(day: date) -> str:
@@ -32,6 +36,7 @@ class MainWindow(QMainWindow):
         conn: sqlite3.Connection,
         prompts_factory: Callable[[QWidget], Prompts] = Prompts,
         today: Callable[[], date] = date.today,
+        reports_dir: Path | None = None,
     ) -> None:
         super().__init__()
         self.ui = Ui_MainWindow()
@@ -40,6 +45,9 @@ class MainWindow(QMainWindow):
         self.field_widgets: dict[str, QWidget] = {}
         self._backups = BackupService(conn)
         self._sheets = SpreadsheetService(conn)
+        self._reports = ReportService(
+            conn, reports_dir or paths.reports_dir(), logo=paths.REPORT_LOGO
+        )
 
         self.invoicing = InvoicingTab(self.ui, conn, self.prompts)
         self.drivers = DriversTab(self.ui, conn, self.prompts, self.invoicing.reload_drivers)
@@ -56,14 +64,10 @@ class MainWindow(QMainWindow):
         ui.actionDriversImport.triggered.connect(self._import_drivers)
         ui.actionClientsExport.triggered.connect(self._export_clients)
         ui.actionClientsImport.triggered.connect(self._import_clients)
-        for action in (
-            ui.actionReportDrivers,
-            ui.actionReportClients,
-            ui.actionReportInvoice,
-            ui.actionPrintReports,
-        ):
-            action.setEnabled(False)  # the PDF reports are rewritten in phase 5
-            action.setToolTip("Los informes estarán disponibles en la próxima versión.")
+        ui.actionReportDrivers.triggered.connect(self._report_drivers)
+        ui.actionReportClients.triggered.connect(self._report_clients)
+        ui.actionReportInvoice.triggered.connect(self._report_invoice)
+        ui.actionPrintReports.triggered.connect(self._choose_reports)
 
         self._status_date = QLabel(status_date(today()), self)
         self._status_date.setAlignment(Qt.AlignmentFlag.AlignHCenter)
@@ -158,3 +162,37 @@ class MainWindow(QMainWindow):
     @user_action
     def _import_clients(self) -> None:
         self._import("Importar clientes", self._sheets.import_clients, "clientes")
+
+    # ---- reports ---------------------------------------------------------------------
+
+    @user_action
+    def _report_drivers(self) -> None:
+        self.prompts.open_document(self._reports.drivers_list())
+
+    @user_action
+    def _report_clients(self) -> None:
+        self.prompts.open_document(self._reports.clients_list())
+
+    @user_action
+    def _report_invoice(self) -> None:
+        invoice = self.invoicing.selected_invoice
+        if invoice is None:
+            raise ValidationError(
+                "Selecciona una factura en la pestaña Facturación para imprimirla."
+            )
+        self.prompts.open_document(self._reports.invoice(invoice.id))
+
+    @user_action
+    def _choose_reports(self) -> None:
+        """Toolbar printer: pick which lists to generate (fixes bugs F2 and F3)."""
+        chosen = self.prompts.choose(
+            "Realizar informe", "Selecciona los informes:", [_DRIVERS_LIST, _CLIENTS_LIST]
+        )
+        if chosen is None:
+            return
+        if not chosen:
+            raise ValidationError("No se ha seleccionado ningún informe.")
+        if _DRIVERS_LIST in chosen:
+            self.prompts.open_document(self._reports.drivers_list())
+        if _CLIENTS_LIST in chosen:
+            self.prompts.open_document(self._reports.clients_list())

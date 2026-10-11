@@ -4,11 +4,22 @@ Controllers never open dialogs themselves, so tests can swap in a fake that reco
 messages and returns canned answers instead of blocking on a modal window.
 """
 
+from collections.abc import Sequence
 from datetime import date
 from pathlib import Path
 
-from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import QDialog, QFileDialog, QMessageBox, QWidget
+from PyQt6.QtCore import QUrl
+from PyQt6.QtGui import QDesktopServices, QIcon
+from PyQt6.QtWidgets import (
+    QCheckBox,
+    QDialog,
+    QDialogButtonBox,
+    QFileDialog,
+    QLabel,
+    QMessageBox,
+    QVBoxLayout,
+    QWidget,
+)
 
 from carteis.ui.dialogs import AboutDialog, CalendarDialog, ExitDialog
 
@@ -58,3 +69,30 @@ class Prompts:
     def open_file(self, title: str, file_filter: str) -> Path | None:
         path, _ = QFileDialog.getOpenFileName(self._parent, title, "", file_filter)
         return Path(path) if path else None
+
+    def choose(self, title: str, text: str, options: Sequence[str]) -> list[str] | None:
+        """Tick any of ``options``. ``None`` if cancelled; may be an empty list."""
+        dialog = QDialog(self._parent)
+        dialog.setWindowTitle(title)
+        dialog.setWindowIcon(QIcon("img:impresora.png"))
+        layout = QVBoxLayout(dialog)
+        layout.addWidget(QLabel(text, dialog))
+        boxes = [QCheckBox(option, dialog) for option in options]
+        for box in boxes:
+            layout.addWidget(box)
+        buttons = QDialogButtonBox(
+            QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel, dialog
+        )
+        buttons.button(QDialogButtonBox.StandardButton.Ok).setText("Aceptar")
+        buttons.button(QDialogButtonBox.StandardButton.Cancel).setText("Cancelar")
+        buttons.accepted.connect(dialog.accept)
+        buttons.rejected.connect(dialog.reject)
+        layout.addWidget(buttons)
+        if dialog.exec() != QDialog.DialogCode.Accepted:
+            return None
+        return [box.text() for box in boxes if box.isChecked()]
+
+    def open_document(self, path: Path) -> None:
+        """Open a generated file with the system viewer; say where it is if that fails."""
+        if not QDesktopServices.openUrl(QUrl.fromLocalFile(str(path))):
+            self.info(f"Documento guardado en:\n{path}")

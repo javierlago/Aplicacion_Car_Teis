@@ -21,6 +21,8 @@ class FakePrompts:
         self.files: list = []
         self.dates: list = []
         self.calendar_opened_on: list = []
+        self.choices: list = []  # answers for choose(); None means cancelled
+        self.opened: list = []  # documents passed to open_document()
         self.exit_answer = True
 
     def info(self, text, detail=""):
@@ -49,6 +51,13 @@ class FakePrompts:
     def open_file(self, _title, _filter):
         return self.files.pop(0) if self.files else None
 
+    def choose(self, _title, _text, options):
+        self.offered = list(options)
+        return self.choices.pop(0) if self.choices else None
+
+    def open_document(self, path):
+        self.opened.append(path)
+
     @property
     def last(self) -> tuple[str, str]:
         kind, text, _ = self.messages[-1]
@@ -67,8 +76,10 @@ def no_real_dialogs(monkeypatch):
 
 
 @pytest.fixture
-def window(qtbot, conn):
-    window = MainWindow(conn, prompts_factory=FakePrompts, today=lambda: TODAY)
+def window(qtbot, conn, tmp_path):
+    window = MainWindow(
+        conn, prompts_factory=FakePrompts, today=lambda: TODAY, reports_dir=tmp_path / "pdf"
+    )
     qtbot.addWidget(window)
     return window
 
