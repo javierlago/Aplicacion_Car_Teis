@@ -116,7 +116,7 @@ Decisiones tomadas durante la fase:
 
 > ⚠️ La app antigua sigue escribiendo en `bbdd.sqlite`. Antes de cambiar a la app nueva (fase 4) hay que **regenerar la semilla** con `python -m carteis.data.legacy_import bbdd.sqlite resources/seed.sqlite --overwrite` para no perder lo que se haya registrado entretanto.
 
-### Fase 3 — Servicios (casos de uso)
+### Fase 3 — Servicios (casos de uso) ✅ (2026-10-11)
 **Objetivo:** la lógica de "qué pasa al pulsar un botón" sale de la UI.
 
 - `ConductorService` y `ClienteService`: alta, modificación, baja/reactivación y búsqueda.
@@ -126,6 +126,17 @@ Decisiones tomadas durante la fase:
 - Tests de servicios.
 
 **Criterio de salida:** todo el flujo de negocio se puede ejecutar y probar sin abrir ninguna ventana.
+
+**Resultado (2026-10-11) ✅** — `carteis/services/` con `people.py` (`DriverService`, `ClientService`), `invoicing.py`, `backup.py` y `spreadsheets.py`. 258 tests y cobertura del 100 %.
+
+Reglas de negocio y cambios de comportamiento:
+- **Alta:** un alta nueva no puede llevar fecha de baja; en conductores la fecha de alta es obligatoria. Un DNI repetido da error en vez de sobrescribir (D1/D2).
+- **Modificar** devuelve si hubo cambios, para que la UI muestre "No se han modificado los campos" como hasta ahora.
+- **Baja** sin fecha usa la de hoy y conserva la de alta (D3). La **reactivación** es una operación explícita; antes se hacía dando de alta otra vez el mismo DNI.
+- **Buscar por DNI** valida el formato y avisa si no existe (F1).
+- **Facturar** exige cliente activo, conductor activo y al menos un viaje. La tarifa la calcula siempre el servicio a partir de la ruta. Al **modificar un viaje** se recalcula su tarifa; si no cambia nada, no se toca (así se conserva el precio con el que se facturó aunque la tarifa cambie después).
+- **Copias de seguridad:** se hacen y restauran con la API de backup de SQLite, sin cerrar la BD. Antes de restaurar se valida el zip: un único fichero `.sqlite`/`.db` sin rutas (evita el *zip slip*), tamaño máximo, `integrity_check` y versión del esquema (D8). Las copias de la app antigua se convierten automáticamente al esquema nuevo.
+- **Excel `.xlsx`:** las columnas se reconocen por cabecera (sin distinguir mayúsculas ni tildes), así que un fichero exportado se puede importar tal cual. El código antiguo exportaba 12 columnas e importaba 10 en otro orden. Cada fila rechazada se informa con su número de fila de Excel y el motivo (F4, F11). La exportación usa fechas y números reales de Excel y mantiene el teléfono como texto.
 
 ### Fase 4 — Interfaz
 **Objetivo:** la UI solo muestra datos y delega en los servicios.
