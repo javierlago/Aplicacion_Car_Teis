@@ -1,15 +1,10 @@
-import os
+from unittest.mock import MagicMock
 
-# Run Qt without a display (CI, terminals). Must be set before PyQt6 is imported.
-os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
+import pytest
+from PyQt6 import QtWidgets
 
-from unittest.mock import MagicMock  # noqa: E402
-
-import pytest  # noqa: E402
-from PyQt6 import QtWidgets  # noqa: E402
-
-import var  # noqa: E402
-import Ventanas  # noqa: E402
+import var
+import Ventanas
 
 
 @pytest.fixture(autouse=True)

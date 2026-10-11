@@ -40,7 +40,7 @@ include = ["carteis*"]
 
 [tool.coverage.run]
 source = ["carteis"]
-omit = ["carteis/ui/generated/*"]
+omit = ["carteis/ui/generated/*", "carteis/__main__.py"]
 
 [tool.coverage.report]
 exclude_also = ['if __name__ == "__main__":']

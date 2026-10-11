@@ -1,7 +1,12 @@
-import pytest
+import os
 
-from carteis.data.database import connect
-from carteis.data.migrations import migrate
+# Run Qt without a display (CI, terminals). Must be set before PyQt6 is imported anywhere.
+os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
+
+import pytest  # noqa: E402
+
+from carteis.data.database import connect  # noqa: E402
+from carteis.data.migrations import migrate  # noqa: E402
 
 PROVINCES = [(1, "Pontevedra"), (2, "A Coruña"), (3, "Navarra"), (4, "Zaragoza")]
 MUNICIPALITIES = [
