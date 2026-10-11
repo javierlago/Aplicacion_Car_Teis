@@ -25,7 +25,9 @@ pyinstaller main.spec                            # build dist/main.exe (bundles 
 cd docs && make html                             # Sphinx docs (autodoc); docs/conf.py has a hardcoded sys.path from another machine
 ```
 
-Tests: `tests/legacy/` are characterization tests that pin current behaviour (bugs included) of the legacy code. `tests/conftest.py` provides `fake_ui` (mocks the global `var.ui`) and `messages` (captures `Ventanas` pop-ups), and makes any `QMessageBox.exec()` fail the test instead of blocking forever. Running the app writes to the tracked `bbdd.sqlite`; restore it with `git checkout bbdd.sqlite` (a pre-refactor copy lives in the git-ignored `backups/`).
+New package (`pip install -e .` installs only `carteis*`): `carteis/config.py` holds fares and VAT; `carteis/domain/` is pure Python (no Qt, no SQL) — dataclass entities that validate themselves on construction (`models.py`), a single implementation of each validator (`validators.py`, raising `ValidationError` with Spanish user-facing messages and a `field`), fares/totals with `Decimal` rounded half-up to cents (`pricing.py`, `money.py`), and locale-free Spanish date/money formatting (`formatting.py`). Behaviour changes vs. legacy are listed under phase 1 in `refactor_plan/02_plan.md`.
+
+Tests: `tests/domain/` covers the new package (keep it at 100% with `pytest --cov`). `tests/legacy/` are characterization tests that pin current behaviour (bugs included) of the legacy code, plus `test_parity.py` checking new code agrees with legacy. `tests/legacy/conftest.py` provides `fake_ui` (mocks the global `var.ui`) and `messages` (captures `Ventanas` pop-ups), and makes any `QMessageBox.exec()` fail the test instead of blocking forever. Running the app writes to the tracked `bbdd.sqlite`; restore it with `git checkout bbdd.sqlite` (a pre-refactor copy lives in the git-ignored `backups/`).
 
 ## Architecture
 

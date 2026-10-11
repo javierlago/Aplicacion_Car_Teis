@@ -68,7 +68,7 @@ Convenciones: PEP 8 en inglés (`snake_case`, `PascalCase` para clases) y type h
 
 **Criterio de salida:** `pip install -e .` deja la app funcionando, `pytest` pasa y `git status` no muestra artefactos.
 
-### Fase 1 — Dominio
+### Fase 1 — Dominio ✅ (2026-10-11)
 **Objetivo:** reglas de negocio en Python puro, probadas y sin duplicados.
 
 - Dataclasses `Conductor`, `Cliente`, `Factura` y `Viaje`, que sustituyen las listas con índices mágicos.
@@ -78,6 +78,16 @@ Convenciones: PEP 8 en inglés (`snake_case`, `PascalCase` para clases) y type h
 - Tests unitarios de todo lo anterior.
 
 **Criterio de salida:** cobertura ≥ 90 % en `dominio/`; la app antigua sigue intacta.
+
+**Resultado (2026-10-11) ✅** — `carteis/domain/` con `models`, `validators`, `pricing`, `formatting`, `money` y `errors`, más `carteis/config.py`. 173 tests y cobertura del 100 %. Los tests de paridad (`tests/legacy/test_parity.py`) confirman que el validador de DNI coincide con el antiguo en 2.000 casos aleatorios y que las tarifas son las mismas. Los 89 registros de la BD actual se cargan en los modelos nuevos sin errores, quitando solo el `.0` de los teléfonos importados desde Excel.
+
+Cambios de comportamiento deliberados respecto al código antiguo:
+- **Importes:** `1.500` se lee como mil quinientos (separador de miles español); el código antiguo lo leía como 1,5. Se aceptan los cuatro formatos de salario que hay en la BD.
+- **Redondeo:** cada línea se redondea a céntimos y el IVA se redondea antes de sumarlo al total. El código antiguo sumaba el IVA sin redondear, así que el total puede diferir en 1 céntimo en casos raros.
+- **Ruta vacía:** sin origen o destino ya no se calcula tarifa local; es un error de validación.
+- **DNI con espacios** alrededor (`" 12345678Z "`): ahora se acepta, porque se recortan los espacios.
+- **Validación completa:** se comprueban todos los campos obligatorios, sin el bug F10 que ignoraba el último.
+- **Formato de dinero y fechas** hecho a mano, sin depender del locale `es_ES.UTF-8`.
 
 ### Fase 2 — Capa de datos
 **Objetivo:** un único acceso a SQLite, con integridad y datos bien tipados.
