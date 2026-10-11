@@ -21,15 +21,21 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "pytest==8.4.2",
+    "pytest-cov==7.0.0",
     "pytest-qt==4.5.0",
     "ruff==0.14.0",
 ]
 
-# The legacy code is a flat set of top-level modules, not a package yet.
-# Disable auto-discovery so `pip install -e .` only installs dependencies.
+# Only the new `carteis` package is installed; the legacy top-level modules
+# are run from the repo root until phase 4 removes them.
 [tool.setuptools]
 py-modules = []
-packages = []
+
+[tool.setuptools.packages.find]
+include = ["carteis*"]
+
+[tool.coverage.run]
+source = ["carteis"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
