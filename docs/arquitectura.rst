@@ -35,7 +35,8 @@ El paquete ``carteis`` está dividido en capas. Las dependencias van en un solo 
 ``ui``
     Un controlador por pestaña sobre el código que genera ``pyuic6`` a partir de los ``.ui``.
     Los controladores no abren ventanas modales directamente: todo pasa por ``Prompts``, de
-    modo que los tests pueden sustituirlo. El estilo está en ``resources/styles.qss``.
+    modo que los tests pueden sustituirlo. El aspecto lo definen ``carteis/ui/theme.py``
+    (colores, paleta y fuente) y ``resources/styles.qss``.
 
 Datos del usuario
 -----------------

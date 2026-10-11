@@ -54,4 +54,5 @@ Interfaz y arranque
 .. automodule:: carteis.ui.forms
 .. automodule:: carteis.ui.prompts
 .. automodule:: carteis.ui.dialogs
+.. automodule:: carteis.ui.theme
 .. automodule:: carteis.ui.table_models

@@ -1,4 +1,4 @@
-# Fase 7 — Rediseño visual
+# Fase 7 — Rediseño visual (7.1, 7.2 y 7.4 ✅; 7.3 pendiente)
 
 Continuación de [02_plan.md](02_plan.md). El objetivo es una interfaz **clara y moderna**, con el amarillo taxi como acento, que se vea igual en cualquier equipo.
 
@@ -90,3 +90,21 @@ Continuación de [02_plan.md](02_plan.md). El objetivo es una interfaz **clara y
 | El amarillo no se lee bien sobre blanco | Solo como fondo con texto oscuro; script de contraste |
 | Cambios que no gusten | Prototipo con capturas en 7.1 antes de tocar la distribución |
 | Licencias de fuente e iconos | Inter (OFL) y Lucide (ISC) permiten incluirlos; los ficheros de licencia van junto a ellos |
+
+## Resultado (2026-10-11)
+
+**7.1 ✅ Base técnica y estilo.** Fuente Inter incluida, estilo Fusion con paleta propia y colores como tokens (`carteis/ui/theme.py` → `@token` en `styles.qss`). Se quitaron las 39 fuentes fijas de los `.ui` y Modificar, Baja y los botones de icono tienen su propio rol. Por los comentarios del autor se oscureció el fondo (`#E6E9ED`) y se sustituyó el marco nativo de los desplegables, que dibujaba una esquina negra, por una flecha de Lucide.
+
+**7.2 ✅ Distribución.**
+- Los tres formularios son rejillas: la etiqueta y su campo comparten fila, así que quedan centrados entre sí. Antes, etiquetas y campos estaban en columnas separadas que se desplazaban entre ellas.
+- Etiquetas y campos se alinean a la izquierda, y todas las filas tienen 28 px de altura mínima, de modo que las tarjetas de Factura y Viaje coinciden fila a fila.
+- Cada pestaña tiene un único ancho de contenido (máximo 1160 px) para la tarjeta y las tablas. Sus bordes coinciden al píxel a 1280×720 y 1600×950, y un test lo comprueba.
+- Las tablas alinean cada columna según su contenido: texto a la izquierda, importes a la derecha y códigos centrados.
+- Diálogos:
+  - el de salir tenía botones recortados (ancho mínimo de 75 px y máximo de 60 px) y textos con erratas; ahora tiene los botones centrados;
+  - "Acerca de" mostraba otro proyecto ("TappxiControl 0.0.0.0");
+  - el calendario sale en español y sin números de semana.
+
+**7.3 ⏳ Iconos (pendiente).** Siguen los PNG originales de la barra de herramientas y de los botones. `tools/fetch_icons.py` ya descarga y colorea iconos de Lucide; bastaría con añadirlos a `ICONS` y sustituirlos en los `.ui`.
+
+**7.4 ✅ Cierre.** 299 tests, cobertura del 100 %, documentación (`docs/`, CLAUDE.md) y README con capturas nuevas (`docs/img/`). Las capturas de cada paso están en `refactor_plan/capturas/`.

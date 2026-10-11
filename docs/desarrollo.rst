@@ -39,9 +39,28 @@ código::
 
     .venv/Scripts/python tools/build_ui.py
 
-No se edita nunca ``carteis/ui/generated/``. Para dar estilo a un widget, se le añade en
-Designer una propiedad dinámica ``role`` (por ejemplo ``primary`` o ``field``) y la regla
-correspondiente en ``resources/styles.qss``.
+No se edita nunca ``carteis/ui/generated/``.
+
+Distribución:
+
+- Cada formulario es una rejilla (``QGridLayout``) en la que la etiqueta y su campo comparten
+  fila; así quedan centrados entre sí. Etiquetas y campos se alinean a la izquierda.
+- En cada pestaña, la tarjeta y las tablas crecen hasta el mismo ancho máximo (1160 px) y los
+  espaciadores laterales solo ocupan el espacio sobrante, de modo que sus bordes coinciden. Un
+  test lo comprueba a 1280×720 y 1600×950.
+
+Estilo y colores
+----------------
+
+- Los colores se definen una sola vez en ``carteis/ui/theme.py`` (``COLORS``). En
+  ``resources/styles.qss`` se escriben como ``@token`` (``@accent``, ``@text``…); un token que
+  no existe es un error al arrancar.
+- La app usa el estilo *Fusion* con una paleta propia y la fuente Inter incluida en
+  ``resources/fonts``, para verse igual en cualquier equipo.
+- Para dar estilo a un widget se le añade en Designer una propiedad dinámica ``role``
+  (``field``, ``primary``, ``outline``, ``danger``, ``icon``, ``highlight``, ``total``,
+  ``title``, ``table``, ``panel``, ``fare``) y la regla correspondiente en el ``.qss``.
+- Los iconos de Lucide se descargan y colorean con ``python tools/fetch_icons.py``.
 
 Cambiar el esquema de la base de datos
 --------------------------------------
