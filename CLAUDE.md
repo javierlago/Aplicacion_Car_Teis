@@ -4,53 +4,43 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-CarTeis is a Windows desktop app (Python + PyQt6 + SQLite) for managing a taxi company: drivers (conductores), clients, and invoicing (facturas with trip lines / viajes). The legacy code, identifiers and UI text are in Spanish. Startup calls `locale.setlocale(..., 'es_ES.UTF-8')`, which must be available on the machine or the app crashes at import.
+CarTeis is a desktop app (Python + PyQt6 + SQLite + reportlab) for managing a taxi company: drivers (conductores), clients, and invoicing (facturas with trip lines / viajes). **Code identifiers are in English; everything the user sees (UI text, error messages, reports) is in Spanish.**
 
 ## Refactor in progress
 
-The app is being fully refactored on the `refactor` branch, following [refactor_plan/02_plan.md](refactor_plan/02_plan.md) (audit in `01_auditoria.md`, manual regression checklist in `03_checklist_manual.md`). Key decisions recorded there: stack stays PyQt6 + SQLite + reportlab; new code goes in a `carteis/` package with `domain/`, `data/`, `services/`, `reports/`, `ui/` layers; **new code identifiers are in English, user-facing text stays in Spanish**; `sqlite3` instead of `QtSql`; `.xlsx` via `openpyxl`; ISO dates and numeric salary after the schema migration. Do not start a phase without the user's explicit approval. The legacy modules described below remain until phase 4 replaces them — don't lint-fix or reformat them.
+The app is being fully refactored on the `refactor` branch, following [refactor_plan/02_plan.md](refactor_plan/02_plan.md) (audit in `01_auditoria.md`, manual regression checklist in `03_checklist_manual.md`). Each phase records its results and deliberate behaviour changes there. Do not start a phase without the user's explicit approval. Phases 0–4 are done: the new app in `carteis/` is complete except the PDF reports (phase 5), which is also when the legacy app is deleted.
 
 ## Commands
 
-All commands must be run from the repo root — the DB (`bbdd.sqlite`) and output folders (`informes\`, `Facturacion\`) are opened via relative paths.
-
 ```sh
-python -m venv .venv && .venv/Scripts/python -m pip install -e ".[dev]"   # setup (deps only; no package yet)
-.venv/Scripts/python main.py                     # run the app
+python -m venv .venv && .venv/Scripts/python -m pip install -e ".[dev]"   # setup
+.venv/Scripts/python -m carteis                  # run the new app (DB in %APPDATA%/CarTeis/CarTeis)
+CARTEIS_DB=/path/copy.sqlite .venv/Scripts/python -m carteis   # run it on another database file
 .venv/Scripts/python -m pytest                   # all tests (Qt runs offscreen)
-.venv/Scripts/python -m pytest tests/legacy/test_validators.py::test_driver_dni_valid   # single test
-.venv/Scripts/ruff check . && .venv/Scripts/ruff format --check tests   # lint (legacy has ~411 known warnings)
-pyuic6 -x templates/MainWindow.ui -o MainWindow.py   # regenerate a UI module after editing a .ui in Qt Designer
-pyinstaller main.spec                            # build dist/main.exe (bundles bbdd.sqlite, icon IconTaxi.ico)
-cd docs && make html                             # Sphinx docs (autodoc); docs/conf.py has a hardcoded sys.path from another machine
+.venv/Scripts/python -m pytest --cov             # coverage; keep carteis/ at 100%
+.venv/Scripts/python -m pytest tests/ui/test_invoicing_tab.py::test_add_trip   # single test
+.venv/Scripts/ruff check carteis tests tools && .venv/Scripts/ruff format --check carteis tests tools
+.venv/Scripts/python tools/build_ui.py           # regenerate carteis/ui/generated after editing resources/ui/*.ui
+.venv/Scripts/python -m carteis.data.legacy_import bbdd.sqlite resources/seed.sqlite --overwrite   # rebuild seed DB
+.venv/Scripts/python main.py                     # legacy app (until phase 5), run from the repo root
 ```
 
-New package (`pip install -e .` installs only `carteis*`): `carteis/config.py` holds fares and VAT; `carteis/domain/` is pure Python (no Qt, no SQL) — dataclass entities that validate themselves on construction (`models.py`), a single implementation of each validator (`validators.py`, raising `ValidationError` with Spanish user-facing messages and a `field`), fares/totals with `Decimal` rounded half-up to cents (`pricing.py`, `money.py`), and locale-free Spanish date/money formatting (`formatting.py`). Behaviour changes vs. legacy are listed under each phase in `refactor_plan/02_plan.md`.
+## Architecture (`carteis/`)
 
-`carteis/data/` uses stdlib `sqlite3`: `database.connect()` turns on foreign keys and autocommit; multi-statement writes go through the nestable `transaction()` context manager, and repositories never commit on their own. Schema changes are new `carteis/data/migrations/NNNN_name.sql` files (version in `PRAGMA user_version`; never edit an applied one). New schema conventions: English names, ISO date text, money as integer cents, locations as `municipality_id` FKs (municipality names repeat across provinces, so `Trip` stores full `Location`s). Repositories (`carteis.data.repositories`) map rows to/from domain models and translate UNIQUE/FK violations into `DuplicateError`/`NotFoundError`. `resources/seed.sqlite` is the new-schema database produced from the legacy one — regenerate it with `python -m carteis.data.legacy_import bbdd.sqlite resources/seed.sqlite --overwrite` (the legacy app still writes to `bbdd.sqlite`).
+Layers depend in one direction: `ui → services → domain ← data`.
 
-`carteis/services/` holds the use cases the UI will call: `DriverService`/`ClientService` (share `_PersonService` in `people.py`), `InvoicingService` (fares always computed from the `Tariff`, never passed in), `BackupService` (SQLite online backup API in both directions; validates archives and converts legacy backups) and `SpreadsheetService` (`.xlsx` via openpyxl, columns matched by normalized header). Services take a `sqlite3.Connection` plus injectable `today`/`now` callables for tests, and signal every user-facing problem by raising a `DomainError` subclass.
+- **`domain/`** — pure Python, no Qt or SQL. Dataclass entities that validate and normalize themselves on construction (`models.py`); one implementation of each validator (`validators.py`); fares and totals with `Decimal` rounded half-up to cents (`pricing.py`, `money.py`); locale-free Spanish date/money formatting (`formatting.py`). Problems are raised as `DomainError` subclasses (`errors.py`) whose message is shown to the user as-is; `ValidationError.field` names the offending field. Fares and VAT live in `carteis/config.py`.
+- **`data/`** — stdlib `sqlite3`. `database.connect()` enables foreign keys and autocommit; multi-statement writes use the nestable `transaction()` context manager, and repositories never commit on their own. Schema changes are new `migrations/NNNN_name.sql` files (version in `PRAGMA user_version`; never edit an applied one). Schema conventions: English names, ISO date text, money as integer cents, locations as `municipality_id` FKs (municipality names repeat across provinces, so `Trip` stores full `Location`s). Repositories map rows to/from domain models and translate UNIQUE/FK violations into `DuplicateError`/`NotFoundError`. `legacy_import.py` converts the legacy Spanish-schema DB.
+- **`services/`** — the use cases the UI calls: `DriverService`/`ClientService` (share `_PersonService`), `InvoicingService` (fares always come from the `Tariff`, never from the caller), `BackupService` (SQLite online backup API both ways; validates archives, converts legacy backups), `SpreadsheetService` (`.xlsx` via openpyxl, columns matched by normalized header). They take a `sqlite3.Connection` plus injectable `today`/`now` callables.
+- **`ui/`** — `main_window.py` builds the window and wires menus/toolbar; `tabs/` has one controller per tab. Controllers never open dialogs directly: all modal interaction (messages, confirmations, file pickers, calendar) goes through `prompts.Prompts`, injected via `MainWindow(prompts_factory=...)`. Slots that can fail are wrapped with `forms.user_action`, which shows the `DomainError` and focuses `field_widgets[error.field]`. Tables are `QTableView`s with `table_models.RecordTableModel`. `ui/generated/` is pyuic output — never edit it; edit `resources/ui/*.ui` (Qt Designer) and run `tools/build_ui.py`, which also rewrites image paths to the `img:` search path.
+- **Start-up** (`app.py`, `paths.py`): sets the style sheet and `img:` search path, rotating log file and an exception hook (logs and reports unexpected errors instead of PyQt aborting), and creates the user's DB from `resources/seed.sqlite` on first run. Nothing depends on the working directory.
 
-Tests: `tests/domain/`, `tests/data/` and `tests/services/` (shared in-memory DB fixture `conn` with a few locations in `tests/conftest.py`; builders in `tests/factories.py`; a sample legacy DB in `tests/legacy_samples.py`) cover the new package (keep it at 100% with `pytest --cov`). `tests/legacy/` are characterization tests that pin current behaviour (bugs included) of the legacy code, plus `test_parity.py` checking new code agrees with legacy. `tests/legacy/conftest.py` provides `fake_ui` (mocks the global `var.ui`) and `messages` (captures `Ventanas` pop-ups), and makes any `QMessageBox.exec()` fail the test instead of blocking forever. Running the app writes to the tracked `bbdd.sqlite`; restore it with `git checkout bbdd.sqlite` (a pre-refactor copy lives in the git-ignored `backups/`).
+**Styling:** all style is in `resources/styles.qss`. Widgets that share a look carry a dynamic `role` property in the `.ui` (`field`, `primary`, `secondary`, `highlight`, `total`, `title`, `table`, `panel`…). Rules written as `X, X *` reproduce old selector-less styles that also applied to children; mind specificity when adding rules (an id selector beats a role selector).
 
-## Architecture
+## Tests
 
-**UI layer is generated.** `MainWindow.py`, `AcercaDeWindow.py`, `VentanaSalir.py`, `WindowCalendar.py` are `pyuic6` output from `templates/*.ui` — never hand-edit them; change the `.ui` and regenerate. `windowaux.py` wraps the generated dialogs in `QDialog` subclasses and wires their buttons.
+`tests/conftest.py` sets `QT_QPA_PLATFORM=offscreen` and provides `conn`, an in-memory migrated DB with a few locations (note "Castejón" exists in two provinces). Builders live in `tests/factories.py`, a sample legacy DB in `tests/legacy_samples.py`. `tests/ui/conftest.py` provides `window` (a real `MainWindow` with `FakePrompts`, which records messages and answers from queues: `confirm_answers`, `files`, `dates`) and makes any real `QMessageBox`/`QDialog.exec()` fail the test instead of hanging. `tests/legacy/` pins the legacy code's behaviour (bugs included) and checks parity with the new code; it goes away with the legacy app.
 
-**Global state lives in `var.py`.** `var.ui` is the main `Ui_MainWindow` instance; every module reaches widgets directly through it (e.g. `var.ui.txtDni.text()`). Other globals: `var.calendar`, `var.acercade`, `var.ventana_salir`, `var.dlg_abrir`, `var.bbdd` (DB path), `var.report` (current reportlab canvas). Modules don't pass widgets around — they read/write `var`.
+## Legacy app (removed in phase 5)
 
-**`main.py` is the composition root.** `Main.__init__` builds the UI, opens the DB, populates combos/tables, and contains *all* signal→slot wiring. When adding a feature, connect its signals here.
-
-**Handlers are static-style methods on classes**, defined without `@staticmethod` and connected directly as slots (often taking a dummy `self`/`self=None`). Follow this convention rather than instantiating classes:
-- `drivers.Drivers`, `cliente.Cliente` — form read/validate (DNI, phone, salary), load row from table into form.
-- `conexion.Conexion` — DB connection (`QSqlDatabase` QSQLITE, global default connection) plus most SQL for drivers/clients/provinces and table refreshes (`mostrardrivers`, `mostrarclientes`, `cargar_facturas`).
-- `Facturas/facturacion.py` (form/table logic, fare calculation), `Facturas/facturacion_repository.py` (invoice/trip SQL), `Facturas/facturacion_informes.py` (invoice PDF).
-- `eventos.Eventos` — misc UI events: dialogs, clear forms, table resizing, status bar, zip backup/restore of `bbdd.sqlite`, XLS import/export.
-- `informes.informes` — reportlab PDF listings written to `informes\` and opened with `os.startfile`; invoice PDFs go to `Facturacion\`.
-- `Ventanas.Ventanas` — shared info/warning message boxes.
-
-Modules import each other circularly (`conexion` ↔ `cliente`/`drivers`/`Facturas`); keep imports at module level as module references (`import conexion` then `conexion.Conexion.x()`), not `from x import y`, to avoid breaking import order.
-
-**Database** (`bbdd.sqlite`, queried via `QtSql.QSqlQuery` with named `bindValue` params): `drivers`, `listadoClientes`, `facturas`, `viajes` (FK `idFactura` → `facturas.numFactura`, on delete cascade), `provincias`/`municipios` (lookup data, CSV source in `DatosCSV/`). Deletion of drivers/clients is a soft delete — a `baja*` date column is set; the radio-button groups filter active/inactive/all. Dates are stored as `dd/mm/YYYY` text.
-
-`styles/styles.qss` exists but is not loaded by the code.
+Top-level modules (`main.py`, `conexion.py`, `drivers.py`, `cliente.py`, `eventos.py`, `informes.py`, `var.py`, `windowaux.py`, `Ventanas.py`, `Facturas/`, generated `MainWindow.py` etc.) form the original app: global state in `var.py`, `QtSql` on `bbdd.sqlite` (Spanish schema, `dd/mm/YYYY` text dates), static-style handler methods wired in `main.py`, circular imports. Don't lint-fix or reformat it. It must run from the repo root, needs the `es_ES.UTF-8` locale, and writes to the tracked `bbdd.sqlite` (restore with `git checkout bbdd.sqlite`; a pre-refactor copy is in the git-ignored `backups/`). Its PDF reports (`informes.py`, `Facturas/facturacion_informes.py`) are what phase 5 rewrites.

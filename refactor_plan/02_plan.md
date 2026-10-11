@@ -138,7 +138,7 @@ Reglas de negocio y cambios de comportamiento:
 - **Copias de seguridad:** se hacen y restauran con la API de backup de SQLite, sin cerrar la BD. Antes de restaurar se valida el zip: un único fichero `.sqlite`/`.db` sin rutas (evita el *zip slip*), tamaño máximo, `integrity_check` y versión del esquema (D8). Las copias de la app antigua se convierten automáticamente al esquema nuevo.
 - **Excel `.xlsx`:** las columnas se reconocen por cabecera (sin distinguir mayúsculas ni tildes), así que un fichero exportado se puede importar tal cual. El código antiguo exportaba 12 columnas e importaba 10 en otro orden. Cada fila rechazada se informa con su número de fila de Excel y el motivo (F4, F11). La exportación usa fechas y números reales de Excel y mantiene el teléfono como texto.
 
-### Fase 4 — Interfaz
+### Fase 4 — Interfaz ✅ (2026-10-11)
 **Objetivo:** la UI solo muestra datos y delega en los servicios.
 
 - Renombrar widgets en los `.ui` con nombres con significado (`txtDni_2` → `txtApellidosConductor`…) y regenerar con un script.
@@ -149,7 +149,25 @@ Reglas de negocio y cambios de comportamiento:
 - Cargar `styles.qss` (o eliminarlo, si se prefiere el estilo actual del `.ui`).
 - Tests de humo de la UI con pytest-qt.
 
-**Criterio de salida:** se borran `conexion.py`, `drivers.py`, `cliente.py`, `eventos.py`, `var.py`, `windowaux.py`, `Ventanas.py` y `Facturas/`; el checklist manual pasa completo.
+**Criterio de salida:** ~~se borran `conexion.py`, `drivers.py`, `cliente.py`, `eventos.py`, `var.py`, `windowaux.py`, `Ventanas.py` y `Facturas/`~~ (pasa a la fase 5, ver abajo); el checklist manual pasa completo.
+
+**Resultado (2026-10-11) ✅** — `python -m carteis` arranca la app nueva. 325 tests y cobertura del 100 % (sin contar el código generado).
+- **`.ui` → `resources/ui/`** con nombres en inglés (`txtDni_2` → `txtDriverSurname`, `tabDriver2` → `tblDrivers`…). `tools/build_ui.py` genera `carteis/ui/generated/` y convierte las rutas de imagen en `img:`, que funciona desde cualquier carpeta.
+- **Estilo en `resources/styles.qss`:** los 102 bloques incrustados (17 estilos distintos) pasan a una propiedad dinámica `role` por grupo de widgets. Se comprobó renderizando la ventana antigua y la nueva: las tres pestañas y el diálogo de salir salen **idénticos píxel a píxel**, y "Acerca de" solo difiere en el suavizado del texto.
+- **Arranque (`app.py`, `paths.py`):** la BD vive en la carpeta de datos del usuario (`%APPDATA%/CarTeis/CarTeis/carteis.sqlite`) y se crea a partir de `seed.sqlite` la primera vez; con la variable `CARTEIS_DB` se usa otro fichero. Hay un log rotativo y un `sys.excepthook` que registra el error y avisa al usuario, en lugar de los `print`.
+- **Interfaz (`carteis/ui/`):** un controlador por pestaña, sin `var.py`. Modelos de tabla (`QTableView` + `RecordTableModel`) en lugar de celdas rellenadas a mano. El decorador `user_action` muestra los errores de dominio y pone el foco en el campo culpable, y todas las ventanas modales pasan por `Prompts`, que los tests sustituyen.
+- **Bugs corregidos:** F2/F3 (diálogos y argumentos), F5, F7, F8, F9, F12 y las erratas visibles ("Destitno", "Restarurar Copia", "RazonSocial", el botón con el texto "btn_menu_print"…).
+
+Cambios de comportamiento en la interfaz:
+- **Reactivar:** el botón "Baja" pasa a "Reactivar" cuando el registro seleccionado está de baja. Antes se reactivaba dando de alta otra vez el mismo DNI.
+- **Validación al guardar**, no al salir de cada campo: ya no salta un aviso ni se borra el campo al salir de un teléfono o DNI incorrectos. El DNI sigue mostrando el icono ✔/✘ mientras se escribe.
+- **Salir:** la X de la ventana y el menú "Salir" usan el mismo diálogo de confirmación.
+- **Selector de conductor en facturación:** muestra todos los conductores, con "(baja)" junto a los inactivos, para que las facturas antiguas los enseñen. Solo se puede facturar con conductores activos.
+- **Lupa del cliente en facturación:** filtra la tabla de facturas por ese cliente. Antes cargaba el cliente en la pestaña de clientes. "Limpiar" quita el filtro.
+- **Radio de tarifa:** solo informa; lo marca la app según la ruta y no se puede pulsar.
+- **Informes PDF deshabilitados** hasta la fase 5. Mientras tanto, la app antigua (`python main.py`) sigue disponible.
+
+> **Cambio de orden:** los informes antiguos (`informes.py`, `Facturas/facturacion_informes.py`) dependen de la BD y los globales antiguos. Borrar el código antiguo en esta fase dejaría la app sin informes hasta la fase 5, así que el borrado pasa al final de la fase 5.
 
 ### Fase 5 — Informes
 **Objetivo:** PDFs generados a partir de los datos, sin estado global.
@@ -158,7 +176,9 @@ Reglas de negocio y cambios de comportamiento:
 - La factura usa los mismos cálculos (`Decimal`) que la pantalla.
 - Salida en la carpeta de documentos del usuario y apertura multiplataforma (`QDesktopServices.openUrl`).
 
-**Criterio de salida:** los tres informes se generan con el mismo contenido que hoy y tienen tests que comprueban que el PDF se crea.
+- **Retirada de la app antigua** (movida desde la fase 4): regenerar `resources/seed.sqlite` desde `bbdd.sqlite`; borrar `main.py`, `conexion.py`, `drivers.py`, `cliente.py`, `eventos.py`, `informes.py`, `var.py`, `windowaux.py`, `Ventanas.py`, `Facturas/`, los módulos generados antiguos (`MainWindow.py`…), `tests/legacy/` y las dependencias `xlrd`/`xlwt`; mover `img/` a `resources/img/`.
+
+**Criterio de salida:** los tres informes se generan con el mismo contenido que hoy y tienen tests que comprueban que el PDF se crea; ya no queda código antiguo y el checklist manual pasa completo con la app nueva.
 
 ### Fase 6 — Empaquetado, documentación y cierre
 - Rutas: los recursos se leen relativos al paquete y la BD vive en la carpeta de datos del usuario (`QStandardPaths`); la primera vez se copia la BD inicial.
