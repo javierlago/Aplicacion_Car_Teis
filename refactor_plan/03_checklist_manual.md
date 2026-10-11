@@ -10,7 +10,7 @@ git checkout bbdd.sqlite                                     # descartar los cam
 
 Cada caso tiene la columna **Hoy** con el comportamiento de la versión original (2026-10-11). Los casos marcados ❌ son bugs conocidos: después del refactor deben comportarse como indica **Esperado**.
 
-> La columna **Hoy** se ha rellenado **leyendo el código**, no probando la app a mano (salvo A1, A2 y C13, que se vieron al ejecutarla). La primera pasada manual sirve para confirmarla.
+> La columna **Hoy** se ha rellenado **leyendo el código**, no probando la app a mano (salvo A1, A2 y C13, que se vieron al ejecutarla). El autor la acepta como referencia sin verificarla a mano (2026-10-11).
 
 ## Datos de referencia (BD original)
 
