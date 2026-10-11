@@ -229,7 +229,7 @@
                              </font>
                             </property>
                             <property name="text">
-                             <string>Codigo:</string>
+                             <string>Código:</string>
                             </property>
                             <property name="alignment">
                              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -611,7 +611,7 @@
                                </font>
                               </property>
                               <property name="text">
-                               <string>Salario</string>
+                               <string>Salario:</string>
                               </property>
                               <property name="alignment">
                                <set>Qt::AlignCenter</set>
@@ -655,7 +655,7 @@
                                </font>
                               </property>
                               <property name="text">
-                               <string>(00000.00)</string>
+                               <string>(€)</string>
                               </property>
                              </widget>
                             </item>
@@ -1200,7 +1200,7 @@
                          </font>
                         </property>
                         <property name="text">
-                         <string>Tipo de carnet</string>
+                         <string>Tipo de carné:</string>
                         </property>
                        </widget>
                       </item>
@@ -1371,7 +1371,7 @@
                          <bool>false</bool>
                         </property>
                         <attribute name="buttonGroup">
-                         <string notr="true">buttonGroup</string>
+                         <string notr="true">grpDriverStatus</string>
                         </attribute>
                        </widget>
                       </item>
@@ -1414,7 +1414,7 @@
                          <bool>true</bool>
                         </property>
                         <attribute name="buttonGroup">
-                         <string notr="true">buttonGroup</string>
+                         <string notr="true">grpDriverStatus</string>
                         </attribute>
                        </widget>
                       </item>
@@ -1451,7 +1451,7 @@
                          <bool>false</bool>
                         </property>
                         <attribute name="buttonGroup">
-                         <string notr="true">buttonGroup</string>
+                         <string notr="true">grpDriverStatus</string>
                         </attribute>
                        </widget>
                       </item>
@@ -1681,7 +1681,7 @@
               </spacer>
              </item>
              <item>
-              <widget class="QTableWidget" name="tblDrivers">
+              <widget class="QTableView" name="tblDrivers">
                <property name="role" stdset="0">
                 <string notr="true">table</string>
                </property>
@@ -1737,7 +1737,7 @@
                 <bool>true</bool>
                </property>
                <property name="selectionMode">
-                <enum>QAbstractItemView::NoSelection</enum>
+                <enum>QAbstractItemView::SingleSelection</enum>
                </property>
                <property name="selectionBehavior">
                 <enum>QAbstractItemView::SelectRows</enum>
@@ -1748,36 +1748,6 @@
                <attribute name="verticalHeaderVisible">
                 <bool>false</bool>
                </attribute>
-               <column>
-                <property name="text">
-                 <string>Codigo</string>
-                </property>
-               </column>
-               <column>
-                <property name="text">
-                 <string>Apellidos</string>
-                </property>
-               </column>
-               <column>
-                <property name="text">
-                 <string>Nombre</string>
-                </property>
-               </column>
-               <column>
-                <property name="text">
-                 <string>Móvil</string>
-                </property>
-               </column>
-               <column>
-                <property name="text">
-                 <string>Licencias</string>
-                </property>
-               </column>
-               <column>
-                <property name="text">
-                 <string>Fecha Baja</string>
-                </property>
-               </column>
               </widget>
              </item>
              <item>
@@ -1958,7 +1928,7 @@
                            </size>
                           </property>
                           <property name="text">
-                           <string>Conductores:</string>
+                           <string>Conductor:</string>
                           </property>
                          </widget>
                         </item>
@@ -2017,7 +1987,7 @@
                         <item>
                          <widget class="QLabel" name="lblInvoiceClient">
                           <property name="text">
-                           <string>Cliente</string>
+                           <string>Cliente:</string>
                           </property>
                          </widget>
                         </item>
@@ -2507,7 +2477,7 @@
                        </font>
                       </property>
                       <property name="text">
-                       <string>Destitno:</string>
+                       <string>Destino:</string>
                       </property>
                       <property name="alignment">
                        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -2603,7 +2573,7 @@
                        </size>
                       </property>
                       <property name="text">
-                       <string>Kms</string>
+                       <string>Km:</string>
                       </property>
                      </widget>
                     </item>
@@ -2697,7 +2667,7 @@
                        <string>Nacional</string>
                       </property>
                       <attribute name="buttonGroup">
-                       <string notr="true">btn_group_tarifas</string>
+                       <string notr="true">grpFare</string>
                       </attribute>
                      </widget>
                     </item>
@@ -2713,7 +2683,7 @@
                        <string>Provincia</string>
                       </property>
                       <attribute name="buttonGroup">
-                       <string notr="true">btn_group_tarifas</string>
+                       <string notr="true">grpFare</string>
                       </attribute>
                      </widget>
                     </item>
@@ -2729,7 +2699,7 @@
                        <string>Local</string>
                       </property>
                       <attribute name="buttonGroup">
-                       <string notr="true">btn_group_tarifas</string>
+                       <string notr="true">grpFare</string>
                       </attribute>
                      </widget>
                     </item>
@@ -2911,7 +2881,7 @@
                </property>
                <layout class="QHBoxLayout" name="horizontalLayout_38">
                 <item>
-                 <widget class="QTableWidget" name="tblInvoices">
+                 <widget class="QTableView" name="tblInvoices">
                   <property name="role" stdset="0">
                    <string notr="true">table</string>
                   </property>
@@ -2961,7 +2931,7 @@
                    <bool>true</bool>
                   </property>
                   <property name="selectionMode">
-                   <enum>QAbstractItemView::NoSelection</enum>
+                   <enum>QAbstractItemView::SingleSelection</enum>
                   </property>
                   <property name="selectionBehavior">
                    <enum>QAbstractItemView::SelectRows</enum>
@@ -2981,21 +2951,6 @@
                   <attribute name="verticalHeaderHighlightSections">
                    <bool>true</bool>
                   </attribute>
-                  <column>
-                   <property name="text">
-                    <string>Factura</string>
-                   </property>
-                  </column>
-                  <column>
-                   <property name="text">
-                    <string>Id Cliente</string>
-                   </property>
-                  </column>
-                  <column>
-                   <property name="text">
-                    <string/>
-                   </property>
-                  </column>
                  </widget>
                 </item>
                 <item>
@@ -3017,7 +2972,7 @@
                 <item>
                  <layout class="QVBoxLayout" name="verticalLayout_17">
                   <item>
-                   <widget class="QTableWidget" name="tblTrips">
+                   <widget class="QTableView" name="tblTrips">
                     <property name="role" stdset="0">
                      <string notr="true">table</string>
                     </property>
@@ -3067,7 +3022,7 @@
                      <bool>true</bool>
                     </property>
                     <property name="selectionMode">
-                     <enum>QAbstractItemView::NoSelection</enum>
+                     <enum>QAbstractItemView::SingleSelection</enum>
                     </property>
                     <property name="selectionBehavior">
                      <enum>QAbstractItemView::SelectRows</enum>
@@ -3078,41 +3033,6 @@
                     <attribute name="verticalHeaderVisible">
                      <bool>false</bool>
                     </attribute>
-                    <column>
-                     <property name="text">
-                      <string>IdViaje</string>
-                     </property>
-                    </column>
-                    <column>
-                     <property name="text">
-                      <string>Origen</string>
-                     </property>
-                    </column>
-                    <column>
-                     <property name="text">
-                      <string>Destino</string>
-                     </property>
-                    </column>
-                    <column>
-                     <property name="text">
-                      <string>Kilometros</string>
-                     </property>
-                    </column>
-                    <column>
-                     <property name="text">
-                      <string>Tarifa</string>
-                     </property>
-                    </column>
-                    <column>
-                     <property name="text">
-                      <string>Total</string>
-                     </property>
-                    </column>
-                    <column>
-                     <property name="text">
-                      <string/>
-                     </property>
-                    </column>
                    </widget>
                   </item>
                   <item>
@@ -3434,7 +3354,7 @@
                          </font>
                         </property>
                         <property name="text">
-                         <string>Codigo:</string>
+                         <string>Código:</string>
                         </property>
                         <property name="alignment">
                          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -3470,7 +3390,7 @@
                          </font>
                         </property>
                         <property name="text">
-                         <string>RazonSocial</string>
+                         <string>Razón social:</string>
                         </property>
                         <property name="alignment">
                          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -3498,7 +3418,7 @@
                          </size>
                         </property>
                         <property name="text">
-                         <string>Direccion:</string>
+                         <string>Dirección:</string>
                         </property>
                         <property name="alignment">
                          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -3526,7 +3446,7 @@
                          </size>
                         </property>
                         <property name="text">
-                         <string>Telefono:</string>
+                         <string>Teléfono:</string>
                         </property>
                         <property name="alignment">
                          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -4251,7 +4171,7 @@
                      <bool>false</bool>
                     </property>
                     <attribute name="buttonGroup">
-                     <string notr="true">botonesDeCliente</string>
+                     <string notr="true">grpClientStatus</string>
                     </attribute>
                    </widget>
                   </item>
@@ -4294,7 +4214,7 @@
                      <bool>true</bool>
                     </property>
                     <attribute name="buttonGroup">
-                     <string notr="true">botonesDeCliente</string>
+                     <string notr="true">grpClientStatus</string>
                     </attribute>
                    </widget>
                   </item>
@@ -4331,7 +4251,7 @@
                      <bool>false</bool>
                     </property>
                     <attribute name="buttonGroup">
-                     <string notr="true">botonesDeCliente</string>
+                     <string notr="true">grpClientStatus</string>
                     </attribute>
                    </widget>
                   </item>
@@ -4544,7 +4464,7 @@
               </spacer>
              </item>
              <item>
-              <widget class="QTableWidget" name="tblClients">
+              <widget class="QTableView" name="tblClients">
                <property name="role" stdset="0">
                 <string notr="true">table</string>
                </property>
@@ -4594,7 +4514,7 @@
                 <bool>true</bool>
                </property>
                <property name="selectionMode">
-                <enum>QAbstractItemView::NoSelection</enum>
+                <enum>QAbstractItemView::SingleSelection</enum>
                </property>
                <property name="selectionBehavior">
                 <enum>QAbstractItemView::SelectRows</enum>
@@ -4602,26 +4522,6 @@
                <attribute name="verticalHeaderVisible">
                 <bool>false</bool>
                </attribute>
-               <column>
-                <property name="text">
-                 <string>Codigo</string>
-                </property>
-               </column>
-               <column>
-                <property name="text">
-                 <string>Razon Social</string>
-                </property>
-               </column>
-               <column>
-                <property name="text">
-                 <string>Telefono</string>
-                </property>
-               </column>
-               <column>
-                <property name="text">
-                 <string>Provincia</string>
-                </property>
-               </column>
               </widget>
              </item>
              <item>
@@ -4759,7 +4659,7 @@
      <normaloff>../../img/salir.png</normaloff>../../img/salir.png</iconset>
    </property>
    <property name="text">
-    <string>salir</string>
+    <string>Salir</string>
    </property>
   </action>
   <action name="actionClearForms">
@@ -4768,7 +4668,7 @@
      <normaloff>../../img/pincel.png</normaloff>../../img/pincel.png</iconset>
    </property>
    <property name="text">
-    <string/>
+    <string>Limpiar formularios</string>
    </property>
   </action>
   <action name="actionExit">
@@ -4791,7 +4691,7 @@
      <normaloff>../../img/actualizar.png</normaloff>../../img/actualizar.png</iconset>
    </property>
    <property name="text">
-    <string>Crear Copia Seguridad</string>
+    <string>Crear copia de seguridad</string>
    </property>
    <property name="shortcut">
     <string>Alt+S</string>
@@ -4803,7 +4703,7 @@
      <normaloff>../../img/restaura_bbdd.png</normaloff>../../img/restaura_bbdd.png</iconset>
    </property>
    <property name="text">
-    <string>Restarurar Copia</string>
+    <string>Restaurar copia de seguridad</string>
    </property>
    <property name="shortcut">
     <string>Alt+R</string>
@@ -4811,27 +4711,27 @@
   </action>
   <action name="actionDriversExport">
    <property name="text">
-    <string>Exportar DatosConductores  XLS</string>
+    <string>Exportar conductores a Excel</string>
    </property>
   </action>
   <action name="actionDriversImport">
    <property name="text">
-    <string>Importar Datos Conductores XLS</string>
+    <string>Importar conductores desde Excel</string>
    </property>
   </action>
   <action name="actionClientsImport">
    <property name="text">
-    <string>Importar Datos Cliente XLS</string>
+    <string>Importar clientes desde Excel</string>
    </property>
   </action>
   <action name="actionReportDrivers">
    <property name="text">
-    <string>ListarConductores</string>
+    <string>Listado de conductores</string>
    </property>
   </action>
   <action name="actionReportClients">
    <property name="text">
-    <string>Listar Clientes</string>
+    <string>Listado de clientes</string>
    </property>
   </action>
   <action name="actionPrintReports">
@@ -4841,7 +4741,7 @@
     </iconset>
    </property>
    <property name="text">
-    <string>btn_menu_print</string>
+    <string>Imprimir informes</string>
    </property>
    <property name="autoRepeat">
     <bool>true</bool>
@@ -4852,12 +4752,12 @@
   </action>
   <action name="actionReportInvoice">
    <property name="text">
-    <string>Imprimir Factura</string>
+    <string>Imprimir factura</string>
    </property>
   </action>
   <action name="actionClientsExport">
    <property name="text">
-    <string>Exportar Datos Cliente XLS</string>
+    <string>Exportar clientes a Excel</string>
    </property>
   </action>
  </widget>
