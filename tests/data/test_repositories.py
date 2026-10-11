@@ -12,7 +12,7 @@ from carteis.data.repositories import (
 from carteis.domain.errors import DuplicateError, NotFoundError, ValidationError
 from carteis.domain.models import Invoice, License, Trip
 from carteis.domain.pricing import Location
-from tests.data.factories import CANGAS, FERROL, VIGO, make_client, make_driver
+from tests.factories import CANGAS, FERROL, VIGO, make_client, make_driver
 
 
 class TestLocations:
