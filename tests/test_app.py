@@ -3,6 +3,7 @@ import re
 import sys
 
 import pytest
+from PyQt6.QtCore import QLocale
 from PyQt6.QtWidgets import QMessageBox
 
 from carteis import app, paths
@@ -52,6 +53,7 @@ def test_create_application(qapp):
     created = app.create_application(["carteis"])
     assert created is qapp
     assert created.applicationName() == "CarTeis"
+    assert QLocale().language() == QLocale.Language.Spanish
     assert "role" in created.styleSheet()
     qapp.setStyleSheet("")
 

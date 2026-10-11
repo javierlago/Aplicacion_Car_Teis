@@ -6,8 +6,16 @@ from pathlib import Path
 import pytest
 from PyQt6.QtCore import QDate, Qt
 from PyQt6.QtGui import QDesktopServices
-from PyQt6.QtWidgets import QCheckBox, QDialog, QFileDialog, QMessageBox, QWidget
+from PyQt6.QtWidgets import (
+    QCalendarWidget,
+    QCheckBox,
+    QDialog,
+    QFileDialog,
+    QMessageBox,
+    QWidget,
+)
 
+from carteis import __version__
 from carteis.ui.dialogs import AboutDialog, CalendarDialog, ExitDialog
 from carteis.ui.prompts import Prompts
 from carteis.ui.table_models import Column, RecordTableModel
@@ -143,3 +151,24 @@ def test_open_document_falls_back_to_a_message(monkeypatch, parent, shown, tmp_p
     monkeypatch.setattr(QDesktopServices, "openUrl", lambda url: False)
     Prompts(parent).open_document(tmp_path / "a.pdf")
     assert "Documento guardado en" in shown[0].text()
+
+
+def test_about_shows_the_current_version(parent):
+    about = AboutDialog(parent)
+    assert about.ui.txtAbout.isReadOnly()
+    text = about.ui.txtAbout.toPlainText()
+    assert "CarTeis" in text and f"Versión {__version__}" in text
+    assert "TappxiControl" not in text
+
+
+def test_calendar_has_no_week_numbers(parent):
+    calendar = CalendarDialog(parent).ui.calendar
+    assert calendar.verticalHeaderFormat() == QCalendarWidget.VerticalHeaderFormat.NoVerticalHeader
+
+
+def test_exit_dialog_buttons_fit_their_text(parent):
+    dialog = ExitDialog(parent)
+    dialog.adjustSize()
+    for button in (dialog.ui.btnAccept, dialog.ui.btnCancel):
+        assert button.width() >= button.sizeHint().width()  # nothing clipped
+    assert dialog.ui.lblQuestion.text() == "¿Seguro que quieres salir de CarTeis?"

@@ -432,6 +432,12 @@ QScrollBar::sub-page {
     border: none;
 }
 
+#exitFrame,
+#buttonsFrame {
+    background: transparent;
+    border: none;
+}
+
 #ExitDialog #lblQuestion {
     font-size: 13pt;
     font-weight: 600;

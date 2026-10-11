@@ -9,85 +9,70 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>477</width>
-    <height>280</height>
+    <width>420</width>
+    <height>260</height>
    </rect>
   </property>
-  <property name="contextMenuPolicy">
-   <enum>Qt::NoContextMenu</enum>
-  </property>
   <property name="windowTitle">
-   <string>Salir de la aplicacion</string>
+   <string>Salir de CarTeis</string>
   </property>
   <property name="windowIcon">
    <iconset>
     <normaloff>../img/taxiIcon.png</normaloff>../img/taxiIcon.png</iconset>
   </property>
-  <property name="layoutDirection">
-   <enum>Qt::LeftToRight</enum>
-  </property>
-  <property name="sizeGripEnabled">
-   <bool>true</bool>
-  </property>
   <property name="modal">
    <bool>true</bool>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout">
+  <layout class="QVBoxLayout" name="dialogLayout">
    <property name="spacing">
-    <number>10</number>
-   </property>
-   <property name="sizeConstraint">
-    <enum>QLayout::SetDefaultConstraint</enum>
+    <number>0</number>
    </property>
    <property name="leftMargin">
-    <number>5</number>
+    <number>0</number>
    </property>
    <property name="topMargin">
-    <number>5</number>
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
    </property>
    <item>
     <widget class="QFrame" name="exitFrame">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
-     <property name="frameShadow">
-      <enum>QFrame::Plain</enum>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QVBoxLayout" name="exitLayout">
+      <property name="spacing">
+       <number>16</number>
+      </property>
+      <property name="leftMargin">
+       <number>24</number>
+      </property>
+      <property name="topMargin">
+       <number>24</number>
+      </property>
+      <property name="rightMargin">
+       <number>24</number>
+      </property>
+      <property name="bottomMargin">
+       <number>20</number>
+      </property>
       <item alignment="Qt::AlignHCenter">
        <widget class="QLabel" name="lblIcon">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-          <horstretch>100</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
         <property name="minimumSize">
          <size>
-          <width>100</width>
-          <height>100</height>
+          <width>88</width>
+          <height>88</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>100</width>
-          <height>100</height>
+          <width>88</width>
+          <height>88</height>
          </size>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="textFormat">
-         <enum>Qt::PlainText</enum>
         </property>
         <property name="pixmap">
          <pixmap>../img/taxiIcon.png</pixmap>
@@ -95,65 +80,68 @@
         <property name="scaledContents">
          <bool>true</bool>
         </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="lblQuestion">
+        <property name="text">
+         <string>¿Seguro que quieres salir de CarTeis?</string>
+        </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
         </property>
-       </widget>
-      </item>
-      <item alignment="Qt::AlignHCenter">
-       <widget class="QLabel" name="lblQuestion">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>Estas seguro que deseas salir</string>
+        <property name="wordWrap">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
       <item>
        <widget class="QFrame" name="buttonsFrame">
         <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
+         <enum>QFrame::NoFrame</enum>
         </property>
-        <property name="frameShadow">
-         <enum>QFrame::Raised</enum>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <layout class="QHBoxLayout" name="buttonsLayout">
+         <property name="spacing">
+          <number>8</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>8</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
          <item>
-          <widget class="QPushButton" name="btnAccept">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
+          <spacer name="buttonsSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
            </property>
-           <property name="minimumSize">
+           <property name="sizeHint" stdset="0">
             <size>
-             <width>75</width>
-             <height>30</height>
+             <width>0</width>
+             <height>0</height>
             </size>
            </property>
-           <property name="maximumSize">
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnAccept">
+           <property name="minimumSize">
             <size>
-             <width>60</width>
-             <height>16777215</height>
+             <width>110</width>
+             <height>0</height>
             </size>
            </property>
            <property name="text">
             <string>Aceptar</string>
            </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>../img/OkIco.svg</normaloff>../img/OkIco.svg</iconset>
+           <property name="default">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -161,22 +149,12 @@
           <widget class="QPushButton" name="btnCancel">
            <property name="minimumSize">
             <size>
-             <width>75</width>
-             <height>30</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>60</width>
-             <height>16777215</height>
+             <width>110</width>
+             <height>0</height>
             </size>
            </property>
            <property name="text">
             <string>Cancelar</string>
-           </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>../img/CancelIco.ico</normaloff>../img/CancelIco.ico</iconset>
            </property>
           </widget>
          </item>

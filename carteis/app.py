@@ -7,7 +7,7 @@ from collections.abc import Sequence
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
-from PyQt6.QtCore import QDir
+from PyQt6.QtCore import QDir, QLocale
 from PyQt6.QtWidgets import QApplication, QMessageBox
 
 from carteis import __version__, paths
@@ -52,6 +52,8 @@ def create_application(argv: Sequence[str]) -> QApplication:
     app.setOrganizationName("CarTeis")
     app.setApplicationName("CarTeis")
     app.setApplicationVersion(__version__)
+    # Spanish month and day names in Qt widgets (calendar, date formats).
+    QLocale.setDefault(QLocale(QLocale.Language.Spanish, QLocale.Country.Spain))
     QDir.addSearchPath("img", str(paths.IMAGES_DIR))
     theme.apply(app, paths.STYLE_SHEET.read_text(encoding="utf-8"), paths.FONTS_DIR)
     return app
