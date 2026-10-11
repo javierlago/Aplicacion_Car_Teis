@@ -34,8 +34,14 @@ py-modules = []
 [tool.setuptools.packages.find]
 include = ["carteis*"]
 
+[tool.setuptools.package-data]
+"carteis.data.migrations" = ["*.sql"]
+
 [tool.coverage.run]
 source = ["carteis"]
+
+[tool.coverage.report]
+exclude_also = ['if __name__ == "__main__":']
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
