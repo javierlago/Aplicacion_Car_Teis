@@ -233,3 +233,15 @@ def test_invoice_date_calendar(window, prompts):
     assert window.ui.txtInvoiceDate.text() == "11/10/2026"
     window.ui.btnInvoiceDateCalendar.click()
     assert prompts.calendar_opened_on[-1] == TODAY
+
+
+def test_delete_errors_are_shown_not_raised(window, prompts, conn, invoice):
+    """A trip or invoice deleted behind the screen's back is reported as a warning."""
+    ui = window.ui
+    stale_trip = ui.tblTrips.indexWidget(ui.tblTrips.model().index(0, 6))
+    stale_invoice = ui.tblInvoices.indexWidget(ui.tblInvoices.model().index(0, 2))
+    InvoicingService(conn).delete_invoice(invoice.id)
+    stale_trip.click()
+    assert prompts.last == ("warning", f"No existe la factura número {invoice.id}.")
+    stale_invoice.click()
+    assert prompts.last == ("warning", "La factura no existe.")

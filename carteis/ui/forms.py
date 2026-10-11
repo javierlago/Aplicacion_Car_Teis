@@ -1,6 +1,7 @@
 """Helpers shared by the tab controllers."""
 
 import functools
+import inspect
 from collections.abc import Callable
 from datetime import date
 from decimal import Decimal
@@ -22,16 +23,18 @@ class _Controller(Protocol):
     field_widgets: dict[str, QWidget]
 
 
-def user_action[C: _Controller](method: Callable[[C], None]) -> Callable[..., None]:
+def user_action[C: _Controller](method: Callable[..., None]) -> Callable[..., None]:
     """Wrap a slot: show any ``DomainError`` to the user and focus the offending field.
 
-    Signal arguments (e.g. ``clicked(bool)``) are ignored.
+    The method receives as many leading arguments as it declares after ``self``; extra
+    signal arguments (e.g. ``clicked(bool)``) are dropped.
     """
+    wanted = len(inspect.signature(method).parameters) - 1
 
     @functools.wraps(method)
-    def slot(self: C, *_signal_args) -> None:
+    def slot(self: C, *args) -> None:
         try:
-            method(self)
+            method(self, *args[:wanted])
         except DomainError as error:
             self.prompts.warning(str(error))
             field = getattr(error, "field", None)

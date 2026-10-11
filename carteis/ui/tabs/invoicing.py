@@ -200,6 +200,7 @@ class InvoicingTab:
         self._invoice = invoice
         self._clear_trip_panel()
 
+    @user_action
     def _delete_invoice(self, invoice: Invoice) -> None:
         if not self.prompts.confirm(f"¿Eliminar la factura {invoice.id} y todos sus viajes?"):
             return
@@ -273,6 +274,7 @@ class InvoicingTab:
         self.prompts.info("Viaje modificado.")
         self._clear_trip_panel()
 
+    @user_action
     def _delete_trip(self, trip: Trip) -> None:
         if not self.prompts.confirm("¿Eliminar este viaje?"):
             return
