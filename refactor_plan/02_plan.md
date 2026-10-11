@@ -169,7 +169,7 @@ Cambios de comportamiento en la interfaz:
 
 > **Cambio de orden:** los informes antiguos (`informes.py`, `Facturas/facturacion_informes.py`) dependen de la BD y los globales antiguos. Borrar el código antiguo en esta fase dejaría la app sin informes hasta la fase 5, así que el borrado pasa al final de la fase 5.
 
-### Fase 5 — Informes
+### Fase 5 — Informes ✅ (2026-10-11)
 **Objetivo:** PDFs generados a partir de los datos, sin estado global.
 
 - Una plantilla común (cabecera, pie y paginación) y un generador por informe que recibe los datos y la ruta de salida; desaparece `var.report`.
@@ -179,6 +179,15 @@ Cambios de comportamiento en la interfaz:
 - **Retirada de la app antigua** (movida desde la fase 4): regenerar `resources/seed.sqlite` desde `bbdd.sqlite`; borrar `main.py`, `conexion.py`, `drivers.py`, `cliente.py`, `eventos.py`, `informes.py`, `var.py`, `windowaux.py`, `Ventanas.py`, `Facturas/`, los módulos generados antiguos (`MainWindow.py`…), `tests/legacy/` y las dependencias `xlrd`/`xlwt`; mover `img/` a `resources/img/`.
 
 **Criterio de salida:** los tres informes se generan con el mismo contenido que hoy y tienen tests que comprueban que el PDF se crea; ya no queda código antiguo y el checklist manual pasa completo con la app nueva.
+
+**Resultado (2026-10-11) ✅** — 285 tests y cobertura del 100 %; ruff pasa sobre todo el repositorio, que antes daba 411 avisos.
+- **`carteis/reports/`:** `pdf.py` tiene la plantilla común (cabecera de empresa con logo, pie con fecha, título y página) y una `Table` que repite su cabecera en cada página y recorta con "…" el texto que no cabe. `documents.py` genera el listado de conductores, el de clientes (con el DNI enmascarado) y la factura. Los datos de la empresa están en `config.COMPANY`.
+- **`ReportService`** guarda los PDFs en `Documentos/CarTeis/Informes` y `Documentos/CarTeis/Facturas` con los nombres de siempre, y la interfaz los abre con el visor del sistema (`QDesktopServices`), no con `os.startfile`, que solo funciona en Windows.
+- **Comparación con la app antigua:** generado con los datos actuales, el listado de clientes coincide fila por fila con el que produjo la app antigua en febrero de 2024. Solo cambian las localidades corregidas en la migración y las erratas. La factura 1 da los mismos totales (57,60 / 12,10 / 69,70 €).
+- **Cambios en los informes:** errata "Trasnsportes Teis" corregida; la factura incluye el **DNI/CIF del cliente**; los totales pasan a la página siguiente si no caben, en vez de pisar el pie; una factura sin viajes muestra los totales a 0; el botón de imprimir de la barra genera el listado que se marca (F2) y avisa si no se marca ninguno (F3).
+- **Retirada de la app antigua:** borrados los módulos antiguos, sus tests de caracterización, `bbdd.sqbpro` y las dependencias `xlrd`, `xlwt` y `svglib` (esta última se importaba pero no se usaba). `img/` pasa a `resources/img/`. `bbdd.sqlite` pasa a `tests/fixtures/legacy_bbdd.sqlite`, y con ella se prueba que se pueden convertir y restaurar copias reales de la versión antigua. Antes de borrar se comprobó que `seed.sqlite` es idéntica a una conversión nueva de `bbdd.sqlite`.
+- Los PDFs generados en su día por la app antigua siguen en `informes/` y `Facturacion/` (en disco, sin versionar).
+- **Pendiente para la fase 6:** `main.spec` (PyInstaller) y `docs/` (Sphinx) aún apuntan a los módulos antiguos.
 
 ### Fase 6 — Empaquetado, documentación y cierre
 - Rutas: los recursos se leen relativos al paquete y la BD vive en la carpeta de datos del usuario (`QStandardPaths`); la primera vez se copia la BD inicial.

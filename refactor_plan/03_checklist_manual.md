@@ -1,16 +1,17 @@
 # Checklist de pruebas manuales
 
-Se repasa **al final de cada fase**. Hay que trabajar sobre una copia de la BD:
+Se repasa **al final de cada fase**, trabajando sobre una copia de la BD para no tocar los datos reales:
 
 ```sh
-cp backups/bbdd_2026-10-11_pre-refactor.sqlite bbdd.sqlite   # partir de la BD original
-.venv/Scripts/python main.py
-git checkout bbdd.sqlite                                     # descartar los cambios al terminar
+cp resources/seed.sqlite /tmp/prueba.sqlite
+CARTEIS_DB=/tmp/prueba.sqlite .venv/Scripts/python -m carteis
 ```
+
+La app antigua se retiró en la fase 5; la columna **Hoy** describe cómo se comportaba.
 
 Cada caso tiene la columna **Hoy** con el comportamiento de la versión original (2026-10-11). Los casos marcados ❌ son bugs conocidos: después del refactor deben comportarse como indica **Esperado**.
 
-Para la app nueva: `python -m carteis` (con `CARTEIS_DB=<copia>.sqlite` para no tocar los datos reales). La columna **App nueva** indica el estado tras la fase 4; casi todos los casos están cubiertos también por los tests de `tests/ui/`.
+La columna **App nueva** indica el estado actual; casi todos los casos están cubiertos también por los tests de `tests/ui/`.
 
 > La columna **Hoy** se ha rellenado **leyendo el código**, no probando la app a mano (salvo A1, A2 y C13, que se vieron al ejecutarla). El autor la acepta como referencia sin verificarla a mano (2026-10-11).
 
@@ -27,7 +28,7 @@ Para la app nueva: `python -m carteis` (con `CARTEIS_DB=<copia>.sqlite` para no 
 
 ## Arranque
 
-| # | Caso | Esperado | Hoy | App nueva (fase 4) |
+| # | Caso | Esperado | Hoy | App nueva |
 |---|---|---|---|---|
 | A1 | Arrancar la app | Ventana maximizada, tablas de conductores, clientes y facturas cargadas | ✅ | ✅ |
 | A2 | Barra de estado | Fecha de hoy y versión | ✅ | ✅ |
@@ -36,7 +37,7 @@ Para la app nueva: `python -m carteis` (con `CARTEIS_DB=<copia>.sqlite` para no 
 
 ## Conductores
 
-| # | Caso | Esperado | Hoy | App nueva (fase 4) |
+| # | Caso | Esperado | Hoy | App nueva |
 |---|---|---|---|---|
 | C1 | Filtros Alta / Baja / Todos | La tabla muestra solo los que corresponden | ✅ | ✅ |
 | C2 | Clic en una fila | Se cargan sus datos en el formulario y la fila se resalta | ✅ | ✅ |
@@ -55,7 +56,7 @@ Para la app nueva: `python -m carteis` (con `CARTEIS_DB=<copia>.sqlite` para no 
 
 ## Clientes
 
-| # | Caso | Esperado | Hoy | App nueva (fase 4) |
+| # | Caso | Esperado | Hoy | App nueva |
 |---|---|---|---|---|
 | L1 | Filtros Alta / Baja / Todos | La tabla muestra solo los que corresponden | ✅ | ✅ |
 | L2 | Clic en una fila | Se cargan sus datos | ✅ | ✅ |
@@ -69,7 +70,7 @@ Para la app nueva: `python -m carteis` (con `CARTEIS_DB=<copia>.sqlite` para no 
 
 ## Facturación
 
-| # | Caso | Esperado | Hoy | App nueva (fase 4) |
+| # | Caso | Esperado | Hoy | App nueva |
 |---|---|---|---|---|
 | T1 | Clic en una factura | Carga cliente, fecha, conductor y sus viajes, con subtotal, IVA (21 %) y total | ✅ | ✅ |
 | T2 | Tarifa: mismo municipio / misma provincia / otra provincia | 0,20 / 0,40 / 0,80 €/km | ✅ | ✅ |
@@ -82,18 +83,18 @@ Para la app nueva: `python -m carteis` (con `CARTEIS_DB=<copia>.sqlite` para no 
 
 ## Informes
 
-| # | Caso | Esperado | Hoy | App nueva (fase 4) |
+| # | Caso | Esperado | Hoy | App nueva |
 |---|---|---|---|---|
-| I1 | Informes → Listar clientes | PDF de clientes con el DNI enmascarado, se abre solo | ✅ | ⏳ fase 5 |
-| I2 | Informes → Listar conductores | PDF de conductores, se abre solo | ✅ | ⏳ fase 5 |
-| I3 | Imprimir (barra) → marcar solo "conductores" | Genera el informe **de conductores** | ❌ F2 (genera el de clientes) | ⏳ fase 5 |
-| I4 | Imprimir sin marcar nada | Aviso "No se ha seleccionado ningún informe" | ❌ F3 (falla en silencio) | ⏳ fase 5 |
-| I5 | Imprimir factura con una factura seleccionada | PDF con los datos del cliente, viajes y totales | ✅ | ⏳ fase 5 |
-| I6 | Imprimir factura sin seleccionar ninguna | Aviso "Selecciona una factura" | ✅ | ⏳ fase 5 |
+| I1 | Informes → Listar clientes | PDF de clientes con el DNI enmascarado, se abre solo | ✅ | ✅ |
+| I2 | Informes → Listar conductores | PDF de conductores, se abre solo | ✅ | ✅ |
+| I3 | Imprimir (barra) → marcar solo "conductores" | Genera el informe **de conductores** | ❌ F2 (genera el de clientes) | ✅ corregido (fase 5) |
+| I4 | Imprimir sin marcar nada | Aviso "No se ha seleccionado ningún informe" | ❌ F3 (falla en silencio) | ✅ corregido (fase 5) |
+| I5 | Imprimir factura con una factura seleccionada | PDF con los datos del cliente, viajes y totales | ✅ | ✅ |
+| I6 | Imprimir factura sin seleccionar ninguna | Aviso "Selecciona una factura" | ✅ | ✅ |
 
 ## Herramientas
 
-| # | Caso | Esperado | Hoy | App nueva (fase 4) |
+| # | Caso | Esperado | Hoy | App nueva |
 |---|---|---|---|---|
 | H1 | Crear copia de seguridad | Se guarda un `.zip` con la BD en la ruta elegida | ✅ | ✅ |
 | H2 | Restaurar copia | Se recupera la BD y se refrescan **todas** las tablas | ❌ D8 (BD abierta, solo refresca conductores) | ✅ corregido |
