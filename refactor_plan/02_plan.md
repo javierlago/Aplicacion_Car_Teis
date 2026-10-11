@@ -189,13 +189,31 @@ Cambios de comportamiento en la interfaz:
 - Los PDFs generados en su día por la app antigua siguen en `informes/` y `Facturacion/` (en disco, sin versionar).
 - **Pendiente para la fase 6:** `main.spec` (PyInstaller) y `docs/` (Sphinx) aún apuntan a los módulos antiguos.
 
-### Fase 6 — Empaquetado, documentación y cierre
+### Fase 6 — Empaquetado, documentación y cierre ✅ (2026-10-11)
 - Rutas: los recursos se leen relativos al paquete y la BD vive en la carpeta de datos del usuario (`QStandardPaths`); la primera vez se copia la BD inicial.
 - Arreglar `main.spec` para que el `.exe` use esa BD persistente.
 - Sphinx con rutas relativas; actualizar `README.md` y `CLAUDE.md`.
 - Pasada final de ruff, revisión de código y checklist manual completo.
 
 **Criterio de salida:** el `.exe` arranca en una carpeta cualquiera y conserva los datos entre ejecuciones.
+
+**Resultado (2026-10-11) ✅** — 287 tests, cobertura del 100 % y ruff limpio en todo el repositorio.
+- **Limpieza del repositorio:** fuera `Capturas/` (capturas del IDE), `DatosCSV/` (sus datos ya están en `seed.sqlite`), el Sphinx antiguo, cuatro imágenes que nada usaba y `main.spec`. El icono del calendario apuntaba a una imagen que nunca existió; ahora usa `calendario.png` y un test comprueba que todas las imágenes referenciadas existen. `.gitignore` sin reglas antiguas y `.gitattributes` para normalizar los finales de línea.
+- **Empaquetado:** `carteis.spec` genera `dist/CarTeis.exe` solo con lo necesario. Comprobado ejecutándolo dos veces desde otra carpeta: la primera crea la BD a partir de la semilla y un cambio hecho entre ambas se conserva.
+- **Documentación:** `docs/` con Sphinx nuevo (arquitectura, flujos de desarrollo y referencia de la API generada desde los docstrings; se genera sin avisos con `-W`) y un `README.md` nuevo con una captura actual.
+- **Revisión final:** los botones de borrar factura y viaje no mostraban como aviso los errores de dominio; `user_action` ahora pasa los argumentos que declara cada método.
+
+## Resumen final
+
+| | Antes | Después |
+|---|---|---|
+| Arquitectura | Módulos acoplados por `var.py`, SQL en la UI, imports circulares | Capas `domain` → `data` / `services` → `reports` / `ui`, sin estado global |
+| Tests | 0 | 287, cobertura del 100 % |
+| Lint (ruff) | 411 avisos | 0 |
+| Gestión de errores | 92 `except` + `print` | Errores de dominio con mensaje al usuario; log y aviso para los inesperados |
+| Bugs de la auditoría | D1–D8, F1–F12 | Corregidos (ver cada fase) |
+| Datos | Texto libre, fechas `dd/mm/aaaa`, dinero en `float` | Esquema versionado, ISO, céntimos, claves foráneas |
+| Arranque | Solo desde la raíz del proyecto y con el locale `es_ES` | Desde cualquier carpeta; datos en la carpeta del usuario |
 
 ## Orden y dependencias
 
