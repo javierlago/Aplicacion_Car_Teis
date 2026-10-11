@@ -177,6 +177,25 @@ QLineEdit[role="field"]:read-only {
     color: @muted;
 }
 
+/* Replace Fusion's native drop-down frame, which draws a dark corner on light themes */
+QComboBox[role="field"]::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: center right;
+    width: 22px;
+    border: none;
+    background: transparent;
+}
+
+QComboBox[role="field"]::down-arrow {
+    image: url(img:icons/chevron-down.svg);
+    width: 14px;
+    height: 14px;
+}
+
+QComboBox[role="field"] {
+    padding-right: 22px;
+}
+
 QComboBox QAbstractItemView {
     background-color: @surface;
     border: 1px solid @border;

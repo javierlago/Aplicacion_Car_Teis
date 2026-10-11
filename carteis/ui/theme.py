@@ -15,11 +15,11 @@ FONT_FAMILY = "Inter"
 FONT_SIZE = 10
 
 COLORS: dict[str, str] = {
-    "background": "#F4F5F7",  # window
+    "background": "#E6E9ED",  # window
     "surface": "#FFFFFF",  # cards, fields, tables
-    "surface-alt": "#F8F9FA",  # alternating table rows, read-only fields
-    "border": "#DDE1E6",
-    "border-strong": "#B8BFC8",  # hovered / focused fields
+    "surface-alt": "#F5F6F8",  # alternating table rows, read-only fields
+    "border": "#D0D5DC",
+    "border-strong": "#A9B1BB",  # hovered / focused fields
     "text": "#1F2328",
     "muted": "#5F6B7A",  # secondary labels, hints
     "accent": "#F7B500",  # taxi yellow: primary button, selection, active tab

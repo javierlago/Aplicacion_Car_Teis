@@ -89,12 +89,16 @@ def test_main_starts_and_closes(monkeypatch, qapp, tmp_path, isolated_logger):
 
 
 def test_every_referenced_image_exists():
-    """Catch icons pointing at missing files (the legacy calendar icon never existed)."""
+    """Catch icons pointing at missing files (the legacy calendar icon never existed).
+
+    Covers the code (``"img:..."``) and the style sheet (``url(img:...)``).
+    """
     sources = paths.RESOURCES_DIR.parent / "carteis"
     names = {
         name
         for source in sources.rglob("*.py")
         for name in re.findall(r'"img:([^"]+)"', source.read_text(encoding="utf-8"))
     }
+    names |= set(re.findall(r"url\(img:([^)]+)\)", paths.STYLE_SHEET.read_text(encoding="utf-8")))
     assert names, "no img: references found"
     assert sorted(n for n in names if not (paths.IMAGES_DIR / n).is_file()) == []

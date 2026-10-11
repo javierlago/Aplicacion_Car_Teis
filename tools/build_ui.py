@@ -39,7 +39,9 @@ def build(ui_file: Path) -> Path:
 def main() -> int:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     (OUT_DIR / "__init__.py").write_text(
-        '"""Code generated from resources/ui by tools/build_ui.py."""\n', encoding="utf-8"
+        '"""Code generated from resources/ui by tools/build_ui.py."""\n',
+        encoding="utf-8",
+        newline="\n",
     )
     for ui_file in sorted(UI_DIR.glob("*.ui")):
         print(f"{ui_file.relative_to(ROOT)} -> {build(ui_file).relative_to(ROOT)}")
